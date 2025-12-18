@@ -20,7 +20,7 @@ export const metadata = {
           inlineAds={inlineAds}
           images={images}
         >
-          {/* 👇 서버 컴포넌트들을 여기서 끼운다 */}
+          {/* 👇 서버 컴포넌트들을 여기서 끼운다! */}
           <ProductListServer
             title="마감 임박! 원더특가 ~66%"
             keyword="time"
