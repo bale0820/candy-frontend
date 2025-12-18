@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { api } from "@/shared/lib/axios";
 import "./ReviewAnalysisPage.scss";
-import { IMAGE_BASE_URL } from "@/shared/constants/imageBaseUrl";
+import { IMAGE_BASE_URL } from "@/shared/constants/apiBaseUrl";
 
 export default function ReviewAnalysisPage() {
   const { ppk } = useParams(); // Next.js의 useParams
@@ -81,7 +81,7 @@ console.log("reviews", reviews);
             {r.images?.length > 0 && (
               <div className="review-images">
                 {r.images.map((img, i) => (
-                  <img key={i} src={`${IMAGE_BASE_URL}${img}`} alt="" />
+                  <img key={i} src={`${IMAGE_BASE_URL}/data${img}`} alt="" />
                 ))}
               </div>
             )}

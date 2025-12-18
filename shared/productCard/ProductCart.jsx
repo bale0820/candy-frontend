@@ -25,7 +25,7 @@ export default function ProductCard({ item }) {
       {/* 🔥 이미지 */}
       <div className="image-container">
         <img
-          src={`${IMAGE_BASE_URL}/productImages/${item.imageUrl}`}
+          src={`${IMAGE_BASE_URL}/data/productImages/${item.imageUrl}`}
           alt={item.productName}
           className="product-image"
           draggable="false"

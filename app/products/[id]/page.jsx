@@ -15,7 +15,7 @@ export async function generateMetadata({ params }) {
       description: product.productName,
       images: [
         {
-          url: `${IMAGE_BASE_URL}/productImages/${product.imageUrl}`,
+          url: `${IMAGE_BASE_URL}/data/productImages/${product.imageUrl}`,
         },
       ],
     },
@@ -37,7 +37,7 @@ export default async function Page({ params }) {
             "@type": "Product",
             name: product.productName,
             image: [
-              `${IMAGE_BASE_URL}/productImages/${product.imageUrl}`,
+              `${IMAGE_BASE_URL}/data/productImages/${product.imageUrl}`,
             ],
             brand: {
               "@type": "Brand",

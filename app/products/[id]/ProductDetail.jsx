@@ -51,7 +51,7 @@ export default function ProductDetail({ product }) {
 
             <div className="product-image-container">
               <img
-                src={`${IMAGE_BASE_URL}/productImages/${product.imageUrl}`}
+                src={`${IMAGE_BASE_URL}/data/productImages/${product.imageUrl}`}
                 alt={`${product.productName} 상품 이미지`}
                 loading="eager"
               />
