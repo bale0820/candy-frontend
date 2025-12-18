@@ -1,0 +1,11 @@
+-- 광고데이터 삽입(수정)
+delete from advertise;
+ALTER TABLE advertise AUTO_INCREMENT = 1;
+INSERT INTO advertise (adv_image_banner, adv_image_inline, adv_link, adv_name)
+VALUES
+( null, '/images/advertiseimages/Adv4.png','https://www.oliveyoung.co.kr/store/main/main.do?oy=0','올리브영'),
+( null, '/images/advertiseimages/Adv5.png','https://www.musinsa.com/main/musinsa/recommend?gf=A','무신사'),
+(null, "/images/advertiseimages/Adv6.png",'http://localhost:3000/coupon','쿠폰받기'),
+('/images/advertiseimages/BannerAdv1.png', null, 'https://www.oliveyoung.co.kr/store/main/main.do?oy=0', '올리브영'),
+('/images/advertiseimages/BannerAdv2.png', null, 'https://www.oliveyoung.co.kr/store/main/main.do?oy=0', '올리브영'),
+('/images/advertiseimages/BannerAdv3.png', null, 'https://www.coupang.com/np/search?component=&q=%EC%98%81%EC%96%91%EC%A0%9C&traceId=miiakjcm&channel=user', '쿠팡');

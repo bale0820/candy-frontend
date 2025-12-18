@@ -1,0 +1,99 @@
+@import "tailwindcss";
+
+/* 전역 스타일 */
+body,
+html {
+  height: 100%;
+  font-family: Arial, sans-serif;
+  background-color: #fafafa;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+
+
+.layout {
+  max-width: 1200px;
+  min-height: 100vh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  margin: 0 auto;
+  width: 100%;
+}
+
+button {
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  color: white;
+  border: none;
+  background: #866bff;   /* 기본 버튼 색 */
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(134, 107, 255, 0.25);
+
+  &:hover {
+    background: #7556ff; /* hover 색 (#866bff 보다 조금 진하게) */
+  }
+
+  &:active {
+    transform: scale(0.96);
+    background: #5a3de0; /* 눌렀을 때 색 */
+  }
+}
+
+
+
+input {
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: all 0.2s ease;
+
+  &:focus {
+    outline: none;
+    border-color: #866bff; /* 포커스 보라색 */
+    box-shadow: 0 0 4px rgba(134, 107, 255, 0.4);
+  }
+
+  &::placeholder {
+    color: #aaa;
+  }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
