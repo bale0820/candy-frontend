@@ -1,4 +1,6 @@
-    import { API_BASE_URL } from "@/shared/constants/dataBaseUrl";
+import { API_BASE_URL } from "@/shared/constants/apiBaseUrl";
+
+  
 
     export async function getProductDetail(id) {
     const res = await fetch(

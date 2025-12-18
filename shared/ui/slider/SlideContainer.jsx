@@ -1,6 +1,6 @@
 "use client";
 
-import { IMAGE_BASE_URL } from "@/shared/constants/imageBaseUrl";
+import { IMAGE_BASE_URL } from "@/shared/constants/apiBaseUrl";
 import "./SlideContainer.scss";
 import { SlideDots } from "./SlideDots";
 import { IoIosRadioButtonOn } from "react-icons/io";
@@ -13,11 +13,11 @@ export function SlideContainer({ images, index, setIndex }) {
     <div className="slide-container">
       {images.map((img, i) => (
         <div 
-          key={`${IMAGE_BASE_URL}/${img}`} 
+          key={`${IMAGE_BASE_URL}/data/${img}`} 
           className={`slide-wrapper ${index === i ? "active" : ""}`}
         >
           <img 
-            src={`${IMAGE_BASE_URL}/${img}`}   // ⬅ 여기 반드시 수정
+            src={`${IMAGE_BASE_URL}/data/${img}`}   // ⬅ 여기 반드시 수정
             alt={`slide-${i}`} 
             className="slide-image" 
           />

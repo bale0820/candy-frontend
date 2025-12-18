@@ -9,7 +9,7 @@ export function useHomeImages() {
 
   useEffect(() => {
     const fetchImages = async () => {
-      const res = await fetch(`${IMAGE_BASE_URL}/jsonData/homeDataImages.json`);
+      const res = await fetch(`${IMAGE_BASE_URL}/data/jsonData/homeDataImages.json`);
       const result = await res.json();
       setImages(result.images ?? []);
     };

@@ -69,7 +69,7 @@ export function ReviewList({ id }) {
           <div className="review-images">
             {reviewImages.map((img, i) => (
               <div key={i} className="review-thumb">
-                <img src={`${IMAGE_BASE_URL}${img}`} alt={`review-${i}`} />
+                <img src={`${IMAGE_BASE_URL}/data${img}`} alt={`review-${i}`} />
               </div>
             ))}
           </div>
@@ -83,7 +83,7 @@ export function ReviewList({ id }) {
 
               <div className="review-images">
                 {r.images.map((img, i) => (
-                  <img key={i} src={`${IMAGE_BASE_URL}${img}`} alt="리뷰 이미지" />
+                  <img key={i} src={`${IMAGE_BASE_URL}/data${img}`} alt="리뷰 이미지" />
                 ))}
               </div>
 
