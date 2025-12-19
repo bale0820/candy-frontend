@@ -1,3 +1,5 @@
+import { API_BASE_URL } from "@/shared/constants/apiBaseUrl";
+
 // src/features/auth/components/SocialLoginButtons.jsx
 export function SocialLoginButtons() {
   const handleNaverLogin = () =>

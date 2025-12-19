@@ -1,10 +1,12 @@
+import { API_BASE_URL_SC } from "@/shared/constants/apiBaseUrl";
+
 export const runtime = "nodejs";
 
-import { API_BASE_URL } from "@/shared/constants/apiBaseUrl";
+
 
 // features/home/server/advertise.js
 export async function getAdvertiseList() {
-  const res = await fetch(`${API_BASE_URL}/advertise/list`, {
+  const res = await fetch(`${API_BASE_URL_SC}/advertise/list`, {
     cache: "no-store",
   });
 

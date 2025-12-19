@@ -1,7 +1,7 @@
-import { API_BASE_URL } from "@/shared/constants/apiBaseUrl";
+import { API_BASE_URL_SC } from "@/shared/constants/apiBaseUrl";
 import { NextResponse } from "next/server";
 
-const BACKEND_BASE_URL = `${API_BASE_URL}`;
+const BACKEND_BASE_URL = `${API_BASE_URL_SC}`;
 
 async function proxy(request, { params }, method) {
   const { path } = params; // ["admin","reviews","analysis","1"]
