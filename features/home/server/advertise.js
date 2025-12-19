@@ -1,6 +1,8 @@
+import { API_BASE_URL } from "@/shared/constants/apiBaseUrl";
+
 // features/home/server/advertise.js
 export async function getAdvertiseList() {
-  const res = await fetch("http://localhost:8080/advertise/list", {
+  const res = await fetch(`${API_BASE_URL}/advertise/list`, {
     cache: "no-store",
   });
 
