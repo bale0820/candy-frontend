@@ -1,3 +1,5 @@
+export const runtime = "nodejs";
+
 import { API_BASE_URL } from "@/shared/constants/apiBaseUrl";
 
 // features/home/server/advertise.js

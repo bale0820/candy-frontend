@@ -1,3 +1,5 @@
+export const runtime = "nodejs";
+
 import { IMAGE_BASE_URL } from "@/shared/constants/apiBaseUrl";
 
 
