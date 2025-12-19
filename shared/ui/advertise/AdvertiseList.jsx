@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import "./advertise.css";
-import { IMAGE_BASE_URL } from "@/shared/constants/imageBaseUrl";
+import { IMAGE_BASE_URL } from "@/shared/constants/apiBaseUrl";
 
 export function AdvertiseList({ ads = [], interval = 3000, random = false }) {
   const [index, setIndex] = useState(0);

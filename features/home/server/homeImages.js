@@ -1,4 +1,5 @@
-import { IMAGE_BASE_URL } from "@/shared/constants/imageBaseUrl";
+import { IMAGE_BASE_URL } from "@/shared/constants/apiBaseUrl";
+
 
 export async function getHomeImages() {
   const res = await fetch(
