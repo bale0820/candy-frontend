@@ -20,7 +20,7 @@ export function useSignupAgree() {
 
   useEffect(() => {
     const load = async () => {
-      const result = await api.get("http://localhost:3000/data/jsonData/terms.json");
+      const result = await api.get("/data/jsonData/terms.json");
       setTermList(result.data.terms);
     };
     load();

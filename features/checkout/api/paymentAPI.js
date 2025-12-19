@@ -89,7 +89,7 @@ export const getNaverPayment = async (receiver, paymentInfo, cartList, couponId)
       totalPayAmount: paymentInfo.totalAmount.toString(),
       taxScopeAmount: paymentInfo.totalAmount.toString(),
       taxExScopeAmount: "0",
-      returnUrl: `http://localhost:8080/payment/naver/return?merchantPayKey=${merchantPayKey}`,
+      returnUrl: `${API_BASE_URL}/payment/naver/return?merchantPayKey=${merchantPayKey}`,
     });
   } catch (error) {
     console.error("NaverPay Error:", error);
