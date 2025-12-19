@@ -37,7 +37,7 @@ export function RightAdBanner({ ads = [], interval = 3000, random = false }) {
       >
         <img
           className="banner-img"
-          src={`${IMAGE_BASE_URL}${ad.advImageBanner}`}
+          src={`${IMAGE_BASE_URL}/data${ad.advImageBanner}`}
           alt={ad.advName ? `${ad.advName} 광고 배너` : "광고 배너"}
         />
       </a>

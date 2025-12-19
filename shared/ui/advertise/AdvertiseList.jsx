@@ -35,7 +35,7 @@ export function AdvertiseList({ ads = [], interval = 3000, random = false }) {
       <a href={ad.advLink} target="_blank" rel="noreferrer">
         <img
           className="advertise-inline"
-          src={`${IMAGE_BASE_URL}${ad.advImageInline}`}
+          src={`${IMAGE_BASE_URL}/data${ad.advImageInline}`}
           alt={ad.advName ?? "advertise-inline"}
         />
       </a>

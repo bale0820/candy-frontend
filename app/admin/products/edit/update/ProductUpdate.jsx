@@ -73,8 +73,8 @@
 
 
 // ProductUpdate.jsx
-import { ProductForm } from "features/administration/productSkill/productAdd/components/ProductForm";
-import { useProductUpdate } from "features/administration/productSkill/productUpdate/useProductUpdate";
+import { ProductForm } from "@/features/administration/products/edit/components/ProductForm";
+import { useProductUpdate } from "@/features/administration/products/edit/components/update/useProductUpdate";
 import React from "react";
 
 export function ProductUpdate() {
