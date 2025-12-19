@@ -3,7 +3,8 @@
 import React, { useMemo, useRef, useState, useEffect, useLayoutEffect } from "react";
 import "./ReviewList.scss";
 import { useProductReviewList } from "@/features/product/hooks/useProductReviewList";
-import { IMAGE_BASE_URL } from "@/shared/constants/imageBaseUrl";
+
+import { IMAGE_BASE_URL } from "@/shared/constants/apiBaseUrl";
 
 export function ReviewList({ id }) {
   const {

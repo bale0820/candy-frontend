@@ -9,9 +9,9 @@ import { useProductDetail } from "@/features/productDetail/hooks/useProductDetai
 import { Item } from "@/features/productDetail/components/item/Item";
 import { Detail } from "@/features/productDetail/components/detail/Detail";
 import { ReviewList } from "@/features/productDetail/components/review/components/ReviewList";
-import { IMAGE_BASE_URL } from "@/shared/constants/imageBaseUrl";
 import { QnA } from "@/features/productDetail/components/qna/QnA";
 import { Return } from "@/features/productDetail/components/return/Return";
+import { IMAGE_BASE_URL } from "@/shared/constants/apiBaseUrl";
 
 export default function ProductDetail({ product }) {
 

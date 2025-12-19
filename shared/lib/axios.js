@@ -210,8 +210,8 @@ export function setupApiInterceptors() {
           console.error("❌ Refresh 실패:", err);
           isRefreshing = false;
 
-          localStorage.removeItem("auth-storage");
-          window.location.href = "/login";
+          // localStorage.removeItem("auth-storage");
+          // window.location.href = "/login";
           return Promise.reject(err);
         }
       }

@@ -1,6 +1,8 @@
 "use client";
 
-import { IMAGE_BASE_URL } from "@/shared/constants/imageBaseUrl";
+import { IMAGE_BASE_URL } from "@/shared/constants/apiBaseUrl";
+
+
 
 export function Item({images}) {
   return (

@@ -1,13 +1,13 @@
 
 export const runtime = "nodejs";
 
-import { API_BASE_URL } from "@/shared/constants/apiBaseUrl";
+import { API_BASE_URL_SC } from "@/shared/constants/apiBaseUrl";
 
   
 
     export async function getProductDetail(id) {
     const res = await fetch(
-        `${API_BASE_URL}/product/productDetail?id=${id}`,
+        `${API_BASE_URL_SC}/product/productDetail?id=${id}`,
         {
         cache: "no-store",
         }

@@ -1,19 +1,52 @@
 import { API_BASE_URL_SC } from "@/shared/constants/apiBaseUrl";
 import { NextResponse } from "next/server";
 
-const BACKEND_BASE_URL = `${API_BASE_URL_SC}`;
+export const runtime = "nodejs";
 
-async function proxy(request, { params }, method) {
-  const { path } = params; // ["admin","reviews","analysis","1"]
-  const backendUrl = `${BACKEND_BASE_URL}/${path.join("/")}`;
+async function proxy(request, context, method) {
+  // ✅ Next 16
+  const { path = [] } = await context.params;
+  const requestPath = path.join("/");
 
-  const headers = new Headers(request.headers);
-  headers.delete("host"); // 중요: 그대로 두면 에러 나는 경우 있음
+  // ✅ query string 포함 (이게 제일 중요)
+  const url = new URL(request.url);
+  const backendUrl = `${API_BASE_URL_SC}/${requestPath}${url.search}`;
+
+  const headers = new Headers();
+
+  // ✅ 레시피 "조회(GET)"만 공개
+  const isPublicRecipeGet =
+    method === "GET" && requestPath.startsWith("recipe/");
+
+  // ===============================
+  // 🔐 인증 헤더 (공개 API 제외)
+  // ===============================
+  if (!isPublicRecipeGet) {
+    const auth = request.headers.get("authorization");
+    if (auth) headers.set("authorization", auth);
+
+    const xsrf = request.headers.get("x-xsrf-token");
+    if (xsrf) headers.set("X-XSRF-TOKEN", xsrf);
+
+    const cookie = request.headers.get("cookie");
+    if (cookie) headers.set("cookie", cookie);
+  }
+
+  // Content-Type 항상 전달
+  const contentType = request.headers.get("content-type");
+  if (contentType) headers.set("content-type", contentType);
+
+  // Origin은 refresh / CORS 검증용 (항상 필요)
+  const origin = request.headers.get("origin");
+  if (origin) headers.set("origin", origin);
 
   const res = await fetch(backendUrl, {
     method,
     headers,
-    body: method === "GET" || method === "HEAD" ? null : await request.text(),
+    body:
+      method === "GET" || method === "HEAD"
+        ? null
+        : await request.text(),
     credentials: "include",
   });
 
@@ -23,18 +56,7 @@ async function proxy(request, { params }, method) {
   });
 }
 
-export async function GET(request, context) {
-  return proxy(request, context, "GET");
-}
-
-export async function POST(request, context) {
-  return proxy(request, context, "POST");
-}
-
-export async function PUT(request, context) {
-  return proxy(request, context, "PUT");
-}
-
-export async function DELETE(request, context) {
-  return proxy(request, context, "DELETE");
-}
+export const GET = (req, ctx) => proxy(req, ctx, "GET");
+export const POST = (req, ctx) => proxy(req, ctx, "POST");
+export const PUT = (req, ctx) => proxy(req, ctx, "PUT");
+export const DELETE = (req, ctx) => proxy(req, ctx, "DELETE");
