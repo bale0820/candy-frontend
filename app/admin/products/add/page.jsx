@@ -3,7 +3,7 @@
 import { useProductAdd } from "@/features/administration/products/edit/components/add/useProductAdd";
 import { ProductForm } from "@/features/administration/products/edit/components/ProductForm";
 
-export function Page() {
+export default function Page() {
   const {
     initialFormData,
     initialExistingImages,
