@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useAutoSlider } from "@/shared/hooks/useAutoSlider";
-import { IMAGE_BASE_URL } from "@/shared/constants/imageBaseUrl";
+import { IMAGE_BASE_URL } from "@/shared/constants/apiBaseUrl";
 
 export function useHomeImages() {
   const [images, setImages] = useState([]);
