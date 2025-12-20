@@ -112,7 +112,7 @@ export function useAdminProducts() {
     try {
       const { accessToken } = JSON.parse(loginInfo).state;
       const payload = parseJwt(accessToken);
-      return payload??.id ?? null;
+      return payload?.id ?? null;
     } catch {
       return null;
     }
@@ -121,7 +121,7 @@ export function useAdminProducts() {
   // ✅ 1차 필터: 내 상품만
   const myProducts = useMemo(() => {
     if (!productList || !userId) return [];
-    return productList.filter((p) => p?.user??.id === userId);
+    return productList.filter((p) => p?.user?.id === userId);
   }, [productList, userId]);
 
   // ✅ 2차 필터 + 정렬

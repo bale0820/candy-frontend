@@ -276,7 +276,7 @@ function ProductList({
 
       case "sale": // 할인율 높은 순
         return productList
-          .filter((item) => item.dc >= 10)
+          .filter((item) => item?.dc >= 10)
           .sort((a, b) => b.dc - a.dc)
           .slice(0, limit);
 

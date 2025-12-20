@@ -24,7 +24,7 @@ export function useReviewList() {
   const list = Object.values(grouped);
 
   const filtered = list.filter((item) =>
-    item.productName.toLowerCase().includes(search.toLowerCase())
+    item?.productName.toLowerCase().includes(search.toLowerCase())
   );
 
   const summary = useMemo(() => {

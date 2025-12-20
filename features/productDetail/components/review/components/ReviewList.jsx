@@ -21,7 +21,7 @@ export function ReviewList({ id }) {
 
   // 🔥 Hook은 return 이전에서 항상 실행되어야 한다
   const productReviews = useMemo(() => {
-    return productReviewList.filter((review) => review.ppk === Number(id));
+    return productReviewList.filter((review) => review?.ppk === Number(id));
   }, [productReviewList, id]);
 
   const reviewImages = useMemo(() => {

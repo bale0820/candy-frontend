@@ -29,7 +29,7 @@ export function useMyCoupon() {
         const res = await couponAPI.getMyCoupons(userId);
 
         const availableCoupons = res.data.filter(
-          (item) => item.isUsed === false
+          (item) => item?.isUsed === false
         );
 
         setCoupons(Array.isArray(availableCoupons) ? availableCoupons : []);

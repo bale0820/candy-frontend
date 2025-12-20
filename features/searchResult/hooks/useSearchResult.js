@@ -14,15 +14,15 @@ export function useSearchResult({ mode, keyword, cateId }) {
     // 검색 필터
     function searchFiltering(keyword) {
         return productList.filter((p) =>
-            p.description.toLowerCase().includes(keyword.toLowerCase()) ||
-            p.productName.toLowerCase().includes(keyword.toLowerCase()) ||
+            p?.description.toLowerCase().includes(keyword.toLowerCase()) ||
+            p?.productName.toLowerCase().includes(keyword.toLowerCase()) ||
             p.brandName.toLowerCase().includes(keyword.toLowerCase())
         );
     }
 
     // 브랜드 필터
     function brandFiltering(keyword) {
-        return productList.filter((p) => p.brandName === keyword);
+        return productList.filter((p) => p?.brandName === keyword);
     }
     // 카테고리 필터
     function categoryFiltering(mode, cateId) {

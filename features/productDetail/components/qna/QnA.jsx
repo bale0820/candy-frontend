@@ -30,7 +30,7 @@ export function QnA({ id, product }) {
   // 🔹 2) 해당 상품의 QnA만 필터링
   const qnaList = useMemo(() => {
     return qnaAll
-      .filter((item) => Number(item.ppk) === Number(id))
+      .filter((item) => Number(item?.ppk) === Number(id))
       .sort((a, b) => new Date(b.date) - new Date(a.date));
   }, [qnaAll, id]);
 

@@ -29,9 +29,9 @@ export function useProductForm({
         if (!categoryList) return;
         if (!initialFormData?.categorySub) return;
 
-        const subId = initialFormData.categorySub??.id;
+        const subId = initialFormData.categorySub?.id;
         const main = categoryList.find((c) =>
-            c.subCategories.some((sub) => sub??.id === subId)
+            c.subCategories.some((sub) => sub?.id === subId)
         );
         if (main) {
             // eslint-disable-next-line react-hooks/set-state-in-effect

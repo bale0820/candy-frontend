@@ -85,7 +85,7 @@ export default function useCheckOutData() {
 
         const loadCoupons = async () => {
             const res = await api.get(`/coupon/my/${userId}`);
-            setCoupons(res.data.filter(item => !item.isUsed));
+            setCoupons(res.data.filter(item => !item?.isUsed));
         };
 
         loadCoupons();
@@ -95,7 +95,7 @@ export default function useCheckOutData() {
     // 0개 상품 제외
     // -----------------------------
     useEffect(() => {
-        setReduceCartList(cartList?.filter(cart => cart.product.count > 0) || []);
+        setReduceCartList(cartList?.filter(cart => cart?.product.count > 0) || []);
     }, [cartList]);
 
     // -----------------------------
