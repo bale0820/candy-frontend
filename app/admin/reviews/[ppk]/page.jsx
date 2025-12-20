@@ -5,7 +5,8 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { api } from "@/shared/lib/axios";
 import "./ReviewAnalysisPage.scss";
-import { IMAGE_BASE_URL } from "@/shared/constants/apiBaseUrl";
+import { IMAGE_BASE_URL } from "@/shared/constants/clientEnv";
+
 
 export default function ReviewAnalysisPage() {
   const { ppk } = useParams(); // Next.js의 useParams
