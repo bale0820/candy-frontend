@@ -51,6 +51,15 @@ async function proxy(request, context, method) {
     credentials: "include",
   });
 
+  if (!res.ok) {
+  const text = await res.text();
+  return new NextResponse(text, {
+    status: res.status,
+    headers: { "content-type": "text/plain" },
+  });
+}
+  
+
   return new NextResponse(res.body, {
     status: res.status,
     headers: res.headers,

@@ -11,6 +11,14 @@ export async function getAdvertiseList() {
     cache: "no-store",
   });
 
+   // 🔥 이 줄이 핵심
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(
+      `getAdvertiseList failed: ${res.status}\n${text}`
+    );
+  }
+
   const list = await res.json();
 
   return {
