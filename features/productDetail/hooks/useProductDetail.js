@@ -42,7 +42,7 @@
         const payload = parseJwt(accessToken);
 
         api.post("/view/log", {
-          upk: payload.id,
+          upk: payload?.id,
           ppk: Number(id),
           categorySubId: product.categorySubId,
         });
@@ -85,7 +85,7 @@
         return;
       }
 
-      const cartItem = cartList?.filter(item => item.product.id === Number(id));
+      const cartItem = cartList?.filter(item => item.product?.id === Number(id));
       if(product.count < count + cartItem[0]?.qty) {
         Swal.fire({
         icon: "error",

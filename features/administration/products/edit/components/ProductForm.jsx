@@ -109,8 +109,8 @@ export function ProductForm({
               상품 카테고리를 선택해주세요.
             </option>
             {categoryList?.map((option) => (
-              <option key={option.id} value={option.id}>
-                {option.name}
+              <option key={option??.id} value={option??.id}>
+                {option?.name}
               </option>
             ))}
           </select>
@@ -123,7 +123,7 @@ export function ProductForm({
               상품 카테고리를 선택해주세요.
             </option>
             {subCategoryList?.map((option) => (
-              <option key={option.id} value={option.id}>
+              <option key={option??.id} value={option??.id}>
                 {option.name}
               </option>
             ))}

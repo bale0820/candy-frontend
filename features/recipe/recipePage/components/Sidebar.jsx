@@ -22,13 +22,13 @@
 //             <h3 style={{ marginBottom: "20px" }}>카테고리</h3>
 
 //             {categoryList?.map((main) => (
-//                 <div key={main.id} style={{ marginBottom: "15px" }}>
+//                 <div key={main?.id} style={{ marginBottom: "15px" }}>
 //                     {/* 🔸 메인 카테고리 */}
 //                     <div
-//                         onClick={() => setOpenMain(openMain === main.id ? null : main.id)}
+//                         onClick={() => setOpenMain(openMain === main?.id ? null : main?.id)}
 //                         style={{
 //                             cursor: "pointer",
-//                             fontWeight: openMain === main.id ? "bold" : "normal",
+//                             fontWeight: openMain === main?.id ? "bold" : "normal",
 //                             marginBottom: "8px"
 //                         }}
 //                     >
@@ -36,22 +36,22 @@
 //                     </div>
 
 //                     {/* 🔸 선택된 메인일 때만 서브 카테고리 펼치기 */}
-//                     {openMain === main.id && (
+//                     {openMain === main?.id && (
 //                         <div style={{ marginLeft: "15px" }}>
 //                             {main.subCategories.map((sub) => (
 //                                 <div
-//                                     key={sub.id}
+//                                     key={sub?.id}
 //                                     onClick={() => {
-//                                         setSelectedSub(sub.id);
-//                                         setSelectSub(sub.id);
-//                                         onSelectCategory?.(main.id, sub.id);
+//                                         setSelectedSub(sub?.id);
+//                                         setSelectSub(sub?.id);
+//                                         onSelectCategory?.(main?.id, sub?.id);
 //                                         router.push("/recipe");
 //                                     }}
 //                                     style={{
 //                                         padding: "4px 0",
 //                                         cursor: "pointer",
-//                                         color: selectedSub === sub.id ? "#5f0080" : "black",
-//                                         fontWeight: selectedSub === sub.id ? "bold" : "normal"
+//                                         color: selectedSub === sub?.id ? "#5f0080" : "black",
+//                                         fontWeight: selectedSub === sub?.id ? "bold" : "normal"
 //                                     }}
 //                                 >
 //                                     - {sub.name}
@@ -87,27 +87,27 @@ export default function Sidebar() {
   <h3 className="sidebar-title">카테고리</h3>
 
   {categoryList?.map((main) => (
-    <div key={main.id} className="sidebar-main">
+    <div key={main?.id} className="sidebar-main">
       <div
-        className={`main-title ${openMain === main.id ? "active" : ""}`}
+        className={`main-title ${openMain === main?.id ? "active" : ""}`}
         onClick={() =>
-          setOpenMain(openMain === main.id ? null : main.id)
+          setOpenMain(openMain === main?.id ? null : main?.id)
         }
       >
         {main.name}
       </div>
 
-      {openMain === main.id && (
+      {openMain === main?.id && (
         <div className="sub-list">
           {main.subCategories.map((sub) => (
             <div
-              key={sub.id}
+              key={sub?.id}
               className={`sub-item ${
-                selectedSub === sub.id ? "selected" : ""
+                selectedSub === sub?.id ? "selected" : ""
               }`}
               onClick={() => {
-                setSelectedSub(sub.id);
-                setSelectSub(sub.id);
+                setSelectedSub(sub?.id);
+                setSelectSub(sub?.id);
                 router.push("/recipe");
               }}
             >

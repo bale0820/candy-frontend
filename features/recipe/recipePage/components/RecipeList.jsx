@@ -9,7 +9,7 @@ export function RecipeList({ recipeList }) {
   return (
     <div className="recipe-grid">
       {recipeList.map((recipe) => (
-        <RecipeCard key={recipe.id} recipe={recipe} />
+        <RecipeCard key={recipe?.id} recipe={recipe} />
       ))}
     </div>
   );

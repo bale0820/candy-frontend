@@ -22,7 +22,7 @@ import { api } from "@/shared/lib/axios";
 
 //       // 장바구니 리스트 설정
 //       const url = "/cart/cartList";
-//       const cartItem = { "user": { "id": payload.id } };
+//       const cartItem = { "user": { "id": payload?.id } };
 
 //       // 장바구니 리스트 취득
 //       const cartData = await api.post(url, cartItem);

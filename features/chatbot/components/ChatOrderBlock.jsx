@@ -30,7 +30,7 @@ export function ChatOrderBlock({ order }) {
       </div>
 
       {o.orderDetails?.map((d) => (
-        <div key={d.id} className="order-item">
+        <div key={d?.id} className="order-item">
           <img
             className="order-img"
             src={`/images/productImages/${d.product?.imageUrl}`}

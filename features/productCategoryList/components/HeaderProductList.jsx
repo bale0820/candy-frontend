@@ -62,7 +62,7 @@ export default function HeaderProductList({ type }) {
         ) : filteredProducts.length > 0 ? (
           <div className="product-grid">
             {filteredProducts.map((item, idx) => (
-              <Link key={idx} href={`/products/${item.id}`}>
+              <Link key={idx} href={`/products/${item?.id}`}>
                 <ProductCard item={item} />
               </Link>
             ))}

@@ -23,7 +23,7 @@ export function useMyOrders(itemsPerPage = 4) {
       if (stored) {
         const { accessToken } = JSON.parse(stored).state;
         const payload = parseJwt(accessToken);
-        return payload.id;
+        return payload?.id;
       }
     }
     return null;
@@ -86,8 +86,8 @@ export function useMyOrders(itemsPerPage = 4) {
   
   /** 장바구니 추가 */
   const handleAddCart = async (item) => {
-    const cartItem = cartList?.filter(cItem => cItem.product.id === item.ppk);
-    const product = productList?.data.filter(pItem => pItem.id === item.ppk);
+    const cartItem = cartList?.filter(cItem => cItem.product?.id === item.ppk);
+    const product = productList?.data.filter(pItem => pItem?.id === item.ppk);
     if(product[0]?.count <= cartItem[0]?.qty) {
       Swal.fire({
       icon: "error",

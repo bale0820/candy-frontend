@@ -60,9 +60,9 @@ export const ProductValidateCheck = (inputField, formData) => {
 
     // 카테고리 중분류 검사(대분류를 선택하지않으면 중분류도 선택할 수 없으므로 중분류만 검사)
     if (
-      formData.categorySub.id === null ||
-      formData.categorySub.id === undefined ||
-      String(formData.categorySub.id).trim() === ""
+      formData.categorySub?.id === null ||
+      formData.categorySub?.id === undefined ||
+      String(formData.categorySub?.id).trim() === ""
     ) {
         result.message ={
           icon: 'warning',

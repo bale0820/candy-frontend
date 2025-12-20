@@ -9,7 +9,7 @@ export function SubCategory({ sub }) {
         e.stopPropagation();
         router.push(
             `/search/category/${encodeURIComponent(sub.name)}?`
-            + new URLSearchParams({ type: "sub", id: sub.id }).toString()
+            + new URLSearchParams({ type: "sub", id: sub?.id }).toString()
         );
     };
 

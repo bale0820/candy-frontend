@@ -80,7 +80,7 @@ export function useRecipeDetail(id) {
 
       setReviews((prev) => [
         {
-          id: res.data.recipeReview.user.id,
+          id: res.data.recipeReview.user?.id,
           username: res.data.recipeReview.user.name,
           rating: newRating,
           content: newContent,

@@ -21,7 +21,7 @@
 //       const { accessToken } = JSON.parse(stored);
 //       const payload = parseJwt(accessToken);
 
-//       setUserId(payload.id); // ✅ 토큰 안의 id를 그대로 사용
+//       setUserId(payload?.id); // ✅ 토큰 안의 id를 그대로 사용
 //     }
 //   }, []);
 

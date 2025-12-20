@@ -51,7 +51,7 @@ export default function useCheckOutData() {
         if (stored) {
             const { accessToken } = JSON.parse(stored).state;
             const payload = parseJwt(accessToken);
-            setUserId(payload.id);
+            setUserId(payload?.id);
         }
     }, []);
 
@@ -152,7 +152,7 @@ export default function useCheckOutData() {
 
         if (value === "0") return setSelectCoupon(0);
 
-        const selected = coupons.find(c => c.id == value);
+        const selected = coupons.find(c => c?.id == value);
         const dcRate = selected.coupon.couponDcRate;
 
         const base = Math.round((totalPrice - totalDcPrice) * dcRate * 0.01);

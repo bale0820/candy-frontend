@@ -14,7 +14,7 @@ export default function ReviewAnalysisPage() {
   const [analysis, setAnalysis] = useState(null);
 
   // 리뷰 필터링
-  const reviews = reviewsAll.filter((r) => r.ppk === Number(ppk));
+  const reviews = reviewsAll.filter((r) => r?.ppk === Number(ppk));
 console.log("reviews", reviews);
   // AI 분석 데이터 요청
   useEffect(() => {
@@ -75,7 +75,7 @@ console.log("reviews", reviews);
 
       <div className="review-list">
         {reviews.map((r) => (
-          <div key={r.id} className="review-item">
+          <div key={r?.id} className="review-item">
             <p className="review-title-text">{r.title}</p>
             <p className="review-content">{r.content}</p>
 

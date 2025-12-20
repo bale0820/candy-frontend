@@ -32,7 +32,7 @@ export default function PaymentInfo({
                                 <select className="couponList" onChange={handleChangeCoupon}>
                                     <option value="0">쿠폰 사용 안함</option>
                                     {coupons.map(coupon =>
-                                        <option key={coupon.id} value={coupon.id}>
+                                        <option key={coupon?.id} value={coupon?.id}>
                                             {coupon.coupon.couponDcRate}% 할인 쿠폰
                                         </option>
                                     )}

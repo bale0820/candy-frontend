@@ -13,7 +13,7 @@ export function RecipeCard({ recipe }) {
   return (
     <div
       className="recipe-card"
-      onClick={() => router.push(`/recipe/${recipe.id}`)}
+      onClick={() => router.push(`/recipe/${recipe?.id}`)}
     >
       <img
         src={`${IMAGE_BASE_URL}/data/${recipe.imageUrl}`}

@@ -6,7 +6,7 @@ export function ReviewList({ currentItems }) {
   return (
     <ul className="review-list">
       {currentItems.map((rev) => (
-        <li key={rev.id} className="review-item">
+        <li key={rev?.id} className="review-item">
           <div className="review-header">
             <span className="review-user">{rev.username}</span>
             <span className="review-rating">⭐ {rev.rating}</span>

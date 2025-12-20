@@ -11,14 +11,15 @@ export default function NoticeList() {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 20;
 
-  if (isLoading) return <p>불러오는 중...</p>;
-
+  
   // 🔹 최신순 정렬 (createdAt 기준)
   const sortedNotices = useMemo(() => {
     return [...noticeList].sort(
       (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
     );
   }, [noticeList]);
+  
+  if (isLoading) return <p>불러오는 중...</p>;
 
   // 🔹 페이지네이션 영역
   const currentItems = sortedNotices.slice(
@@ -54,7 +55,7 @@ export default function NoticeList() {
         <tbody>
           {currentItems.length > 0 ? (
             currentItems.map((item, index) => (
-              <tr key={item.id}>
+              <tr key={item?.id}>
                 {/* 번호: 전체 개수 - 현재 시작 index */}
                 <td>
                   {sortedNotices.length -
@@ -62,7 +63,7 @@ export default function NoticeList() {
                 </td>
 
                 <td className="title">
-                  <Link href={`/notice/${item.id}`}>{item.title}</Link>
+                  <Link href={`/notice/${item?.id}`}>{item.title}</Link>
                 </td>
 
                 <td>

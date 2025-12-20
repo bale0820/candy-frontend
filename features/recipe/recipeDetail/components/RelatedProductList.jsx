@@ -10,7 +10,7 @@ export function RelatedProductList({ relatedProducts }) {
 
       <div className="related-product-list">
         {relatedProducts?.map((p) => (
-          <Link href={`/products/${p.id}`} key={p.id}>
+          <Link href={`/products/${p?.id}`} key={p?.id}>
             <div className="related-product-card">
               <img src={`/data/productImages/${p.imageUrl}`} alt={p.productName} />
               <div className="product-name">{p.productName}</div>

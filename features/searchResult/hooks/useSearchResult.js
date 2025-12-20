@@ -30,17 +30,17 @@ export function useSearchResult({ mode, keyword, cateId }) {
         // 대분류
         if (mode === "main") {
             const category = categoryList.find(
-                (c) => c.id === cateId
+                (c) => c?.id === cateId
             );
 
             filtered = productList.filter((p) =>
-                category.subCategories.some((sub) => sub.id === p.categorySub.id)
+                category.subCategories.some((sub) => sub?.id === p.categorySub?.id)
             );
         }
         // 중분류
         else {
             filtered = productList.filter(
-                (p) => p.categorySub.id === cateId
+                (p) => p.categorySub?.id === cateId
             );
         }
 

@@ -16,7 +16,7 @@ export function useMyCoupon() {
     if (stored) {
       const { accessToken } = JSON.parse(stored).state;
       const payload = parseJwt(accessToken);
-      setUserId(payload.id);
+      setUserId(payload?.id);
     }
   }, []);
 

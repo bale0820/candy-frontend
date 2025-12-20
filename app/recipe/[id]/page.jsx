@@ -13,7 +13,7 @@ export default function RecipeDetailPage() {
   const router = useRouter();
   const pathname = usePathname();
   const params = useParams();
-  const id = params.id;
+  const id = params?.id;
 
   const {
     recipe,

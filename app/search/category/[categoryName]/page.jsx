@@ -51,7 +51,7 @@ export default async function Page({ params, searchParams }) {
   const sp = await searchParams;
 
   const type = sp.type;      // main / sub
-  const cateId = Number(sp.id);
+  const cateId = Number(sp?.id);
   return (
     <SearchResult
       mode={type}

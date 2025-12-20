@@ -8,14 +8,14 @@ import { loadNaverPaySDK } from "@/shared/utils/loadNaverSDK";
 export const getKakaoPayment = async (receiver, paymentInfo, cartList, couponId) => {
   const cidList = cartList.map((item) => item.cid);
   const qty = cartList.reduce((sum, item) => sum + parseInt(item.qty), 0);
-  const productInfo = cartList.map((item) => ({pid: item.product.id, qty: item.qty}));
+  const productInfo = cartList.map((item) => ({pid: item.product?.id, qty: item.qty}));
   const stored = localStorage.getItem("auth-storage");
   let id = -1;
 
   if (stored) {
     const { accessToken } = JSON.parse(stored).state;
     const payload = parseJwt(accessToken);
-    id = payload.id;
+    id = payload?.id;
   }
 
   const url = "/payment/kakao/ready";
@@ -45,14 +45,14 @@ export const getKakaoPayment = async (receiver, paymentInfo, cartList, couponId)
 export const getNaverPayment = async (receiver, paymentInfo, cartList, couponId) => {
   const cidList = cartList.map((item) => item.cid);
   const qty = cartList.reduce((sum, item) => sum + parseInt(item.qty), 0);
-  const productInfo = cartList.map((item) => ({pid: item.product.id, qty: item.qty}));
+  const productInfo = cartList.map((item) => ({pid: item.product?.id, qty: item.qty}));
   const stored = localStorage.getItem("auth-storage");
   let id = -1;
 
   if (stored) {
     const { accessToken } = JSON.parse(stored).state;
     const payload = parseJwt(accessToken);
-    id = payload.id;
+    id = payload?.id;
   } 
   // 1️⃣ 백엔드에 주문 생성 요청
   const data = {

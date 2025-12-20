@@ -29,13 +29,13 @@
         login({
           accessToken,
           role,
-          userId: payload.id,
+          userId: payload?.id,
         });
 
         // 2️⃣ 로그인 후 장바구니 로드
         try {
           const res = await api.post("/cart/cartList", {
-            user: { id: payload.id },
+            user: { id: payload?.id },
           });
           setCartList(res.data);
         } catch (err) {
@@ -44,7 +44,7 @@
         
         // 2️⃣ 로그인 후 주문 내역 로드
         try {
-          const res = await api.get(`/orders/my/${payload.id}`);
+          const res = await api.get(`/orders/my/${payload?.id}`);
           setOrders(res.data);
         } catch (err) {
           console.error("장바구니 불러오기 실패", err);

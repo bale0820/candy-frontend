@@ -9,7 +9,7 @@ export function MainCategory({ main }) {
     const goMain = () => {
       router.push(
     `/search/category/${encodeURIComponent(main.name)}?`
-            + new URLSearchParams({ type: "main", id: main.id }).toString()
+            + new URLSearchParams({ type: "main", id: main?.id }).toString()
       );
     };
 
@@ -20,7 +20,7 @@ export function MainCategory({ main }) {
           {main.subCategories?.length > 0 && (
             <ul className="sub-category-list">
               {main.subCategories.map((sub) => (
-                <SubCategory key={sub.id} sub={sub} />
+                <SubCategory key={sub?.id} sub={sub} />
               ))}
             </ul>
           )}

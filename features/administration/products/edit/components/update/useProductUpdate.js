@@ -45,7 +45,7 @@ export function useProductUpdate() {
           formData,
           imageListFile,
           false,             // update mode
-          item.id,
+          item?.id,
           existingImages.length
         );
 

@@ -30,7 +30,7 @@ export default function MyOrders() {
       ) : (
         currentItems.map((order) => (
           <OrderCard
-            key={order.id}
+            key={order?.id}
             order={order}
             goProduct={goProduct}
             handleAddCart={handleAddCart}

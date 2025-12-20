@@ -202,9 +202,9 @@
   //           <div className="slides">
   //             {productFilterList.map((item) => (
   //               <Link
-  //                 href={`/products/${item.id}`}
+  //                 href={`/products/${item?.id}`}
   //                 className="slide"
-  //                 key={item.id} // 🔥 idx → item.id 로 수정
+  //                 key={item?.id} // 🔥 idx → item?.id 로 수정
   //                 draggable="false"
   //                 onClick={(e) => {
   //                   if (dragPreventClick.current) {
@@ -399,9 +399,9 @@ function ProductList({
           <div className="slides">
             {productFilterList.map((item) => (
               <Link
-                href={`/products/${item.id}`}
+                href={`/products/${item?.id}`}
                 className="slide"
-                key={item.id}
+                key={item?.id}
                 draggable="false"
                 onClick={(e) => {
                   if (dragPreventClick.current) {

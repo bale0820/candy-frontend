@@ -29,7 +29,7 @@ export default function ProductDetail({ product }) {
     returnRef,
     handleTabClick,
   } = useProductDetail(product);
-  const id = product.id;
+  const id = product?.id;
 
   if (!product) return <p>상품 정보를 찾을 수 없습니다.</p>;
 
