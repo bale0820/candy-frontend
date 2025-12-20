@@ -1,4 +1,5 @@
-import { API_BASE_URL_SC } from "@/shared/constants/apiBaseUrl";
+
+import { API_BASE_URL_SC } from "@/shared/constants/serverEnv";
 import { NextResponse } from "next/server";
 
 export const runtime = "nodejs";

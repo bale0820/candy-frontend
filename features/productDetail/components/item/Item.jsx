@@ -1,6 +1,7 @@
 "use client";
 
-import { IMAGE_BASE_URL } from "@/shared/constants/apiBaseUrl";
+import { IMAGE_BASE_URL } from "@/shared/constants/clientEnv";
+
 
 
 

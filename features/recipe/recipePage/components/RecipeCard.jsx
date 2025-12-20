@@ -3,7 +3,8 @@
 import React from "react";
 // import { useNavigate } from "react-router-dom";
 import { useRouter } from "next/navigation";
-import { IMAGE_BASE_URL } from "@/shared/constants/apiBaseUrl";
+import { IMAGE_BASE_URL } from "@/shared/constants/clientEnv";
+
 
 
 export function RecipeCard({ recipe }) {

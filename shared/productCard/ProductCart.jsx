@@ -2,7 +2,8 @@
 
 import React, { useMemo } from "react";
 import "./ProductCard.scss";
-import { IMAGE_BASE_URL } from "../constants/apiBaseUrl";
+import { IMAGE_BASE_URL } from "../constants/clientEnv";
+
 export default function ProductCard({ item }) {
   // 할인된 가격 계산
   const discountedPrice = useMemo(() => {

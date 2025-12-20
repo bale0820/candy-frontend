@@ -11,7 +11,7 @@ import { Detail } from "@/features/productDetail/components/detail/Detail";
 import { ReviewList } from "@/features/productDetail/components/review/components/ReviewList";
 import { QnA } from "@/features/productDetail/components/qna/QnA";
 import { Return } from "@/features/productDetail/components/return/Return";
-import { IMAGE_BASE_URL } from "@/shared/constants/apiBaseUrl";
+import { IMAGE_BASE_URL } from "@/shared/constants/clientEnv";
 
 export default function ProductDetail({ product }) {
 

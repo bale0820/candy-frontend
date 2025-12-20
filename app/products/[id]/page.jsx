@@ -1,6 +1,6 @@
 import { getProductDetail } from "@/features/productDetail/server/getProductDetail";
 import ProductDetail from "./ProductDetail";
-import { IMAGE_BASE_URL } from "@/shared/constants/apiBaseUrl";
+import { IMAGE_BASE_URL } from "@/shared/constants/clientEnv";
 
 // ✅ SEO
 export async function generateMetadata({ params }) {

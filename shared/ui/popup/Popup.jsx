@@ -2,7 +2,8 @@
 
 import { useRouter } from "next/navigation";
 import "./Popup.css";
-import { IMAGE_BASE_URL } from "@/shared/constants/apiBaseUrl";
+import { IMAGE_BASE_URL } from "@/shared/constants/clientEnv";
+
 
 export default function Popup({ onClose }) {
   const router = useRouter();
