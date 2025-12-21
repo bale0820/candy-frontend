@@ -9,7 +9,7 @@ export default function OAuthSuccessPage() {
   const searchParams = useSearchParams();
 
   // 상태 저장 함수
-  const socialLogin = useAuthStore((state) => state.socialLogin);
+  const socialLogin = useAuthStore((state) => state.login);
 
   const accessToken = searchParams.get("accessToken");
   const provider = searchParams.get("provider");
