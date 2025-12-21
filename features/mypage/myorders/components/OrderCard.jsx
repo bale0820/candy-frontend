@@ -1,6 +1,9 @@
 // pages/myPage/OrderCard.jsx
 
+import { IMAGE_BASE_URL } from "@/shared/constants/clientEnv";
+
 export function OrderCard({ order, goProduct, handleAddCart, onDelete }) {
+  console.log("OrderCard order:", order);
   return (
     <div className="mypage-card">
       <div className="mypage-body">
@@ -20,27 +23,27 @@ export function OrderCard({ order, goProduct, handleAddCart, onDelete }) {
               <div className="mypage-product-img-container">
                 <img
                   className="mypage-product-img"
-                  src={`/data/productImages/${item.product.imageUrl}`}
+                  src={`${IMAGE_BASE_URL}/data/productImages/${item.product?.imageUrl}`}
                   alt="product"
                 />
-                {item.product.count <= 0 && (
+                {item.product?.count <= 0 && (
                   <div className="sold-out">SOLD OUT</div>
                 )}
               </div>
 
               <div className="mypage-product-info">
-                <div>{item.productName}</div>
-                {item.price.toLocaleString()}원 · <b>{item.qty}</b>개
+                <div>{item?.productName}</div>
+                {item.price?.toLocaleString()}원 · <b>{item?.qty}</b>개
               </div>
 
               <div className="mypage-btn">
-                <button onClick={() => goProduct(item.ppk)}>
+                <button onClick={() => goProduct(item?.ppk)}>
                   상품 바로가기
                 </button>
 
                 <button
                   onClick={() => handleAddCart(item)}
-                  disabled={item.product.count <= 0}
+                  disabled={item.product?.count <= 0}
                 >
                   장바구니
                 </button>
@@ -51,13 +54,13 @@ export function OrderCard({ order, goProduct, handleAddCart, onDelete }) {
 
         <div className="mypage-info">
           <p>
-            <b>수령인:</b> {order.receiverName} / {order.receiverPhone}
+            <b>수령인:</b> {order?.receiverName} / {order?.receiverPhone}
           </p>
           <p>
-            <b>주소:</b> {order.address1} {order.address2} ({order.zipcode})
+            <b>주소:</b> {order?.address1} {order?.address2} ({order?.zipcode})
           </p>
           <p>
-            <b>결제 금액:</b> {order.totalAmount.toLocaleString()}원
+            <b>결제 금액:</b> {order.totalAmount?.toLocaleString()}원
           </p>
         </div>
       </div>
