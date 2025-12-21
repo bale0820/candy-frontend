@@ -14,15 +14,15 @@ export function useSearchResult({ mode, keyword, cateId }) {
     // 검색 필터
     function searchFiltering(keyword) {
         return productList.filter((p) =>
-            p.description.toLowerCase().includes(keyword.toLowerCase()) ||
-            p.productName.toLowerCase().includes(keyword.toLowerCase()) ||
+            p?.description.toLowerCase().includes(keyword.toLowerCase()) ||
+            p?.productName.toLowerCase().includes(keyword.toLowerCase()) ||
             p.brandName.toLowerCase().includes(keyword.toLowerCase())
         );
     }
 
     // 브랜드 필터
     function brandFiltering(keyword) {
-        return productList.filter((p) => p.brandName === keyword);
+        return productList.filter((p) => p?.brandName === keyword);
     }
     // 카테고리 필터
     function categoryFiltering(mode, cateId) {
@@ -30,17 +30,17 @@ export function useSearchResult({ mode, keyword, cateId }) {
         // 대분류
         if (mode === "main") {
             const category = categoryList.find(
-                (c) => c.id === cateId
+                (c) => c?.id === cateId
             );
 
             filtered = productList.filter((p) =>
-                category.subCategories.some((sub) => sub.id === p.categorySub.id)
+                category.subCategories.some((sub) => sub?.id === p.categorySub?.id)
             );
         }
         // 중분류
         else {
             filtered = productList.filter(
-                (p) => p.categorySub.id === cateId
+                (p) => p.categorySub?.id === cateId
             );
         }
 

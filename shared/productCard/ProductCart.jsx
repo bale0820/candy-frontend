@@ -2,7 +2,8 @@
 
 import React, { useMemo } from "react";
 import "./ProductCard.scss";
-import { IMAGE_BASE_URL } from "../constants/imageBaseUrl";
+import { IMAGE_BASE_URL } from "../constants/clientEnv";
+
 export default function ProductCard({ item }) {
   // 할인된 가격 계산
   const discountedPrice = useMemo(() => {
@@ -25,7 +26,7 @@ export default function ProductCard({ item }) {
       {/* 🔥 이미지 */}
       <div className="image-container">
         <img
-          src={`${IMAGE_BASE_URL}/productImages/${item.imageUrl}`}
+          src={`${IMAGE_BASE_URL}/data/productImages/${item.imageUrl}`}
           alt={item.productName}
           className="product-image"
           draggable="false"

@@ -9,9 +9,9 @@ import { useProductDetail } from "@/features/productDetail/hooks/useProductDetai
 import { Item } from "@/features/productDetail/components/item/Item";
 import { Detail } from "@/features/productDetail/components/detail/Detail";
 import { ReviewList } from "@/features/productDetail/components/review/components/ReviewList";
-import { IMAGE_BASE_URL } from "@/shared/constants/imageBaseUrl";
 import { QnA } from "@/features/productDetail/components/qna/QnA";
 import { Return } from "@/features/productDetail/components/return/Return";
+import { IMAGE_BASE_URL } from "@/shared/constants/clientEnv";
 
 export default function ProductDetail({ product }) {
 
@@ -29,7 +29,7 @@ export default function ProductDetail({ product }) {
     returnRef,
     handleTabClick,
   } = useProductDetail(product);
-  const id = product.id;
+  const id = product?.id;
 
   if (!product) return <p>상품 정보를 찾을 수 없습니다.</p>;
 
@@ -51,7 +51,7 @@ export default function ProductDetail({ product }) {
 
             <div className="product-image-container">
               <img
-                src={`${IMAGE_BASE_URL}/productImages/${product.imageUrl}`}
+                src={`${IMAGE_BASE_URL}/data/productImages/${product.imageUrl}`}
                 alt={`${product.productName} 상품 이미지`}
                 loading="eager"
               />

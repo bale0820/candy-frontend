@@ -8,7 +8,7 @@ export function MyCouponList({ coupons, onDelete }) {
   return (
     <ul className="mypage-couponList">
       {coupons.map((item) => (
-        <li key={item.id} className="mypage-couponItem">
+        <li key={item?.id} className="mypage-couponItem">
           <span>
             <b>{item.coupon.couponDcRate}% 할인 쿠폰</b> — 수량: {item.qty}
           </span>

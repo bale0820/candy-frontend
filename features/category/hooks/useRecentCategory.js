@@ -17,7 +17,7 @@ export function useRecentCategory() {
       const { accessToken } = JSON.parse(stored).state;
       const payload = parseJwt(accessToken);
 
-      const res = await api.get(`/view/recent-subcat/${payload.id}`);
+      const res = await api.get(`/view/recent-subcat/${payload?.id}`);
       const value = res.data.recentSubCategory;
 
       setRecentSubCategory(value);

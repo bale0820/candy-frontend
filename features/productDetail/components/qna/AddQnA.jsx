@@ -11,7 +11,7 @@ export default function AddQnA({ onAddQnA, onClose, product , userId }) {
 
   const handleSubmit = () => {
     const qnaData = {
-      ppk: product.id,
+      ppk: product?.id,
       title,
       content,
       isPrivate,

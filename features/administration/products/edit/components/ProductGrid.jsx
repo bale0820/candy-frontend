@@ -25,7 +25,7 @@ export function ProductGrid({ items, onDelete }) {
           <button
             type="button"
             className="delete-btn"
-            onClick={() => onDelete(item.id)}
+            onClick={() => onDelete(item?.id)}
           >
             삭제
           </button>

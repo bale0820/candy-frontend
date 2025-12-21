@@ -40,8 +40,8 @@ export function SignupTerms({
                 <div>
                   <input
                     type="checkbox"
-                    name={item.id}
-                    checked={agree[item.id]}
+                    name={item?.id}
+                    checked={agree[item?.id]}
                     onChange={handleAgreeChange}
                   />
                   <span>{item.title}</span>
@@ -51,13 +51,13 @@ export function SignupTerms({
                 {/* 약관 보기 Hover 영역 */}
                 <div
                   className="agree-hover-area"
-                  onMouseEnter={() => setHoveredId(item.id)}
+                  onMouseEnter={() => setHoveredId(item?.id)}
                   onMouseLeave={() => setHoveredId(null)}
                 >
                   <span className="agree-text">약관보기</span>
 
                   {/* Hover 시 약관 내용 표시 */}
-                  {hoveredId === item.id && (
+                  {hoveredId === item?.id && (
                     <div className="agree-box">
                       <h4 className="agree-title">{item.title}</h4>
                       <ol className="agree-list">

@@ -51,7 +51,7 @@ export default function useCheckOutData() {
         if (stored) {
             const { accessToken } = JSON.parse(stored).state;
             const payload = parseJwt(accessToken);
-            setUserId(payload.id);
+            setUserId(payload?.id);
         }
     }, []);
 
@@ -85,7 +85,7 @@ export default function useCheckOutData() {
 
         const loadCoupons = async () => {
             const res = await api.get(`/coupon/my/${userId}`);
-            setCoupons(res.data.filter(item => !item.isUsed));
+            setCoupons(res.data.filter(item => !item?.isUsed));
         };
 
         loadCoupons();
@@ -95,7 +95,7 @@ export default function useCheckOutData() {
     // 0개 상품 제외
     // -----------------------------
     useEffect(() => {
-        setReduceCartList(cartList?.filter(cart => cart.product.count > 0) || []);
+        setReduceCartList(cartList?.filter(cart => cart?.product.count > 0) || []);
     }, [cartList]);
 
     // -----------------------------
@@ -152,7 +152,7 @@ export default function useCheckOutData() {
 
         if (value === "0") return setSelectCoupon(0);
 
-        const selected = coupons.find(c => c.id == value);
+        const selected = coupons.find(c => c?.id == value);
         const dcRate = selected.coupon.couponDcRate;
 
         const base = Math.round((totalPrice - totalDcPrice) * dcRate * 0.01);

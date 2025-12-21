@@ -10,7 +10,7 @@ export function SearchResultList({ filterList }) {
     <div className="product-grid">
       {filterList.map((item, idx) => (
         <Link
-          href={`/products/${encodeURIComponent(item.id)}`}
+          href={`/products/${encodeURIComponent(item?.id)}`}
           key={idx}
         >
           <ProductCard item={item} />

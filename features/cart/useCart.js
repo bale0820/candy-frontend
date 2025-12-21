@@ -16,7 +16,7 @@ export function useCart() {
       if (stored) {
         const { accessToken } = JSON.parse(stored).state;
         const payload = parseJwt(accessToken);
-        return payload.id;
+        return payload?.id;
       }
     }
     return null;

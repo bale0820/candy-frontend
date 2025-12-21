@@ -29,13 +29,13 @@ export function useProductForm({
         if (!categoryList) return;
         if (!initialFormData?.categorySub) return;
 
-        const subId = initialFormData.categorySub.id;
+        const subId = initialFormData.categorySub?.id;
         const main = categoryList.find((c) =>
-            c.subCategories.some((sub) => sub.id === subId)
+            c.subCategories.some((sub) => sub?.id === subId)
         );
         if (main) {
             // eslint-disable-next-line react-hooks/set-state-in-effect
-            setSelectedMain(main.id.toString());
+            setSelectedMain(main?.id.toString());
             setSubCategoryList(main.subCategories);
             setSelectedSub(subId.toString());
         }
@@ -67,7 +67,7 @@ export function useProductForm({
 
   const handleChangeCategory = (e) => {
     const { value } = e.target;
-    const main = categoryList.find((c) => c.id === parseInt(value));
+    const main = categoryList.find((c) => c?.id === parseInt(value));
 
     setSubCategoryList(main.subCategories);
     setSelectedMain(value);

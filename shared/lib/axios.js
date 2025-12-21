@@ -106,9 +106,11 @@
 //   );
 // }
 import axios from "axios";
+import { API_BASE_URL } from "../constants/clientEnv";
+
 
 export const api = axios.create({
-  baseURL: "http://localhost:8080",
+  baseURL: `${API_BASE_URL}`, // ⭐ 절대 "/" 쓰면 안 됨
   withCredentials: true,
 });
 
@@ -209,8 +211,8 @@ export function setupApiInterceptors() {
           console.error("❌ Refresh 실패:", err);
           isRefreshing = false;
 
-          localStorage.removeItem("auth-storage");
-          window.location.href = "/login";
+          // localStorage.removeItem("auth-storage");
+          // window.location.href = "/login";
           return Promise.reject(err);
         }
       }

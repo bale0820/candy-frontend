@@ -37,7 +37,7 @@
 
 //   // 등록버튼 클릭시 이벤트
 //   const handleSubmit = async (formData, imageListFile) => {
-//     const result = await setProductData(formData, imageListFile, false, item.id, existingImages.length);
+//     const result = await setProductData(formData, imageListFile, false, item?.id, existingImages.length);
 
 //     // 등록 성공시
 //     if(result){
@@ -73,8 +73,8 @@
 
 
 // ProductUpdate.jsx
-import { ProductForm } from "features/administration/productSkill/productAdd/components/ProductForm";
-import { useProductUpdate } from "features/administration/productSkill/productUpdate/useProductUpdate";
+import { ProductForm } from "@/features/administration/products/edit/components/ProductForm";
+import { useProductUpdate } from "@/features/administration/products/edit/components/update/useProductUpdate";
 import React from "react";
 
 export function ProductUpdate() {

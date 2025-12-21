@@ -60,7 +60,7 @@ export function useRecipeDetail(id) {
     .filter((w) => w.length > 1);
 
   const matches = productList.filter((p) =>
-    keywords.some((kw) => p.productName.includes(kw))
+    keywords.some((kw) => p?.productName.includes(kw))
   );
 
   setRelatedProducts(matches);
@@ -80,7 +80,7 @@ export function useRecipeDetail(id) {
 
       setReviews((prev) => [
         {
-          id: res.data.recipeReview.user.id,
+          id: res.data.recipeReview.user?.id,
           username: res.data.recipeReview.user.name,
           rating: newRating,
           content: newContent,

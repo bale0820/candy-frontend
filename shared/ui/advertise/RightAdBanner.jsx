@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import "./advertise.css";
-import { IMAGE_BASE_URL } from "@/shared/constants/imageBaseUrl";
+import { IMAGE_BASE_URL } from "@/shared/constants/clientEnv";
 
 export function RightAdBanner({ ads = [], interval = 3000, random = false }) {
   const [index, setIndex] = useState(0);
@@ -37,7 +37,7 @@ export function RightAdBanner({ ads = [], interval = 3000, random = false }) {
       >
         <img
           className="banner-img"
-          src={`${IMAGE_BASE_URL}${ad.advImageBanner}`}
+          src={`${IMAGE_BASE_URL}/data${ad.advImageBanner}`}
           alt={ad.advName ? `${ad.advName} 광고 배너` : "광고 배너"}
         />
       </a>

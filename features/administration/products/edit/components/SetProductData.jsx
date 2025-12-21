@@ -15,7 +15,7 @@ export function SetProductData(formData, imageListFile, isNew, id, maxImageLengt
         const data = new FormData();
 
         // user의 id설정
-        formData = {...formData, "user": { "id": payload.id } };
+        formData = {...formData, "user": { "id": payload?.id } };
 
         // 신규 등록이 아닐 경우
         if(!isNew) {

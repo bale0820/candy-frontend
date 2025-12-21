@@ -16,7 +16,7 @@ export function OrderCard({ order, goProduct, handleAddCart, onDelete }) {
 
         <ul>
           {order.orderDetails.map((item) => (
-            <li className="mypage-product-list" key={item.id}>
+            <li className="mypage-product-list" key={item?.id}>
               <div className="mypage-product-img-container">
                 <img
                   className="mypage-product-img"

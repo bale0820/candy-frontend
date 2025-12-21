@@ -17,7 +17,7 @@ export default function AddressModal({ onClose, onSelectAddress }) {
     //             if (stored) {
     //                 const { accessToken } = JSON.parse(stored);
     //                 const payload = parseJwt(accessToken);
-    //                 return payload.id;
+    //                 return payload?.id;
     //             }
     //         }
     //         return null;

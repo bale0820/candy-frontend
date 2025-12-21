@@ -15,7 +15,7 @@ export function useUserDetail() {
       const { state } = JSON.parse(stored);
       const accessToken = state.accessToken;
       const payload = JSON.parse(atob(accessToken.split(".")[1]));
-      setUserId(payload.id);
+      setUserId(payload?.id);
     }
   }, []);
 

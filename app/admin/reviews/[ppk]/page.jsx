@@ -5,7 +5,8 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { api } from "@/shared/lib/axios";
 import "./ReviewAnalysisPage.scss";
-import { IMAGE_BASE_URL } from "@/shared/constants/imageBaseUrl";
+import { IMAGE_BASE_URL } from "@/shared/constants/clientEnv";
+
 
 export default function ReviewAnalysisPage() {
   const { ppk } = useParams(); // Next.js의 useParams
@@ -13,7 +14,7 @@ export default function ReviewAnalysisPage() {
   const [analysis, setAnalysis] = useState(null);
 
   // 리뷰 필터링
-  const reviews = reviewsAll.filter((r) => r.ppk === Number(ppk));
+  const reviews = reviewsAll.filter((r) => r?.ppk === Number(ppk));
 console.log("reviews", reviews);
   // AI 분석 데이터 요청
   useEffect(() => {
@@ -74,14 +75,14 @@ console.log("reviews", reviews);
 
       <div className="review-list">
         {reviews.map((r) => (
-          <div key={r.id} className="review-item">
+          <div key={r?.id} className="review-item">
             <p className="review-title-text">{r.title}</p>
             <p className="review-content">{r.content}</p>
 
             {r.images?.length > 0 && (
               <div className="review-images">
                 {r.images.map((img, i) => (
-                  <img key={i} src={`${IMAGE_BASE_URL}${img}`} alt="" />
+                  <img key={i} src={`${IMAGE_BASE_URL}/data${img}`} alt="" />
                 ))}
               </div>
             )}

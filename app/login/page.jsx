@@ -1,5 +1,5 @@
 import LoginClient from "./LoginClient";
-
+import { Suspense } from "react";
 export const metadata = {
   robots: {
     index: false,
@@ -8,5 +8,7 @@ export const metadata = {
 };
 
 export default function LoginPage() {
-  return <LoginClient />;
+  return <Suspense fallback={<div>로딩 중...</div>}>
+          <LoginClient />
+          </Suspense>;
 }

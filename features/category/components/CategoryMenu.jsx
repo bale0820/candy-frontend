@@ -13,7 +13,7 @@ export function CategoryMenu() {
     <ul className="main-category-list">
       
       {categoryList?.map((main) => (
-        <MainCategory key={main.id} main={main} />
+        <MainCategory key={main?.id} main={main} />
       ))}
     </ul>
   );

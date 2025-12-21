@@ -58,7 +58,7 @@ export const useCartStore = create((set, get) => ({
   // 가격 계산
   calcTotals: () => {
     const totalList = get().cartList; //매진 포함
-    const list = totalList.filter(item => item.product.count > 0); //매진 제외
+    const list = totalList.filter(item => item.product?.count > 0); //매진 제외
 
     const total = list.reduce(
       (acc, item) => acc + item.qty * item.product.price,

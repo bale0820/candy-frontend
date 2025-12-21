@@ -3,7 +3,8 @@
 import React, { useMemo, useRef, useState, useEffect, useLayoutEffect } from "react";
 import "./ReviewList.scss";
 import { useProductReviewList } from "@/features/product/hooks/useProductReviewList";
-import { IMAGE_BASE_URL } from "@/shared/constants/imageBaseUrl";
+import { IMAGE_BASE_URL } from "@/shared/constants/clientEnv";
+
 
 export function ReviewList({ id }) {
   const {
@@ -20,7 +21,7 @@ export function ReviewList({ id }) {
 
   // 🔥 Hook은 return 이전에서 항상 실행되어야 한다
   const productReviews = useMemo(() => {
-    return productReviewList.filter((review) => review.ppk === Number(id));
+    return productReviewList.filter((review) => review?.ppk === Number(id));
   }, [productReviewList, id]);
 
   const reviewImages = useMemo(() => {
@@ -69,7 +70,7 @@ export function ReviewList({ id }) {
           <div className="review-images">
             {reviewImages.map((img, i) => (
               <div key={i} className="review-thumb">
-                <img src={`${IMAGE_BASE_URL}${img}`} alt={`review-${i}`} />
+                <img src={`${IMAGE_BASE_URL}/data${img}`} alt={`review-${i}`} />
               </div>
             ))}
           </div>
@@ -83,7 +84,7 @@ export function ReviewList({ id }) {
 
               <div className="review-images">
                 {r.images.map((img, i) => (
-                  <img key={i} src={`${IMAGE_BASE_URL}${img}`} alt="리뷰 이미지" />
+                  <img key={i} src={`${IMAGE_BASE_URL}/data${img}`} alt="리뷰 이미지" />
                 ))}
               </div>
 

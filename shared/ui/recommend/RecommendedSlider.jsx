@@ -25,7 +25,7 @@ export default function RecommendedSlider({ title = "추천 상품", limit = 20 
     if (!recentSubCategory || productList.length === 0) return [];
 
     return productList
-      .filter((item) => item.categorySub.id === recentSubCategory)
+      .filter((item) => item.categorySub?.id === recentSubCategory)
       .slice(0, limit);
   }, [productList, recentSubCategory, limit]);
 
@@ -75,9 +75,9 @@ export default function RecommendedSlider({ title = "추천 상품", limit = 20 
         <div className="recommend-track">
           {extendedList.map((item, idx) => (
             <Link
-              href={`/products/${item.id}`}
+              href={`/products/${item?.id}`}
               className="recommend-item small-card"
-              key={`${item.id}-${idx}`}
+              key={`${item?.id}-${idx}`}
             >
               <ProductCard item={item} />
             </Link>

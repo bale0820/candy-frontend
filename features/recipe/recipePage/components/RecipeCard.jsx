@@ -3,6 +3,8 @@
 import React from "react";
 // import { useNavigate } from "react-router-dom";
 import { useRouter } from "next/navigation";
+import { IMAGE_BASE_URL } from "@/shared/constants/clientEnv";
+
 
 
 export function RecipeCard({ recipe }) {
@@ -11,10 +13,10 @@ export function RecipeCard({ recipe }) {
   return (
     <div
       className="recipe-card"
-      onClick={() => router.push(`/recipe/${recipe.id}`)}
+      onClick={() => router.push(`/recipe/${recipe?.id}`)}
     >
       <img
-        src={`/data/recipe/${recipe.imageUrl}`}
+        src={`${IMAGE_BASE_URL}/data${recipe.imageUrl}`}
         alt={recipe.title}
         className="recipe-img"
       />

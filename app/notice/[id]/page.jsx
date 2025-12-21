@@ -13,7 +13,7 @@ export default function NoticeDetail() {
 
   if (isLoading) return <p>불러오는 중...</p>;
 
-  const notice = notices.find((n) => n.id === noticeId);
+  const notice = notices.find((n) => n?.id === noticeId);
 
   if (!notice) {
     return <p>공지사항을 찾을 수 없습니다.</p>;

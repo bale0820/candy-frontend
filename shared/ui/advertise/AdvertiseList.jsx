@@ -2,11 +2,11 @@
 
 import { useEffect, useState } from "react";
 import "./advertise.css";
-import { IMAGE_BASE_URL } from "@/shared/constants/imageBaseUrl";
+import { IMAGE_BASE_URL } from "@/shared/constants/clientEnv";
+
 
 export function AdvertiseList({ ads = [], interval = 3000, random = false }) {
   const [index, setIndex] = useState(0);
-
   // 🔹 광고 자동 교체
   useEffect(() => {
     if (ads.length === 0) return;
@@ -35,7 +35,7 @@ export function AdvertiseList({ ads = [], interval = 3000, random = false }) {
       <a href={ad.advLink} target="_blank" rel="noreferrer">
         <img
           className="advertise-inline"
-          src={`${IMAGE_BASE_URL}${ad.advImageInline}`}
+          src={`${IMAGE_BASE_URL}/data${ad.advImageInline}`}
           alt={ad.advName ?? "advertise-inline"}
         />
       </a>
