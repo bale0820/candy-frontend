@@ -13,7 +13,7 @@ export const runtime = "nodejs";
         cache: "no-store",
         }
     );
-
+   
     if (!res.ok) {
         throw new Error(`상품 조회 실패: ${res.status}`);
     }
