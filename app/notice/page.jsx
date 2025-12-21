@@ -19,7 +19,7 @@ export default function NoticeList() {
     );
   }, [noticeList]);
   
-  if (isLoading) return <p>불러오는 중...</p>;
+  if (isLoading) return <p>불러오는 중.....</p>;
 
   // 🔹 페이지네이션 영역
   const currentItems = sortedNotices.slice(
