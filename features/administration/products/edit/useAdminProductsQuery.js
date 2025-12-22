@@ -28,7 +28,7 @@ export function useAdminProductsQuery(id, productJson, files) {
     // 상품 등록
     const productAdd = useMutation({
         mutationFn: async (data) => {
-            await api.post("/product/productAdd", data);
+            await api.post("https://candy-api.duckdns.org/product/productAdd", data);
         },
         onSuccess: () => {
             queryClient.invalidateQueries(["adminProductList"]);
@@ -38,7 +38,7 @@ export function useAdminProductsQuery(id, productJson, files) {
     // 상품 편집
     const productUpdate = useMutation({
         mutationFn: async (data) => {
-            await api.post("/product/productUpdate", data);
+            await api.post("https://candy-api.duckdns.org/product/productUpdate", data);
         },
         onSuccess: () => {
             queryClient.invalidateQueries(["adminProductList"]);
