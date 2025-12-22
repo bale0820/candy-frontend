@@ -2,6 +2,7 @@
 
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { api } from "@/shared/lib/axios";
+import { PRODUCT_API_BASE_URL } from "@/shared/constants/clientEnv";
 
 export function useAdminProductsQuery(id, productJson, files) {
     const queryClient = useQueryClient();
@@ -18,7 +19,7 @@ export function useAdminProductsQuery(id, productJson, files) {
     // 상품 삭제
     const productDelete = useMutation({
         mutationFn: async ({ productId }) => {
-            await api.get("/product/productDelete",{ params: { "id":productId } });
+            await api.get("${PRODUCT_API_BASE_URL}/product/productDelete",{ params: { "id":productId } });
         },
         onSuccess: () => {
             queryClient.invalidateQueries(["adminProductList"]);
@@ -28,7 +29,7 @@ export function useAdminProductsQuery(id, productJson, files) {
     // 상품 등록
     const productAdd = useMutation({
         mutationFn: async (data) => {
-            await api.post("/product/productAdd", data);
+            await api.post(`${PRODUCT_API_BASE_URL}/product/productAdd`, data);
         },
         onSuccess: () => {
             queryClient.invalidateQueries(["adminProductList"]);
@@ -38,7 +39,7 @@ export function useAdminProductsQuery(id, productJson, files) {
     // 상품 편집
     const productUpdate = useMutation({
         mutationFn: async (data) => {
-            await api.post("/product/productUpdate", data);
+            await api.post(`${PRODUCT_API_BASE_URL}/product/productUpdate`, data);
         },
         onSuccess: () => {
             queryClient.invalidateQueries(["adminProductList"]);
