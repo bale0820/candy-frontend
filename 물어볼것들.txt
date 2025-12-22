@@ -29,7 +29,7 @@ server {
    listen 80;
    server_name candy-api.duckdns.org;
 
-    # � 인증서 발급용 (중요)
+    #   인증서 발급용 (중요)
    location /.well-known/acme-challenge/ {
         root /var/www/html;
    }
@@ -57,5 +57,6 @@ server {
        proxy_set_header X-Forwarded-Proto https;
   }
 }
-
+sudo nginx -t
+sudo systemctl reload nginx
 http://54.180.149.63:8080
