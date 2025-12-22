@@ -1,0 +1,61 @@
+ubuntu@ip-172-31-44-239:~/candy/sandbox$ sudo certbot certonly --webroot -w /var/www/html -d candy-api.duckdns.org
+Saving debug log to /var/log/letsencrypt/letsencrypt.log
+Requesting a certificate for candy-api.duckdns.org
+
+Successfully received certificate.
+Certificate is saved at: /etc/letsencrypt/live/candy-api.duckdns.org/fullchain.pem
+Key is saved at:         /etc/letsencrypt/live/candy-api.duckdns.org/privkey.pem
+This certificate expires on 2026-03-22.
+These files will be updated when the certificate renews.
+Certbot has set up a scheduled task to automatically renew this certificate in the background.
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+If you like Certbot, please consider supporting our work by:
+ * Donating to ISRG / Let's Encrypt:   https://letsencrypt.org/donate
+ * Donating to EFF:                    https://eff.org/donate-le
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
+
+sudo nano /etc/nginx/sites-available/candy
+
+sudo nginx -t
+
+sudo systemctl reload nginx
+
+
+
+server {
+   listen 80;
+   server_name candy-api.duckdns.org;
+
+    # � 인증서 발급용 (중요)
+   location /.well-known/acme-challenge/ {
+        root /var/www/html;
+   }
+
+   location / {
+       return 301 https://$host$request_uri;
+   }
+}
+
+
+server {
+    listen 443 ssl;
+    server_name candy-api.duckdns.org;
+
+
+    ssl_certificate     /etc/letsencrypt/live/candy-api.duckdns.org/fullchain>
+    ssl_certificate_key /etc/letsencrypt/live/candy-api.duckdns.org/privkey.p>
+
+   location / {
+       proxy_pass http://localhost:8080;
+
+       proxy_set_header Host $host;
+       proxy_set_header X-Real-IP $remote_addr;
+       proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+       proxy_set_header X-Forwarded-Proto https;
+  }
+}
+
+http://54.180.149.63:8080
