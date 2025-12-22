@@ -17,7 +17,7 @@ export function ImageUpload({ onFileSelect, idx, text, existingImage }) {
         if (selectedFile) {
             // 이미지의 URL설정
             setImage(URL.createObjectURL(selectedFile));
-
+            console.log("Selected file:", URL.createObjectURL(selectedFile));
             // ProductAdd에 파일 전송
             if (onFileSelect) {
                 onFileSelect(idx, selectedFile);
