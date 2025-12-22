@@ -1,8 +1,11 @@
 "use client";
+export const dynamic = "force-dynamic";
+
 
 import { useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useAuthStore } from "@/store/authStore";
+import { api } from "@/shared/lib/axios";
 
 export default function OAuthSuccessPage() {
   const router = useRouter();
@@ -16,25 +19,43 @@ export default function OAuthSuccessPage() {
   const userId = searchParams.get("userId");
   const success = searchParams.get("success");
 
-  useEffect(() => {
-    if (success !== "200") return;
+ useEffect(() => {
+  if (success !== "200") return;
 
-    // 1️⃣ 로그인 성공 → localStorage(또는 indexedDB)에 저장(Zustand persist)
-    if (accessToken && userId && provider) {
-      socialLogin({
-        provider,
-        userId,
-        accessToken,
-      });
-    }
+  if (accessToken && userId && provider) {
+    // 1️⃣ 로그인 정보 저장
+    socialLogin({
+      provider,
+      userId,
+      accessToken,
+    });
 
-    // 2️⃣ 2초 뒤 메인 페이지로 이동
-    const timer = setTimeout(() => {
-      router.replace("/");
-    }, 2000);
+    // 2️⃣ 소셜 쿠키 발급 요청 (에러는 잡아서 무시)
+    (async () => {
+      try {
+        await api.post(
+          "/auth/social-cookie",
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          }
+        );
+      } catch (err) {
+        console.error("❌ social-cookie 실패 (페이지는 계속 진행)", err);
+      }
+    })();
+  }
 
-    return () => clearTimeout(timer);
-  }, [success, accessToken, provider, userId ,router, socialLogin]);
+  // 3️⃣ 메인 페이지 이동
+  const timer = setTimeout(() => {
+    router.replace("/");
+  }, 2000);
+
+  return () => clearTimeout(timer);
+}, [success, accessToken, provider, userId, router, socialLogin]);
+
 
   return (
     <div style={{ textAlign: "center", marginTop: "100px" }}>
