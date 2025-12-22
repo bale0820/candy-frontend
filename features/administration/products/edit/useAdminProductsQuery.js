@@ -19,7 +19,7 @@ export function useAdminProductsQuery(id, productJson, files) {
     // 상품 삭제
     const productDelete = useMutation({
         mutationFn: async ({ productId }) => {
-            await api.get("${PRODUCT_API_BASE_URL}/product/productDelete",{ params: { "id":productId } });
+            await api.get(`${PRODUCT_API_BASE_URL}/product/productDelete`,{ params: { "id":productId } });
         },
         onSuccess: () => {
             queryClient.invalidateQueries(["adminProductList"]);
