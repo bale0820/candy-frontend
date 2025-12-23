@@ -7,20 +7,22 @@
 .section-header {
   // display: flex;
   // justify-content:center;
-  text-align: center;
+  padding-left: 20px;
   align-items: center;
   margin-bottom: 15px;
   position: relative;
 
   .section-title {
-    font-size: clamp(1.4rem, 1.5vw, 2rem); // 반응형 폰트
-    // font-weight: 700;
+    // font-size: clamp(1.4rem, 1.5vw, 2rem); // 반응형 폰트
+     /* 🔥 핵심: 디바이스별 폰트 자동 조절 */
+    font-size: clamp(1rem, 1.2vw, 0.8rem);
+    font-weight: 700;
     color: #474747;
   }
 
   .view-all-btn {
     position: absolute;
-    top: 5px;
+    top: -5px;
     right: 0;
     font-size: clamp(0.9rem, 1.5vw, 1rem);
     color: #666;
@@ -89,7 +91,7 @@
 
 .slides {
   display: flex;
-  // gap: 10px;
+  gap: 10px;
   overflow: visible;
 }
 

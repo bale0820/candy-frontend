@@ -3,10 +3,11 @@
 }
 
 .recommend-title {
-  font-size: 1.6rem;
+  font-size: clamp(1rem, 1.2vw, 0.8rem);
   font-weight: 700;
   margin-bottom: 12px;
-  text-align: center;
+  padding-left: 20px;
+  // text-align: center;
 }
 
 // .recommend-slider {

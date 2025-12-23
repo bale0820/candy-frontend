@@ -1,103 +1,208 @@
+// .new-products-page {
+//   width: 100%;
+//   max-width: 1200px;
+//   margin: 0 auto;
+//   font-family: "Pretendard", sans-serif;
+//   padding: 2rem 0;
+
+//   .page-title {
+//     font-size: 1.8rem;
+//     font-weight: 600;
+//     text-align: center;
+//   }
+
+//   .product-tabs {
+//     display: flex;
+//     justify-content: center;
+//     gap: 1rem;
+//     margin-bottom: 2rem;
+
+//     button {
+//       background: none;
+//       border: none;
+//       padding: 0.6rem 1rem;
+//       cursor: pointer;
+//       font-size: 0.95rem;
+//       color: #777;
+//       border-bottom: 2px solid transparent;
+//       transition: all 0.2s;
+
+//       &.active {
+//         color: #000;
+//         border-color: #000;
+//         font-weight: 600;
+//       }
+
+//       &:hover {
+//         color: #000;
+//       }
+//     }
+//   }
+
+//   .product-list-container {
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+
+//     .product-grid {
+//       display: grid;
+//       grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+//       gap: 2rem;
+//       width: 100%;
+
+//       img {
+//         width: 100%;
+//         height: 300px;
+//         aspect-ratio: 1 / 1;
+//         object-fit: cover;
+//         display: block;
+//       }
+
+//       .delete-btn {
+//         width: 100%;
+//         margin-top: 10px;
+//         padding: 12px;
+//         font-size: 16px;
+//         font-weight: bold;
+//         background-color: #ff3b6a;
+//         color: white;
+//         border: none;
+//         border-radius: 6px;
+//         cursor: pointer;
+//         transition: background-color 0.2s ease;
+//       }
+
+//       .delete-btn:hover {
+//         background-color: #e2355d;
+//       }
+
+//       .update-btn {
+//         width: 100%;
+//         padding: 12px;
+//         font-size: 16px;
+//         font-weight: bold;
+//         background-color: #007bff;
+//         color: white;
+//         border: none;
+//         border-radius: 6px;
+//         cursor: pointer;
+//         transition: background-color 0.2s ease;
+//       }
+
+//       .update-btn:hover {
+//         background-color: #0056b3;
+//       }
+//     }
+
+//     .empty {
+//       color: #888;
+//       margin-top: 2rem;
+//       font-size: 1rem;
+//     }
+//   }
+// }
+
 .new-products-page {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   font-family: "Pretendard", sans-serif;
-  padding: 2rem 0;
+  padding: 2rem 1rem;
 
+  /* ===============================
+     페이지 타이틀
+  ============================== */
   .page-title {
     font-size: 1.8rem;
     font-weight: 600;
     text-align: center;
+    margin-bottom: 1.5rem;
   }
 
-  .product-tabs {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-bottom: 2rem;
-
-    button {
-      background: none;
-      border: none;
-      padding: 0.6rem 1rem;
-      cursor: pointer;
-      font-size: 0.95rem;
-      color: #777;
-      border-bottom: 2px solid transparent;
-      transition: all 0.2s;
-
-      &.active {
-        color: #000;
-        border-color: #000;
-        font-weight: 600;
-      }
-
-      &:hover {
-        color: #000;
-      }
-    }
-  }
-
+  /* ===============================
+     상품 리스트 영역
+  ============================== */
   .product-list-container {
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
 
     .product-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 2rem;
       width: 100%;
+      display: grid;
+      gap: 2rem;
 
-      img {
-        width: 100%;
-        height: 300px;
-        aspect-ratio: 1 / 1;
-        object-fit: cover;
-        display: block;
-      }
+      /* 🔥 데스크탑 기준 */
+      grid-template-columns: repeat(4, minmax(260px, 1fr));
 
-      .delete-btn {
-        width: 100%;
-        margin-top: 10px;
-        padding: 12px;
-        font-size: 16px;
-        font-weight: bold;
-        background-color: #ff3b6a;
-        color: white;
-        border: none;
-        border-radius: 6px;
-        cursor: pointer;
-        transition: background-color 0.2s ease;
-      }
+      /* 🔥 grid 아이템(= Link) 중앙 정렬 */
+      justify-items: center;
+    }
 
-      .delete-btn:hover {
-        background-color: #e2355d;
-      }
-
-      .update-btn {
-        width: 100%;
-        padding: 12px;
-        font-size: 16px;
-        font-weight: bold;
-        background-color: #007bff;
-        color: white;
-        border: none;
-        border-radius: 6px;
-        cursor: pointer;
-        transition: background-color 0.2s ease;
-      }
-
-      .update-btn:hover {
-        background-color: #0056b3;
-      }
+    /* 🔥 Link가 grid 아이템이므로 block 처리 (중요) */
+    .product-grid > a {
+      width: 100%;
+      display: block;
     }
 
     .empty {
       color: #888;
       margin-top: 2rem;
       font-size: 1rem;
+    }
+  }
+}
+
+/* ===============================
+   반응형 브레이크포인트
+================================ */
+
+/* 💻 노트북 / 작은 데스크탑 → 3열 유지 */
+@media (max-width: 1200px) {
+  .new-products-page {
+    .product-list-container {
+      .product-grid {
+        grid-template-columns: repeat(3, minmax(260px, 1fr));
+      }
+    }
+  }
+}
+
+/* 📱 태블릿 → 2열 (minmax 제거해서 깨짐 방지) */
+@media (max-width: 900px) {
+  .new-products-page {
+    padding: 1.5rem 1rem;
+
+    .product-list-container {
+      .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+        justify-items: center;
+      }
+
+      .product-grid > a {
+        max-width: 420px; /* 🔥 카드 최대 폭 제한 */
+      }
+    }
+  }
+}
+
+/* 📱 모바일 → 1열 */
+@media (max-width: 600px) {
+  .new-products-page {
+    padding: 1rem 0.75rem;
+
+    .product-list-container {
+      .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.2rem;
+        justify-items: center;
+      }
+
+      .product-grid > a {
+        max-width: 360px; /* 🔥 모바일 카드 폭 안정화 */
+      }
     }
   }
 }
