@@ -21,7 +21,7 @@
 @media (max-width: 768px) {
   .floating-chatbot {
     right: 1px;
-    bottom: 1px;         /* 👈 하단 UI 피하기 */
+    bottom: 50px;         /* 👈 하단 UI 피하기 */
     padding: 14px;
     font-size: 0;          /* 👈 텍스트 숨김 */
     border-radius: 50%;
