@@ -5,17 +5,12 @@
   transition: transform 0.25s ease, box-shadow 0.25s ease;
   cursor: pointer;
   position: relative;
-  // &:hover {
-  //   transform: translateY(-20px);
-  //   z-index: 10;
-  //   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); // ✅ 살짝 떠오르는 느낌
-  // }
 
   /* ✅ 뱃지 */
   .badge-container {
     position: absolute;
     top: 10px;
-    left: 10px;
+    left: 15px;
     display: flex;
     align-items: flex-start;
     flex-direction: row;
@@ -33,6 +28,7 @@
     padding: 4px 8px;
     border-radius: 4px;
     font-weight: 600;
+    z-index: 2;
 
     &.hot {
       background-color: #8c4eff; // 보라색
@@ -44,7 +40,7 @@
   }
 
   .image-container {
-    width: 100%;
+    width: 90%;
     position: relative;
     display: inline-block;
   
@@ -52,7 +48,7 @@
     .product-image {
       width: 100%;
       object-fit: cover;
-      aspect-ratio: 1 / 1;
+      aspect-ratio: 1 / 1.2;
       border-radius: 8px;
     }
 

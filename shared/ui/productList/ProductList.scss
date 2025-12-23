@@ -89,13 +89,13 @@
 
 .slides {
   display: flex;
-  gap: 20px;
+  // gap: 10px;
   overflow: visible;
 }
 
 .slide {
   flex: 0 0 18%;
-  min-width: 220px;
+  min-width: 130px;
   aspect-ratio: 3 / 4.5;
   border-radius: 8px;
   transition: transform 0.25s ease;
