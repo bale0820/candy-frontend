@@ -1,20 +1,16 @@
 /* 상품 사이 광고 */
 .advertise-list {
   width: 100%;
-  display: flex;
-  justify-content: center;
   margin-top: 10px;
 }
 
 .advertise-inline {
-   width: 100%;        /* ✅ 핵심 */
-  max-width: 1200px;  /* ✅ layout 최대폭까지만 */
+  width: 100%;
   height: 200px;
-  max-width: 1200px;
+  max-width: 100%;   /* 🔥 이게 핵심 */
   border-radius: 8px;
-  cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
 }
+
 
 /* 오른쪽 고정 배너 */
 .right-ad-banner {
