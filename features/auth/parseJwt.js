@@ -1,4 +1,9 @@
 export function parseJwt(token) {
+
+   if (!token || typeof token !== "string") {
+    return null;
+  }
+  
   try {
     const base64Payload = token.split('.')[1]; // payload 부분 추출
     const payload = atob(base64Payload); // base64 → 문자열 디코딩
