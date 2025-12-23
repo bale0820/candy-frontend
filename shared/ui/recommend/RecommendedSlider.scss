@@ -9,21 +9,38 @@
   text-align: center;
 }
 
+// .recommend-slider {
+//   overflow: hidden;
+//   white-space: nowrap;   // ★ 트랙을 한 줄로 유지
+// }
+
+// .recommend-track {
+//   display: inline-flex;   // ★ 핵심
+//   gap: 20px;
+//   white-space: nowrap;
+// }
+
+// .recommend-item {
+//   flex: 0 0 auto;
+//   width: 165px;        // 🔥 전체 너비를 ProductList 대비 20% 축소
+// }
+
 .recommend-slider {
   overflow: hidden;
-  white-space: nowrap;   // ★ 트랙을 한 줄로 유지
+  width: 100%;
 }
 
 .recommend-track {
-  display: inline-flex;   // ★ 핵심
+  display: flex;
   gap: 20px;
-  white-space: nowrap;
+  will-change: transform;
 }
 
 .recommend-item {
   flex: 0 0 auto;
-  width: 165px;        // 🔥 전체 너비를 ProductList 대비 20% 축소
+  width: 165px;
 }
+
 
 .clone {
   opacity: 0.9;

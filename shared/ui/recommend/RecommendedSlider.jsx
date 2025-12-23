@@ -43,26 +43,55 @@ export default function RecommendedSlider({ title = "추천 상품", limit = 20 
     return arr.slice(0, minCount * 2);
   }, [filteredList]);
 
-  // 🔹 자동 스크롤 애니메이션
+  // // 🔹 자동 스크롤 애니메이션
+  // useEffect(() => {
+  //   const slider = sliderRef.current;
+  //   if (!slider) return;
+
+  //   let animationId;
+
+  //   const scroll = () => {
+  //     slider.scrollLeft += 0.8;
+
+  //     if (slider.scrollLeft >= slider.scrollWidth - slider.clientWidth) {
+  //       slider.scrollLeft = 0;
+  //     }
+
+  //     animationId = requestAnimationFrame(scroll);
+  //   };
+
+  //   animationId = requestAnimationFrame(scroll);
+
+  //   return () => cancelAnimationFrame(animationId);
+  // }, [extendedList]);
+
   useEffect(() => {
     const slider = sliderRef.current;
     if (!slider) return;
 
-    let animationId;
+    const track = slider.querySelector(".recommend-track");
+    if (!track) return;
 
-    const scroll = () => {
-      slider.scrollLeft += 0.8;
+    let x = 0;
+    let rafId;
+    const speed = 0.8;
 
-      if (slider.scrollLeft >= slider.scrollWidth - slider.clientWidth) {
-        slider.scrollLeft = 0;
+    const loopWidth = track.scrollWidth / 2;
+
+    const animate = () => {
+      x -= speed;
+
+      if (Math.abs(x) >= loopWidth) {
+        x = 0;
       }
 
-      animationId = requestAnimationFrame(scroll);
+      track.style.transform = `translateX(${x}px)`;
+      rafId = requestAnimationFrame(animate);
     };
 
-    animationId = requestAnimationFrame(scroll);
+    rafId = requestAnimationFrame(animate);
 
-    return () => cancelAnimationFrame(animationId);
+    return () => cancelAnimationFrame(rafId);
   }, [extendedList]);
 
   if (extendedList.length === 0) return null;
