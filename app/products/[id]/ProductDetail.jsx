@@ -38,7 +38,7 @@ export default function ProductDetail({ product }) {
       <div className="product-detail">
         <div className="product-detail-main">
           {/* ----------------------- 이미지 ----------------------- */}
-          <div className="product-image">
+          {/* <div className="product-image">
             <div
               className={`badge-container ${product.hotDeal && product.memberSpecial ? "multi" : ""
                 }`}
@@ -57,7 +57,31 @@ export default function ProductDetail({ product }) {
               />
               {product.count <= 0 && <div className="sold-out">SOLD OUT</div>}
             </div>
+          </div> */}
+          <div className="product-image">
+            <div className="product-image-container">
+
+              {/* ✅ 뱃지를 이미지 안으로 이동 */}
+              <div
+                className={`badge-container ${product.hotDeal && product.memberSpecial ? "multi" : ""
+                  }`}
+              >
+                {product.hotDeal && <span className="badge hot">원딜핫딜</span>}
+                {product.memberSpecial && (
+                  <span className="badge member">멤버특가</span>
+                )}
+              </div>
+
+              <img
+                src={`${IMAGE_BASE_URL}/data/productImages/${product.imageUrl}`}
+                alt={`${product.productName} 상품 이미지`}
+                loading="eager"
+              />
+
+              {product.count <= 0 && <div className="sold-out">SOLD OUT</div>}
+            </div>
           </div>
+
 
           {/* ----------------------- 상품 정보 ----------------------- */}
           <div className="product-info">
@@ -170,7 +194,7 @@ export default function ProductDetail({ product }) {
           <li><button onClick={() => handleTabClick(detailRef)}>상세정보</button></li>
           <li><button onClick={() => handleTabClick(reviewRef)}>구매후기</button></li>
           <li><button onClick={() => handleTabClick(qnaRef)}>상품문의</button></li>
-          <li><button onClick={() => handleTabClick(returnRef)}>배송/반품/교환정보</button></li>
+          <li><button onClick={() => handleTabClick(returnRef)}>배송/반품</button></li>
         </ul>
       </div>
 
@@ -179,7 +203,7 @@ export default function ProductDetail({ product }) {
         <section ref={itemRef} id="item">
           <Item images={product.productInformationImage} />
         </section>
-                  
+
         <section ref={detailRef} id="detail">
           <Detail images={product.productDescriptionImage} />
         </section>
