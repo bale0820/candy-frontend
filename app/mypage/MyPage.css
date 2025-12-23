@@ -1,174 +1,238 @@
+/* ===============================
+   공통 컨테이너
+================================ */
 .mypage-container {
+  width: 100%;
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 0 16px;
+  font-family: 'Pretendard', sans-serif;
+}
+
+/* PC 전용 최소폭 */
+@media (min-width: 768px) {
+  .mypage-container {
     min-width: 700px;
-    max-width: 800px;
-    margin: 50px auto;
-    font-family: 'Pretendard', sans-serif;
+  }
 }
 
-.mypage-container .mypage-title {
-    margin-bottom: 24px;
-    color: #4B3EFF;
+/* ===============================
+   제목
+================================ */
+.mypage-title {
+  margin-bottom: 24px;
+  color: #4B3EFF;
+  font-size: 1.4rem;
 }
 
-.mypage-container .mypage-card {
-    border: 1px solid #e0e0e0;
-    border-radius: 12px;
-    padding: 20px;
-    margin-bottom: 20px;
-    background-color: #fff;
+/* ===============================
+   카드 공통
+================================ */
+.mypage-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  background-color: #fff;
 }
 
-.mypage-container .mypage-header {
-    border-bottom: 1px solid #eee;
-    margin-bottom: 12px;
-    padding-bottom: 8px;
+/* ===============================
+   주문 헤더
+================================ */
+.mypage-order-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
 }
 
-.mypage-container .mypage-body {
-    font-size: 1rem;
-    line-height: 1.6;
+.mypage-order-title-name {
+  font-size: 1.2rem;
 }
 
-.mypage-container .mypage-couponList {
-    list-style: none;
-    padding: 0;
+.mypage-order-date {
+  text-align: right;
+  font-size: 0.85rem;
+  color: #666;
 }
 
-.mypage-container .mypage-couponItem {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    margin-bottom: 10px;
-    background: #fafafa;
+.mypage-order-code {
+  color: #aaa;
+  font-size: 0.75rem;
 }
 
-.mypage-container .mypage-deleteBtn {
-    background: #ff4d4f;
-    
-    color: white;
-    border: none;
-    padding: 6px 12px;
-    border-radius: 6px;
-    cursor: pointer;
+/* ===============================
+   상품 리스트
+================================ */
+.mypage-product-list {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin: 12px 0;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12);
 }
 
-.mypage-container .mypage-product-list {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 10px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 10px 20px;
-    padding-left: 20px;
-    box-shadow: 
-    0 1px 3px rgba(0,0,0,0.12),
-    0 1px 2px rgba(0,0,0,0.24);
+/* 이미지 */
+.mypage-product-img-container {
+  position: relative;
+  flex-shrink: 0;
 }
 
-.mypage-container .mypage-order-code {
-    color : #aaa;
-    font-size: 0.8rem;
-}
-
-.mypage-container .mypage-order-title {
-    display: flex;
-    justify-content: space-between;
-}
-
-.mypage-container .mypage-product-img-container {
-    position: relative;
-    display: inline-block;
-}
-
-.mypage-container .mypage-product-img {
-    aspect-ratio: 1 / 1;
-    width: 100px;
-}
-
-.mypage-container .sold-out {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5); /* 반투명 검정 */
-    color: rgb(255, 0, 0);
-    font-size: 1rem;
-    font-weight: bold;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-transform: uppercase;
-    pointer-events: none; /* 클릭 방해 방지 */
-    border-radius: 5px;
-    z-index: 10;
-}
-
-
-.mypage-container .mypage-info {
-    display: flex;
-    flex-direction: column;
-    margin: 10px;
-    gap: 5px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 10px 20px;
-    box-shadow: 
-    0 1px 3px rgba(0,0,0,0.12),
-    0 1px 2px rgba(0,0,0,0.24);
-}
-
-.mypage-container .mypage-order-title-name {
-    font-size: 1.5rem;
-}
-
-.mypage-container .mypage-btn {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-}
-
-.mypage-container .mypage-btn>button {
-    background: #4949b1ff;
-    color: white;
-    border: none;
-    padding: 6px 12px;
-    border-radius: 6px;
-    cursor: pointer;
-}
-
-/* 갯수가 0개 일때 */
-.mypage-btn>button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-    opacity: 0.6;
-}
-
-.mypage-container .mypage-product-info {
-    width: 300px;
-    padding: 0px 20px;
-}
-
-.mypage-container .pagination-btn {
-  background-color: transparent;
-  color: #4949b1ff;
-  border: 1px solid #4949b1ff;
+.mypage-product-img {
+  width: 90px;
+  aspect-ratio: 1 / 1;
   border-radius: 6px;
-  padding: 4px 10px;
-  font-size: 0.9rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
+  object-fit: cover;
 }
 
-.mypage-container .pagination-btn:hover {
-  background-color: #4949b1ff;
+/* SOLD OUT */
+.sold-out {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  color: red;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+}
+
+/* 상품 정보 */
+.mypage-product-info {
+  flex: 1;
+  font-size: 0.95rem;
+}
+
+/* 버튼 */
+.mypage-btn {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.mypage-btn button {
+  background: #4949b1;
   color: #fff;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
 }
 
-.mypage-container .mypage-order-date {
-    text-align: right;
+.mypage-btn button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+/* ===============================
+   주문 정보
+================================ */
+.mypage-info {
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  font-size: 0.9rem;
+}
+
+/* ===============================
+   쿠폰
+================================ */
+.mypage-couponList {
+  list-style: none;
+  padding: 0;
+}
+
+.mypage-couponItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  background: #fafafa;
+}
+
+.mypage-delete-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+.mypage-deleteBtn {
+  background: #ff4d4f;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* ===============================
+   페이지네이션
+================================ */
+
+.pagination {
+  display: flex;
+  justify-content: center;   /* ⭐ 핵심 */
+  align-items: center;
+  margin: 24px 0 40px;
+  gap: 8px;
+}
+
+.pagination-btn {
+  border: 1px solid #4949b1;
+  color: #4949b1;
+  background: transparent;
+  padding: 4px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* ===============================
+   🔥 모바일 상품 카드 완전 정렬 (최종)
+================================ */
+@media (max-width: 768px) {
+  .mypage-product-list {
+    flex-direction: column;      /* ⭐⭐⭐ 핵심 */
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+  }
+
+  .mypage-product-img-container {
+    margin-bottom: 6px;
+  }
+
+  .mypage-product-img {
+    width: 110px;
+  }
+
+  .mypage-product-info {
+    width: 100%;
+    padding: 0;
+    text-align: center;
+  }
+
+  .mypage-btn {
+    width: 100%;
+    flex-direction: row;         /* 버튼은 가로 */
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .mypage-btn button {
+    max-width: 160px;
+    width: 100%;
+  }
+
+  .mypage-info {
+    text-align: center;
+  }
 }

@@ -65,9 +65,11 @@ export function OrderCard({ order, goProduct, handleAddCart, onDelete }) {
         </div>
       </div>
 
-      <button className="mypage-deleteBtn" onClick={onDelete}>
-        삭제
-      </button>
+      <div className="mypage-delete-wrapper">
+        <button className="mypage-deleteBtn" onClick={onDelete}>
+          삭제
+        </button>
+      </div>
     </div>
   );
 }
