@@ -38,6 +38,16 @@ img {
   flex-direction: column;
 }
 
+/* .layout {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  padding-left: max(16px, calc((100vw - 1200px) / 2));
+  padding-right: max(16px, calc((100vw - 1200px) / 2));
+} */
+
 .main {
   flex: 1;
   display: flex;

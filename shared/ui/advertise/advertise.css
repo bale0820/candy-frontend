@@ -35,3 +35,9 @@
 .banner-img:hover {
   transform: scale(1.05);
 }
+/* 모바일(500px 이하)에서는 오른쪽 고정 배너 숨김 */
+@media (max-width: 1900px) {
+  .right-ad-banner {
+    display: none;
+  }
+}
