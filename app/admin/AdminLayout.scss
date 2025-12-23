@@ -1,17 +1,68 @@
+// .admin-container {
+//   display: flex;
+//   height: 100vh;
+// }
+
+// .admin-sidebar {
+//   width: 220px;
+//   background: #282c34;
+//   color: white;
+//   padding: 20px;
+// }
+
+// .admin-title {
+//   margin-bottom: 20px;
+//   font-size: 20px;
+//   font-weight: bold;
+// }
+
+// .admin-nav {
+//   display: flex;
+//   flex-direction: column;
+//   gap: 12px;
+// }
+
+// .admin-nav a {
+//   color: white;
+//   text-decoration: none;
+//   padding: 10px;
+//   border-radius: 6px;
+//   background: #3a3f47;
+// }
+
+// .admin-nav a:hover {
+//   background: #50555f;
+// }
+
+// .admin-content {
+//   flex: 1;
+//   padding: 30px;
+//   background: #f8f9fa;
+//   overflow-y: auto;
+// }
 .admin-container {
   display: flex;
-  height: 100vh;
+  min-height: 100vh;
+  background: #f8f9fa;
+  position: relative;
 }
 
+/* ===============================
+   사이드바
+================================ */
 .admin-sidebar {
   width: 220px;
   background: #282c34;
   color: white;
   padding: 20px;
+  flex-shrink: 0;
+  height: auto;
+  transition: transform 0.3s ease, width 0.3s ease;
+  z-index: 200;
 }
 
 .admin-title {
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   font-size: 20px;
   font-weight: bold;
 }
@@ -19,24 +70,112 @@
 .admin-nav {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
+
+  a {
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 6px;
+    background: #3a3f47;
+    font-size: 0.95rem;
+    transition: background 0.2s;
+
+    &:hover {
+      background: #50555f;
+    }
+  }
 }
 
-.admin-nav a {
-  color: white;
-  text-decoration: none;
-  padding: 10px;
-  border-radius: 6px;
-  background: #3a3f47;
-}
-
-.admin-nav a:hover {
-  background: #50555f;
-}
-
+/* ===============================
+   콘텐츠
+================================ */
 .admin-content {
   flex: 1;
   padding: 30px;
   background: #f8f9fa;
   overflow-y: auto;
+}
+
+/* ===============================
+   모바일 메뉴 버튼
+================================ */
+.admin-menu-btn {
+  display: none;
+  position: fixed;
+  top: 14px;
+  left: 14px;
+  z-index: 300;
+  background: #282c34;
+  color: white;
+  border: none;
+  padding: 8px 10px;
+  font-size: 18px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* ===============================
+   🔥 오버레이 (바깥 클릭용)
+================================ */
+.admin-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 150;
+}
+
+/* ===============================
+   반응형
+================================ */
+@media (max-width: 900px) {
+  .admin-container {
+    flex-direction: column;
+  }
+
+  .admin-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 180px;
+    padding: 16px;
+    transform: translateX(-100%);
+    max-height: calc(100vh - 20px);
+    overflow-y: auto;
+  }
+
+  .admin-sidebar.open {
+    transform: translateX(0);
+  }
+
+  .admin-menu-btn {
+    display: block;
+  }
+
+  .admin-content {
+    padding: 70px 16px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-sidebar {
+    width: 150px;
+    padding: 12px;
+  }
+
+  .admin-title {
+    font-size: 16px;
+  }
+
+  .admin-nav a {
+    font-size: 0.8rem;
+    padding: 6px;
+  }
+
+  .admin-menu-btn {
+    top: 12px;
+    left: 12px;
+    padding: 6px 8px;
+    font-size: 16px;
+  }
 }
