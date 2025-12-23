@@ -177,13 +177,12 @@ export default function ProductDetail({ product }) {
       {/* ----------------------- 탭 콘텐츠 ----------------------- */}
       <div className="product-tab-content">
         <section ref={itemRef} id="item">
-          <Item images={product.productDescriptionImage} />
+          <Item images={product.productInformationImage} />
         </section>
 
         <section ref={detailRef} id="detail">
-          <Detail images={product.productInformationImage} />
+          <Detail images={product.productDescriptionImage} />
         </section>
-
         <section ref={reviewRef} id="review">
           <ReviewList id={id} />
         </section>
