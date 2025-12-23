@@ -49,7 +49,7 @@ export function ProductForm({
     onSubmit,
   });
 
-  const imageNames = ["상품 이미지", "속성 이미지", "상세 이미지"];
+  const imageNames = ["상품 이미지", "상품 설명 이미지", "제품정보 이미지"];
 
   return (
     <div className="product-add-container">
