@@ -13,7 +13,6 @@ export default function CategoryNav() {
         {/* 카테고리 전체 메뉴 */}
         <li className="category-first">
           <FiMenu />
-          <span>카테고리</span>
           <CategoryMenu />
         </li>
 

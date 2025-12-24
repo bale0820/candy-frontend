@@ -1,20 +1,54 @@
+// "use client";
+
+// import {MainCategory} from "@/features/category/components/MainCategory";
+// import {useCategoryList} from "@/features/category/hooks/useCategoryList.js";
+
+// export function CategoryMenu() {
+//     const {
+//         data: categoryList
+//     } = useCategoryList();
+
+    
+
+//   return (
+    
+//     <ul className="main-category-list">
+      
+//       {categoryList?.map((main) => (
+//         <MainCategory key={main?.id} main={main} />
+//       ))}
+//     </ul>
+//   );
+// }
 "use client";
 
-import {MainCategory} from "@/features/category/components/MainCategory";
-import {useCategoryList} from "@/features/category/hooks/useCategoryList.js";
+import { useState } from "react";
+import { MainCategory } from "@/features/category/components/MainCategory";
+import { useCategoryList } from "@/features/category/hooks/useCategoryList";
 
 export function CategoryMenu() {
-    const {
-        data: categoryList
-    } = useCategoryList();
+  const { data: categoryList } = useCategoryList();
+  const [open, setOpen] = useState(false);
 
   return (
-    
-    <ul className="main-category-list">
-      
-      {categoryList?.map((main) => (
-        <MainCategory key={main?.id} main={main} />
-      ))}
-    </ul>
+    <div
+      className="category-first"
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+    >
+      카테고리
+
+      {open && (
+        <ul className="main-category-list">
+          {categoryList?.map((main) => (
+            <MainCategory
+              key={main.id}
+              main={main}
+              closeMenu={() => setOpen(false)} // 🔥 핵심
+            />
+          ))}
+        </ul>
+      )}
+    </div>
   );
 }
