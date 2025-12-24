@@ -1,41 +1,56 @@
-// "use client"
-// import React, { useState } from "react";
 // import "./RecipePage.scss";
-// import { useRecipeList } from "features/recipe/recipePage/hooks/useRecipeList";
 // import Sidebar from "features/recipe/recipePage/components/Sidebar";
-// import { RecipeList } from "features/recipe/recipePage/components/RecipeList";
 
-// export default function RootLayout({children}) {
-//   const [selectedSub, setSelectedSub] = useState(null);
-//   const recipeList = useRecipeList(selectedSub);
-
+// export default function RecipeLayout({ children }) {
 //   return (
 //     <div style={{ display: "flex" }}>
-//       <Sidebar onSelectCategory={(mainId, subId) => setSelectedSub(subId)} />
+//       <Sidebar />
 
 //       <div style={{ flex: 1, padding: "20px" }}>
 //         <h2>레시피</h2>
-//         {/* <RecipeList recipeList={recipeList} /> */}
 //         {children}
 //       </div>
 //     </div>
 //   );
 // }
 
-// app/recipe/layout.tsx
+"use client";
 
-import "./RecipePage.scss";
+import { useState, useEffect } from "react";
 import Sidebar from "features/recipe/recipePage/components/Sidebar";
+import "./RecipePage.scss";
 
 export default function RecipeLayout({ children }) {
-  return (
-    <div style={{ display: "flex" }}>
-      <Sidebar />
+  const [open, setOpen] = useState(false);
 
-      <div style={{ flex: 1, padding: "20px" }}>
-        <h2>레시피</h2>
-        {children}
+  // 모바일에서 열릴 때 스크롤 방지
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
+  return (
+    <>
+      {/* 모바일 햄버거 버튼 */}
+      <button className="recipe-menu-btn" onClick={() => setOpen(true)}>
+        ☰
+      </button>
+
+      {/* 오버레이 */}
+      {open && <div className="recipe-overlay" onClick={() => setOpen(false)} />}
+
+      <div className="recipe-layout">
+        <aside className={`recipe-sidebar ${open ? "open" : ""}`}>
+          <Sidebar onClose={() => setOpen(false)} />
+        </aside>
+
+        <section className="recipe-content">
+          <h2 className="recipe-page-title">레시피</h2>
+          {children}
+        </section>
       </div>
-    </div>
+    </>
   );
 }

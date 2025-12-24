@@ -8,6 +8,7 @@ import { useRecipeDetail } from "features/recipe/recipeDetail/useRecipeDetail";
 import { RelatedProductList } from "features/recipe/recipeDetail/components/RelatedProductList";
 import { ReviewWriteBox } from "features/recipe/recipeDetail/components/ReviewWriteBox";
 import { ReviewList } from "features/recipe/recipeDetail/components/ReviewList";
+import { IMAGE_BASE_URL } from "@/shared/constants/clientEnv";
 
 export default function RecipeDetailPage() {
   const router = useRouter();
@@ -43,7 +44,7 @@ export default function RecipeDetailPage() {
 
   return (
     <div className="recipe-detail-container">
-      <img src={`/data${recipe.imageUrl}`} className="detail-img" />
+      <img src={`${IMAGE_BASE_URL}/data/recipe/${recipe.imageUrl}`} className="detail-img" />
 
       <h1 className="detail-title">{recipe.title}</h1>
       <div className="detail-summary">{recipe.summary}</div>

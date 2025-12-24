@@ -1,30 +1,123 @@
-.recipe-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
+// .recipe-grid {
+//   display: grid;
+//   grid-template-columns: repeat(3, 1fr);
+//   gap: 30px;
+// }
+
+// .recipe-card {
+//   cursor: pointer;
+// }
+
+// .recipe-img {
+//   width: 100%;
+//   aspect-ratio: 1 / 1;
+//   border-radius: 8px;
+// }
+
+// .recipe-title {
+//   font-size: 1rem;
+//   margin-top: 10px;
+// }
+
+// .recipe-rating {
+//   font-size: 0.9rem;
+//   color: #666;
+// }
+
+// .recipe-time {
+//   font-size: 0.85rem;
+//   color: #999;
+// }
+
+:root {
+  --header-height: 64px;
 }
 
-.recipe-card {
-  cursor: pointer;
+/* ========================= */
+/* PC 기본 레이아웃 */
+/* ========================= */
+
+.recipe-layout {
+  display: flex;
 }
 
-.recipe-img {
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  border-radius: 8px;
+.recipe-sidebar {
+  width: 240px;
+  min-height: calc(100vh - var(--header-height));
+  border-right: 1px solid #eaeaea;
+  background: #fff;
 }
 
-.recipe-title {
-  font-size: 1rem;
-  margin-top: 10px;
+.recipe-content {
+  flex: 1;
+  padding: 20px;
 }
 
-.recipe-rating {
-  font-size: 0.9rem;
-  color: #666;
+.recipe-page-title {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
 }
 
-.recipe-time {
-  font-size: 0.85rem;
-  color: #999;
+/* ========================= */
+/* 모바일 햄버거 버튼 */
+/* ========================= */
+
+.recipe-menu-btn {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 1300;
+
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  border: none;
+  background: #6b5cff;
+  color: #fff;
+  font-size: 20px;
+}
+
+/* ========================= */
+/* 오버레이 */
+/* ========================= */
+
+.recipe-overlay {
+  position: fixed;
+  top: var(--header-height);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 1000;
+}
+
+/* ========================= */
+/* 📱 모바일 Drawer */
+/* ========================= */
+
+@media (max-width: 768px) {
+  .recipe-layout {
+    flex-direction: column;
+  }
+
+  .recipe-menu-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .recipe-sidebar {
+    position: fixed;
+    top: var(--header-height);
+    left: -260px;
+    height: calc(100vh - var(--header-height));
+    z-index: 1100;
+    transition: left 0.3s ease;
+    box-shadow: 4px 0 12px rgba(0,0,0,0.15);
+  }
+
+  .recipe-sidebar.open {
+    left: 0;
+  }
 }
