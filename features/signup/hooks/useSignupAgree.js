@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { api } from "@/shared/lib/axios";
+import { IMAGE_BASE_URL } from "@/shared/constants/clientEnv";
 
 export function useSignupAgree() {
   const [hoveredId, setHoveredId] = useState(null);
@@ -20,7 +21,7 @@ export function useSignupAgree() {
 
   useEffect(() => {
     const load = async () => {
-      const result = await api.get("/data/jsonData/terms.json");
+      const result = await api.get(`${IMAGE_BASE_URL}/data/jsonData/terms.json`);
       setTermList(result.data.terms);
     };
     load();
