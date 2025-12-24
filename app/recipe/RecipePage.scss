@@ -41,11 +41,20 @@
   display: flex;
 }
 
+// .recipe-sidebar {
+//   width: 240px;
+//   min-height: calc(100vh - var(--header-height));
+//   border-right: 1px solid #eaeaea;
+//   background: #fff;
+// }
 .recipe-sidebar {
   width: 240px;
-  min-height: calc(100vh - var(--header-height));
+  height: calc(100vh - var(--header-height)); /* ⭐ height로 */
   border-right: 1px solid #eaeaea;
   background: #fff;
+
+  overflow-y: auto;       /* ⭐ 핵심 */
+  overscroll-behavior: contain;
 }
 
 .recipe-content {
@@ -119,5 +128,18 @@
 
   .recipe-sidebar.open {
     left: 0;
+  }
+}
+
+/* 기본 (PC) */
+.recipe-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+/* 📱 모바일 – 무조건 2열 고정 */
+@media (max-width: 768px) {
+  .recipe-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
