@@ -36,7 +36,7 @@ export function SignupTerms({
           {/* 개별 약관 */}
           {termList &&
             termList.map((item, index) => (
-              <div key={index}>
+              <div className="term-list" key={index}>
                 <div>
                   <input
                     type="checkbox"
