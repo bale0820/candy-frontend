@@ -63,6 +63,7 @@
 
 /* 정보 그리드 */
 .checkout-container .info-grid {
+  width: 100%;
   display: grid;
   grid-template-columns: 80px 1fr;
   row-gap: 12px;
