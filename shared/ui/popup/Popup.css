@@ -51,7 +51,6 @@
   cursor: pointer;
   font-weight: bold;
 }
-
 .popup-close-btn {
   margin-top: 10px;
   width: 100%;
@@ -110,4 +109,34 @@
     opacity: 1;
     transform: scale(1);
   }
+}
+
+
+/* popup-content를 기준으로 위치 잡기 */
+.popup-content {
+  position: relative;
+}
+.popup-text {
+  position: absolute;
+  font-size: 0.5rem;
+  top: 16px;
+  right: 50px;
+}
+
+
+/* 오른쪽 위 X 버튼 */
+.popup-close-x {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 9px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #333;
+}
+
+.popup-close-x:hover {
+  color: #000;
 }
