@@ -9,46 +9,30 @@
 //       accessToken: null,
 //       role: null,
 //       userId: null,
-//       provider: null,
-
-//       // ⭐ 로그인 여부 표시
 //       isLogin: false,
 
-//       // ⭐ 일반 로그인
 //       login: ({ accessToken, role, userId }) =>
 //         set(() => ({
 //           accessToken,
 //           role,
 //           userId,
-//           isLogin: true,   // 추가
+//           isLogin: true,
 //         })),
 
-//       // ⭐ 소셜 로그인
-//       socialLogin: ({ provider, accessToken, userId }) =>
-//         set(() => ({
-//           provider,
-//           accessToken,
-//           userId,
-//           role: "USER",
-//           isLogin: true,   // 추가
-//         })),
-
-//       // ⭐ 로그아웃
 //       logout: () =>
 //         set(() => ({
 //           accessToken: null,
-//           userId: null,
 //           role: null,
-//           provider: null,
-//           isLogin: false,  // 추가
+//           userId: null,
+//           isLogin: false,
 //         })),
 //     }),
 //     {
 //       name: "auth-storage",
-//       skipHydration: true
 //     }
 //   )
 // );
+// store/authStore.ts
 "use client";
 
 import { create } from "zustand";
@@ -61,25 +45,29 @@ export const useAuthStore = create(
       role: null,
       userId: null,
       isLogin: false,
+      _hasHydrated: false,
 
       login: ({ accessToken, role, userId }) =>
-        set(() => ({
+        set({
           accessToken,
           role,
           userId,
           isLogin: true,
-        })),
+        }),
 
       logout: () =>
-        set(() => ({
+        set({
           accessToken: null,
           role: null,
           userId: null,
           isLogin: false,
-        })),
+        }),
     }),
     {
       name: "auth-storage",
+      onRehydrateStorage: () => (state) => {
+        if (state) state._hasHydrated = true;
+      },
     }
   )
 );

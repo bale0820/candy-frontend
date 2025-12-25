@@ -4,8 +4,10 @@ import "./globals.css";
 import { Providers } from "./providers";
 import Footer from "@/layout/Footer/Footer";
 import FloatingChatBot from "@/layout/floating/FloatingChatBot";
-import { CartInitializer } from "@/features/CartInitializer/CartInitializer";
 import { SlideContainer } from "@/shared/ui/slider/SlideContainer";
+// import { CartInitializer } from "@/features/CartInitializer/CartInitializer";
+
+
 
 // 컴포넌트 import (Next.js에서는 절대경로 alias 추천)
 
@@ -26,7 +28,7 @@ export default function RootLayout({ children }) {
           <div className="layout">
             <main className="main container">
               <Header />
-              <CartInitializer />
+              {/* <CartInitializer /> */}
               {children}
             </main>
             <Footer />
