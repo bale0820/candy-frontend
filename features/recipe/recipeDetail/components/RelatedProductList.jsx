@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import { IMAGE_BASE_URL } from "@/shared/constants/clientEnv";
 
 export function RelatedProductList({ relatedProducts }) {
   if (!relatedProducts?.length) return null;
@@ -12,7 +13,7 @@ export function RelatedProductList({ relatedProducts }) {
         {relatedProducts?.map((p) => (
           <Link href={`/products/${p?.id}`} key={p?.id}>
             <div className="related-product-card">
-              <img src={`/data/productImages/${p.imageUrl}`} alt={p.productName} />
+              <img src={`${IMAGE_BASE_URL}/data/productImages/${p.imageUrl}`} alt={p.productName} />
               <div className="product-name">{p.productName}</div>
               <div className="product-price">{p.price.toLocaleString()}원</div>
             </div>
