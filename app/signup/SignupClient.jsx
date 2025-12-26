@@ -13,7 +13,7 @@ import { SignupAddress } from "@/features/signup/components/SignupAddress";
 import { SignupGender } from "@/features/signup/components/SignupGender";
 import { SignupBirth } from "@/features/signup/components/SignupBirth";
 import { SignupPlus } from "@/features/signup/components/SignupPlus";
-import { SignupTerms } from "@/features/signup/components/SignupTerms";
+// import { SignupTerms } from "@/features/signup/components/SignupTerms";
 
 export default function SignupClient() {
   const {
@@ -81,7 +81,7 @@ export default function SignupClient() {
             handleChangeForm={handleChangeForm}
             handleIdCheck={handleIdCheck}
           /> 
-
+{/* 
           <SignupTerms
             agree={agree}
             termList={termList}
@@ -89,7 +89,7 @@ export default function SignupClient() {
             setHoveredId={setHoveredId}
             handleAgreeChange={handleAgreeChange}
             handleAllAgree={handleAllAgree}
-          />
+          /> */}
 
           <li>
             <button className="btn-submit" type="submit">
