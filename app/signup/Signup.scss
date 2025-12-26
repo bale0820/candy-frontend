@@ -684,9 +684,9 @@
 .signup-container .agree-box {
   position: absolute;
   top: -380px;
-  right: 0;
-  width: 70dvw;
-  font-size: 12px;
+  right: 50px;
+  width: 30dvw;
+  font-size: 16px;
   background-color: #fafafa;
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -726,4 +726,25 @@
 .signup-container .agree-text.active {
   color: #a13bea;
   text-decoration: underline;
+}
+
+@media screen and (max-width: 768px) {
+  /* 약관 설명 박스 (호버 시 표시) 모바일 버전 */
+  .signup-container .agree-box {
+    position: absolute;
+    top: -380px;
+    right: 0;
+    width: 70dvw;
+    font-size: 12px;
+    background-color: #fafafa;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    line-height: 1.6;
+    z-index: 10;
+    animation: fadeIn 0.2s ease-in-out;
+    height: 60dvh;
+    overflow-y: auto;
+  }
 }
