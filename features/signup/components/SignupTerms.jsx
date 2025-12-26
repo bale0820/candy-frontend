@@ -54,7 +54,7 @@ export function SignupTerms({
                   onMouseEnter={() => setHoveredId(item?.id)}
                   onMouseLeave={() => setHoveredId(null)}
                 >
-                  <span className="agree-text">약관보기</span>
+                  <span className="agree-text">약관보기!</span>
 
                   {/* Hover 시 약관 내용 표시 */}
                   {hoveredId === item?.id && (
