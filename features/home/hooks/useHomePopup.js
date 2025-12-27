@@ -69,7 +69,6 @@ export function useHomePopup() {
     "coupon_popup_hide_until",
     String(endOfToday)
   );
-
   setShowPopup(false);
 };
 

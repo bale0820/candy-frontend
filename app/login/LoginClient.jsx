@@ -37,9 +37,9 @@ export default function LoginClient() {
         <ul>
           <li>
             <div className="links">
-              <a href="/find-user-id">아이디 찾기</a>
+              <a href="/login/find-user-id">아이디 찾기</a>
               <span>|</span>
-              <a href="/send-code">비밀번호 찾기</a>
+              <a href="/login/find-password">비밀번호 찾기</a>
             </div>
           </li>
 
