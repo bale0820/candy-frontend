@@ -18,7 +18,7 @@ export default function FindUserIdClient() {
     setError(null); // 이전 에러 초기화
 
     try {
-      const response = await axios.get("http://localhost:8080/member/find-user-id", {
+      const response = await api.get("/member/find-user-id", {
         params: { query },
       });
 
