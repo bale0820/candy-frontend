@@ -54,5 +54,25 @@ export function useHomePopup() {
     setShowPopup(false);
   };
 
-  return { showPopup, handleClosePopup };
+  const handleHideToday = () => {
+  const now = new Date();
+
+  // 오늘 23:59:59
+  const endOfToday = new Date(
+    now.getFullYear(),
+    now.getMonth(),
+    now.getDate(),
+    23, 59, 59, 999
+  ).getTime();
+
+  localStorage.setItem(
+    "coupon_popup_hide_until",
+    String(endOfToday)
+  );
+
+  setShowPopup(false);
+};
+
+
+  return { showPopup, handleClosePopup, handleHideToday };
 }

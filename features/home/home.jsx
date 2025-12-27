@@ -21,7 +21,7 @@ export default function Home({
   const { index, setIndex } = useAutoSlider(images.length, 5000);
 
   useRecentCategory();
-  const { showPopup, handleClosePopup } = useHomePopup();
+  const { showPopup, handleClosePopup, handleHideToday } = useHomePopup();
 
   return (
     <>
@@ -31,7 +31,7 @@ export default function Home({
       
       <RightAdBanner ads={bannerAds} />
 
-      {showPopup && <Popup onClose={handleClosePopup} />}
+      {showPopup && <Popup onClose={handleClosePopup} onTodayHide={handleHideToday} />}
 
       <SlideContainer images={images} index={index} setIndex={setIndex} />
 
