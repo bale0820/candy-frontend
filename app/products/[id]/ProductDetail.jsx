@@ -37,27 +37,7 @@ export default function ProductDetail({ product }) {
     <div className="product-container">
       <div className="product-detail">
         <div className="product-detail-main">
-          {/* ----------------------- 이미지 ----------------------- */}
-          {/* <div className="product-image">
-            <div
-              className={`badge-container ${product.hotDeal && product.memberSpecial ? "multi" : ""
-                }`}
-            >
-              {product.hotDeal && <span className="badge hot">원딜핫딜</span>}
-              {product.memberSpecial && (
-                <span className="badge member">멤버특가</span>
-              )}
-            </div>
-
-            <div className="product-image-container">
-              <img
-                src={`${IMAGE_BASE_URL}/data/productImages/${product.imageUrl}`}
-                alt={`${product.productName} 상품 이미지`}
-                loading="eager"
-              />
-              {product.count <= 0 && <div className="sold-out">SOLD OUT</div>}
-            </div>
-          </div> */}
+          
           <div className="product-image">
             <div className="product-image-container">
 

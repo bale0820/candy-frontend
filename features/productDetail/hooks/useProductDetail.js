@@ -24,11 +24,6 @@
     const { cartList } = useCartStore();
 
     // -------------------------
-    // 1) 상품 데이터 가져오기
-    // -------------------------
-    // const { data: product, isLoading } = useProductDetailQuery(id);
-
-    // -------------------------
     // 2) 조회 로그 저장
     // -------------------------
     useEffect(() => {
