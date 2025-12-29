@@ -15,7 +15,8 @@ export function QnA({ id, product }) {
     data: qnaAll = [],
     isLoading,
     isError,
-  } = useProductQnAList();
+  } = useProductQnAList(id);
+  console.log("qnaAll", qnaAll);
 
   const router = useRouter();
   const pathname = usePathname();
