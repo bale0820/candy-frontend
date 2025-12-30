@@ -9,27 +9,6 @@ export default function AddressModal({ onClose, onSelectAddress }) {
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 3;
 
-    // 🔹 UserId가 생기면 주문 목록 불러오기
-    // useEffect(() => {
-    //     const [userId] = useState(() => {
-    //         if (typeof window !== "undefined") {
-    //             const stored = localStorage.getItem("loginInfo");
-    //             if (stored) {
-    //                 const { accessToken } = JSON.parse(stored);
-    //                 const payload = parseJwt(accessToken);
-    //                 return payload?.id;
-    //             }
-    //         }
-    //         return null;
-    //     });
-
-    //     const getOders = async() => {
-    //         const res = await api.get(`/orders/my/${userId}`);
-    //         setOrders(res.data);
-    //     }
-        
-    //     getOders();
-    // }, []);
 
     const handleNext = () => {
         setCurrentPage((prev) =>

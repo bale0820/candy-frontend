@@ -9,9 +9,26 @@ import TermsAgree from "@/features/checkout/components/TermsAgree";
 import PayButton from "@/features/checkout/components/PayButton";
 import useCheckOutData from "@/features/checkout/hooks/useCheckOutData";
 import "./CheckOut.scss";
+import { useEffect } from "react";
+import { isTokenExpired } from "@/utils/isTokenExpired";
+import { useRouter } from "next/navigation";
+
 
 export default function checkout() {
     const checkout = useCheckOutData();
+
+    const router = useRouter();
+
+    useEffect(() => {
+        const stored = localStorage.getItem("auth-storage");
+    
+        const { accessToken } = JSON.parse(stored).state;
+
+        if (!accessToken || isTokenExpired(accessToken)) {
+            // 🔥 핵심
+            router.replace("/login?from=/checkout");
+        }
+    }, [router]);
 
     return (
         <div className="checkout-container">

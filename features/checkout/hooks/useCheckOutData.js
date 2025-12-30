@@ -7,10 +7,10 @@ import Swal from "sweetalert2";
 import { parseJwt } from "@/features/auth/parseJwt";
 import { getKakaoPayment, getNaverPayment } from "@/features/checkout/api/paymentAPI";
 import { api } from "@/shared/lib/axios.js";
-import {useCartStore} from "@/store/cartStore";
+import { useCartStore } from "@/store/cartStore";
 
 export default function useCheckOutData() {
-    const {cartList, totalPrice, totalDcPrice, shippingFee} = useCartStore();
+    const { cartList, totalPrice, totalDcPrice, shippingFee } = useCartStore();
 
     const [reduceCartList, setReduceCartList] = useState([]);
     const [userId, setUserId] = useState(null);
@@ -64,11 +64,11 @@ export default function useCheckOutData() {
             setUser(u);
 
             setReceiver({
-                name: u.name,
-                phone: u.phone,
-                address1: u.address,
+                name: u.name ?? "",
+                phone: u.phone ?? "",
+                address1: u.address ?? "",
                 address2: "",
-                zipcode: u.zonecode,
+                zipcode: u.zonecode ?? "",
                 memo: "문앞에 놔주세요"
             });
 
