@@ -12,7 +12,6 @@ export default function CategoryNav() {
       <ul className="category-nav__list">
         {/* 카테고리 전체 메뉴 */}
         <li className="category-first">
-          <FiMenu />
           <CategoryMenu />
         </li>
 
