@@ -15,6 +15,7 @@ export function QnA({ id, product }) {
     data: qnaList = [],
     isLoading,
     isError,
+    refetch
   } = useProductQnAList(id);
 
 
@@ -42,6 +43,7 @@ export function QnA({ id, product }) {
       currentPage * itemsPerPage
     );
   }, [qnaList, currentPage]);
+  console.log("currentItems", currentItems);
   // 🔹 1) 로딩/에러 처리
   if (isLoading) return <p>문의글을 불러오는 중...</p>;
   if (isError) return <p>문의 정보를 가져오지 못했습니다.</p>;
@@ -82,6 +84,7 @@ export function QnA({ id, product }) {
       }).then(() => {
         setIsClickQnA(false);
       });
+       refetch();
     } catch (e) {
       Swal.fire({
         icon: "error",
@@ -132,7 +135,7 @@ export function QnA({ id, product }) {
             currentItems.map((item, idx) => (
               <tr key={idx}>
                 <td>
-                  {item.is_private ? (
+                  {item.private ? (
                     <>
                       비밀글입니다 <span className="lock-icon">🔒</span>
                     </>
