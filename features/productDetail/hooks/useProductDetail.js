@@ -81,7 +81,6 @@
       }
 
       const cartItem = cartList?.filter(item => item.product?.id === Number(id));
-      console.log("cartItem", cartItem);
       if(product.count < count + cartItem[0]?.qty) {
         Swal.fire({
         icon: "error",

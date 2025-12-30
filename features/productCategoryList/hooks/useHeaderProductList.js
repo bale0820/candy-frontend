@@ -15,7 +15,6 @@ import {
 
 export function useHeaderProductList(type) {
   const [activeFilter, setActiveFilter] = useState("");
-  console.log("🔥 useHeaderProductList id 값:", type);
 
   // ▶ 전체 상품 리스트 가져오기
   const { data: productList = [], isLoading: productLoading } = useQuery({

@@ -59,9 +59,6 @@ export function useMyOrders(itemsPerPage = 4) {
       });
     }
     ordersQuery.refetch();
-    // console.log(userId, orderCode);
-    
-    // deleteMutation.mutate(userId, orderCode);
   };
 
   /** 페이지네이션 */

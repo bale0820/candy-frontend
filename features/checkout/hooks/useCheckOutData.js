@@ -11,7 +11,6 @@ import { useCartStore } from "@/store/cartStore";
 
 export default function useCheckOutData() {
     const { cartList, totalPrice, totalDcPrice, shippingFee } = useCartStore();
-
     const [reduceCartList, setReduceCartList] = useState([]);
     const [userId, setUserId] = useState(null);
     const [user, setUser] = useState(null);
@@ -54,6 +53,7 @@ export default function useCheckOutData() {
             setUserId(payload?.id);
         }
     }, []);
+    
 
     // -----------------------------
     // cartList 준비되면 receiver 초기화
@@ -104,6 +104,7 @@ export default function useCheckOutData() {
     const handleClick = () => {
         open({
             onComplete: (data) => {
+
                 let fullAddress = data.address;
                 let zonecode = data.zonecode;
 
@@ -123,15 +124,15 @@ export default function useCheckOutData() {
     // 최근 주소 선택
     // -----------------------------
     const handleSelectAddress = (address) => {
-        setUserZoneCode(address.zipcode);
-        setUserFullAddress(address.address1);
+        setUserZoneCode(address.zipcode?? "");
+        setUserFullAddress(address.address1?? "");
         setReceiver({
-            name: address.receiverName,
-            phone: address.receiverPhone,
-            address1: address.address1,
-            address2: address.address2,
-            zipcode: address.zipcode,
-            memo: address.memo
+            name: address.receiverName ?? "",
+            phone: address.receiverPhone ?? "",
+            address1: address.address1 ?? "",
+            address2: address.address2 ?? "",
+            zipcode: address.zipcode ?? "",
+            memo: address.memo ?? ""   // ⭐ 핵심
         });
     };
 

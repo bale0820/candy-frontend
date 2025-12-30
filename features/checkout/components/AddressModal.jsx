@@ -1,14 +1,13 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useMyOrders } from "@/features/mypage/myorders/hooks/useMyOrders";
 
 export default function AddressModal({ onClose, onSelectAddress }) {
-    const {orders} = useMyOrders();
+    const { orders } = useMyOrders();
 
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 3;
-
 
     const handleNext = () => {
         setCurrentPage((prev) =>
@@ -51,8 +50,8 @@ export default function AddressModal({ onClose, onSelectAddress }) {
 
                     {/* 주문 리스트 */}
                     {orders.length > 0 &&
-                        currentItems?.map((order) => (
-                            <ul className="address-modal-group" key={order.orderId}>
+                        currentItems?.map((order, key) => (
+                            <ul className="address-modal-group" key={key}>
                                 <li className="address-modal-name">
                                     <div>{order.receiverName}</div>
                                     <div>
@@ -74,8 +73,8 @@ export default function AddressModal({ onClose, onSelectAddress }) {
                                 {"<"}
                             </button>
                             <span style={{ margin: "0 0.6rem" }}>
-                {currentPage} / {Math.ceil(orders.length / itemsPerPage)}
-              </span>
+                                {currentPage} / {Math.ceil(orders.length / itemsPerPage)}
+                            </span>
                             <button
                                 onClick={handleNext}
                                 disabled={currentPage * itemsPerPage >= orders.length}

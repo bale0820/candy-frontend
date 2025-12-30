@@ -69,7 +69,6 @@ export function QnA({ id, product }) {
 
   // 🔹 5) 문의 등록
   const handleAddQnA = async (qnaData) => {
-    console.log("qnaData",qnaData);
     try {
       await api.post("/product/addQnA", qnaData);
 

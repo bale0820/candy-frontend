@@ -15,7 +15,6 @@ export default function ReviewAnalysisPage() {
 
   // 리뷰 필터링
   const reviews = reviewsAll.filter((r) => r?.ppk === Number(ppk));
-console.log("reviews", reviews);
   // AI 분석 데이터 요청
   useEffect(() => {
     if (!ppk) return;

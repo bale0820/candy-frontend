@@ -15,6 +15,7 @@ export default function ReceiverInfo({
     handleSelectAddress,
     handleChangeValue
 }) {
+
     return (
         <div className="section">
             <h2 className="section-title">
@@ -59,9 +60,10 @@ export default function ReceiverInfo({
                         <div className="label">이름</div>
                         <input
                             className="value"
-                            name='name'
+                            name="name"
                             value={receiver.name}
                             onChange={handleChangeValue}
+                          
                         />
 
                         <div className="label">배송주소</div>
@@ -70,14 +72,15 @@ export default function ReceiverInfo({
                                 type="text"
                                 name='address1'
                                 value={userFullAddress}
-                                readOnly
-                                onClick={handleClick}
+                                readOnly={isChange}
+                                onClick={!isChange ? handleClick : undefined}
                             />
                             <input
                                 type="text"
                                 name='address2'
                                 value={receiver.address2}
                                 onChange={handleChangeValue}
+                            
                             />
                         </div>
 
@@ -87,6 +90,7 @@ export default function ReceiverInfo({
                             name='phone'
                             value={receiver.phone}
                             onChange={handleChangeValue}
+                           
                         />
 
                         <div className="label">배송 요청사항</div>
@@ -95,6 +99,7 @@ export default function ReceiverInfo({
                             name='memo'
                             value={receiver.memo}
                             onChange={handleChangeValue}
+                            
                         />
                     </div>
                 </div>

@@ -3,7 +3,6 @@
 import { IMAGE_BASE_URL } from "@/shared/constants/clientEnv";
 
 export function OrderCard({ order, goProduct, handleAddCart, onDelete }) {
-  console.log("OrderCard order:", order);
   return (
     <div className="mypage-card">
       <div className="mypage-body">
