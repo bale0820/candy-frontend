@@ -29,12 +29,7 @@ export function QnA({ id, product }) {
 
   // 로그인 여부 (Next.js에서는 Zustand 또는 cookie 기반이라 가정)
   const { isLogin, userId } = useAuthStore(); // 👉 필요 시 Zustand store 또는 cookie에서 가져오면 됨
-  // 🔹 2) 해당 상품의 QnA만 필터링
-  // const qnaList = useMemo(() => {
-  //   return qnaAll
-  //     .filter((item) => Number(item?.ppk) === Number(id))
-  //     .sort((a, b) => new Date(b.date) - new Date(a.date));
-  // }, [qnaAll, id]);
+
 
   // 🔹 3) 페이지 슬라이싱
   const currentItems = useMemo(() => {
@@ -43,7 +38,8 @@ export function QnA({ id, product }) {
       currentPage * itemsPerPage
     );
   }, [qnaList, currentPage]);
-  console.log("currentItems", currentItems);
+
+
   // 🔹 1) 로딩/에러 처리
   if (isLoading) return <p>문의글을 불러오는 중...</p>;
   if (isError) return <p>문의 정보를 가져오지 못했습니다.</p>;
