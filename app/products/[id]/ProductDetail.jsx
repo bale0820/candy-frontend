@@ -14,7 +14,6 @@ import { Return } from "@/features/productDetail/components/return/Return";
 import { IMAGE_BASE_URL } from "@/shared/constants/clientEnv";
 
 export default function ProductDetail({ product }) {
-
   const {
     count,
     salesPrice,
