@@ -86,7 +86,7 @@ if (refs.current === null) {
       [name]: value,
     }));
   };
-
+  console.log("form", form);
   // -------------------------------------------------------------------
   // 6️⃣ 주소 검색
   // -------------------------------------------------------------------
@@ -115,18 +115,18 @@ if (refs.current === null) {
   // 7️⃣ 아이디 중복 체크
   // -------------------------------------------------------------------
   const handleIdCheck = async (e) => {
-    const { name, value } = e.target;
+    const userId = form.userId.trim();
 
-    if (!value) {
-      Swal.fire({
-        icon: "error",
-        title: "중복체크 결과",
-        text: "❌ 아이디를 입력해주세요.",
-      });
-      return;
-    }
+  if (!userId) {
+    Swal.fire({
+      icon: "error",
+      title: "중복체크 결과",
+      text: "❌ 아이디를 입력해주세요.",
+    });
+    return;
+  }
 
-    const result = await getCheckId(name, value);
+  const result = await getCheckId("userId", userId);
 
     Swal.fire({
       icon: result.data ? "error" : "success",
