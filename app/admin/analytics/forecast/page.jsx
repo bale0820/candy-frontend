@@ -27,6 +27,7 @@ export default function ForecastPage() {
     setForecast(result);
   };
 
+  console.log("forecast", forecast);
   // 🔥 forecast가 바뀔 때만 계산됨
   const excelRows = useForecastExcelRows(forecast);
 
