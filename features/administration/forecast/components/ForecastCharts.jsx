@@ -6,12 +6,12 @@ export default function ForecastCharts({ sales, forecast, excelRows }) {
   return (
     <div>
       <h2>📌 과거 판매량</h2>
-      {sales.length > 0 && (
+      {/* {sales.length > 0 && ( */}
         <ForecastChart
           labels={sales.map((s) => s?.dateTime.split("T")[0])}
           values={sales.map((s) => s?.qty)}
         />
-      )}
+      {/* )} */}
 
       {forecast && (
         <>

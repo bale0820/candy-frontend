@@ -17,4 +17,5 @@ export async function exportConversionExcel(rows) {
   link.setAttribute("download", "conversion.xlsx");
   document.body.appendChild(link);
   link.click();
+  document.body.removeChild(link);
 }

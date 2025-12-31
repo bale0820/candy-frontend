@@ -14,7 +14,6 @@
           else d.setMonth(today.getMonth() + (i + 1));
           return d.toISOString().split("T")[0];
         });
-
       // 7일
       genDates(7).forEach((date, i) => {
         rows.push({
@@ -23,7 +22,6 @@
           value: forecast.next7Days[i],
         });
       });
-
       // 30일
       genDates(30).forEach((date, i) => {
         rows.push({

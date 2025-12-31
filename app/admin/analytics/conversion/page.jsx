@@ -7,7 +7,6 @@ import { useConversionData } from "@/features/administration/conversion/useConve
 
 export default function ConversionPage() {
   const { data, labels, clicks, orders, rates } = useConversionData();
-
   return (
     <div style={{ padding: 20 }}>
       <h1>📊 상품별 클릭 → 구매 전환율 분석</h1>
