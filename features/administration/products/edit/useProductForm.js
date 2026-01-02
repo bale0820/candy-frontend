@@ -1,8 +1,8 @@
 import Swal from "sweetalert2";
-import {useEffect, useState} from "react";
-import {useCategoryList} from "@/features/category/hooks/useCategoryList";
-import {useDeliveryList} from "@/features/delivery/hooks/useDeliveryList";
-import {ProductValidateCheck} from "@/features/administration/products/edit/components/ProductValidateCheck.jsx";
+import { useEffect, useState } from "react";
+import { useCategoryList } from "@/features/category/hooks/useCategoryList";
+import { useDeliveryList } from "@/features/delivery/hooks/useDeliveryList";
+import { ProductValidateCheck } from "@/features/administration/products/edit/components/ProductValidateCheck.jsx";
 
 export function useProductForm({
   initialFormData,
@@ -17,6 +17,7 @@ export function useProductForm({
   const { data: categoryList } = useCategoryList();
 
   const [formData, setFormData] = useState(initialFormData);
+
   const [count, setCount] = useState(initialCount);
   const [price, setPrice] = useState(initialPrice);
   const [imageListFile, setImageListFile] = useState([]);
@@ -24,22 +25,24 @@ export function useProductForm({
   const [subCategoryList, setSubCategoryList] = useState([]);
   const [selectedMain, setSelectedMain] = useState("");
   const [selectedSub, setSelectedSub] = useState("");
+  console.log("formData", formData);
+  console.log("categoryList", categoryList);
+  console.log("imageListFile", imageListFile);
+  useEffect(() => {
+    if (!categoryList) return;
+    if (!initialFormData?.categorySub) return;
 
-    useEffect(() => {
-        if (!categoryList) return;
-        if (!initialFormData?.categorySub) return;
-
-        const subId = initialFormData.categorySub?.id;
-        const main = categoryList.find((c) =>
-            c.subCategories.some((sub) => sub?.id === subId)
-        );
-        if (main) {
-            // eslint-disable-next-line react-hooks/set-state-in-effect
-            setSelectedMain(main?.id.toString());
-            setSubCategoryList(main.subCategories);
-            setSelectedSub(subId.toString());
-        }
-    }, [categoryList, initialFormData]);
+    const subId = initialFormData.categorySub?.id;
+    const main = categoryList.find((c) =>
+      c.subCategories.some((sub) => sub?.id === subId)
+    );
+    if (main) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setSelectedMain(main?.id.toString());
+      setSubCategoryList(main.subCategories);
+      setSelectedSub(subId.toString());
+    }
+  }, [categoryList, initialFormData]);
 
 
   const handleChange = (e) => {

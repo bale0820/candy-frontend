@@ -5,6 +5,7 @@ import { useAdminProductsQuery } from "@/features/administration/products/edit/u
 import { useRouter } from "next/navigation";
 import { useProductStore } from "@/store/proudctStore.js";
 import { SetProductData } from "@/features/administration/products/edit/components/SetProductData";
+import { IMAGE_BASE_URL } from "@/shared/constants/clientEnv";
 
 export function useProductUpdate() {
     const { productUpdate }= useAdminProductsQuery();
@@ -32,9 +33,9 @@ export function useProductUpdate() {
 
     // 💡 기존 이미지 경로
     const existingImages = item ? [
-        `/images/productImages/${item.imageUrl}`,
-        `/images/productInformation/${item.productInformationImage}`,
-        `/images/productDescription/${item.productDescriptionImage}`,
+        `${IMAGE_BASE_URL}/data/productImages/${item.imageUrl}`,
+        `${IMAGE_BASE_URL}/data/productInformation/${item.productInformationImage}`,
+        `${IMAGE_BASE_URL}/data/productDescription/${item.productDescriptionImage}`,
     ] : [];
 
     // ⭐ 제출 로직
