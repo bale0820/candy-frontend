@@ -17,6 +17,7 @@ export default function Cart() {
     removeItem,
     goCheckout,
   } = useCart();
+  console.log("cartList", cartList);
   return (
     <div className="cart-container">
       <h2 className="cart-header">장바구니</h2>
