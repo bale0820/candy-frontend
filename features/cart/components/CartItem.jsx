@@ -1,9 +1,11 @@
+import { IMAGE_BASE_URL } from "@/shared/constants/clientEnv";
+
 // features/cart/components/CartItem.jsx
 export function CartItem({ item, decreaseQty, increaseQty, removeItem }) {
   return (
     <div className='cart-item'>
       <div className="cart-image-container">
-        <img src={`/data/productImages/${item.product.imageUrl}`} alt='product img' />
+        <img src={`${IMAGE_BASE_URL}/data/productImages/${item.product.imageUrl}`} alt='product img' />
         {item.product.count <= 0 && <div className="sold-out">SOLD OUT</div>}
       </div>
 
