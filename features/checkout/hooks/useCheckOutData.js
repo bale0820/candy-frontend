@@ -85,6 +85,7 @@ export default function useCheckOutData() {
 
         const loadCoupons = async () => {
             const res = await api.get(`/coupon/my/${userId}`);
+            console.log("res",res);
             setCoupons(res.data.filter(item => !item?.isUsed));
         };
 

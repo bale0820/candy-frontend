@@ -12,7 +12,6 @@ export function useProductUpdate() {
     const router = useRouter();
     const { item } = useProductStore();
     const loading = !item;
-
     // 💡 기존 데이터를 기반으로 초기 formData 생성
     const initialFormData = item ? {
         productName: item.productName,
