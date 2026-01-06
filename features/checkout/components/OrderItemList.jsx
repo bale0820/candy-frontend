@@ -1,3 +1,5 @@
+import { IMAGE_BASE_URL } from "@/shared/constants/clientEnv";
+
 export default function OrderItemList({ reduceCartList }) {
     return (
         <div className="section order-section">
@@ -7,7 +9,7 @@ export default function OrderItemList({ reduceCartList }) {
                     {reduceCartList.map((item) =>
                         <div key={item.cid} className="value order-item">
                             <img
-                                src={`/data/productImages/${item.product.imageUrl}`}
+                                src={`${IMAGE_BASE_URL}/data/productImages/${item.product.imageUrl}`}
                                 alt="product"
                                 className="order-thumb"
                             />
