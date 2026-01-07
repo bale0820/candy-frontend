@@ -12,6 +12,9 @@ export const metadata = {
     template: "%s | Candy Market",
   },
   description: "Next.js Shopping Mall",
+  verification: {
+    google: "359In8q40-mtbh78wCDQZ_YHIoDJAbisN-1e72YfYK0", // 👈 여기 붙여넣기
+  },
 };
 
 export default function RootLayout({ children }) {
