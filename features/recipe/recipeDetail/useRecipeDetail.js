@@ -42,6 +42,7 @@ export function useRecipeDetail(id) {
   useEffect(() => {
     const fetch = async () => {
       const result = await getRecipeDetailAPI(id);
+      console.log("result", result);
       setRecipe(result.recipe);
       setReviews(result.reviews);
     };

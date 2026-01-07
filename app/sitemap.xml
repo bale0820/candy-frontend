@@ -1,23 +1,10 @@
+// app/sitemap.ts
 export default function sitemap() {
-  const baseUrl = "https://your-domain.com";
+  const baseUrl = "https://candy-frontend-taupe.vercel.app";
 
   return [
-    {
-      url: `${baseUrl}`,
-      lastModified: new Date(),
-    },
-    {
-      url: `${baseUrl}/product`,
-      lastModified: new Date(),
-    },
-    {
-      url: `${baseUrl}/recipe`,
-      lastModified: new Date(),
-    },
-    // 예시: 동적 페이지도 필요하면 직접 추가
-    {
-      url: `${baseUrl}/recipe/1`,
-      lastModified: new Date(),
-    },
+    { url: baseUrl, lastModified: new Date() },
+    { url: `${baseUrl}/product`, lastModified: new Date() },
+    { url: `${baseUrl}/recipe`, lastModified: new Date() },
   ];
 }

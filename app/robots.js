@@ -5,6 +5,6 @@ export default function robots() {
       allow: "/",
       disallow: ["/admin", "/checkout", "/order"],
     },
-    sitemap: "https://your-domain.com/sitemap.xml",
+    sitemap: "https://candy-frontend-taupe.vercel.app/sitemap.xml",
   };
 }
