@@ -17,11 +17,11 @@ export default function Footer() {
 
         <div className="footer__links">
           <ul>
-            <li><Link href="/terms">이용약관</Link></li>
-            <li><Link href="/privacy">개인정보처리방침</Link></li>
-            <li><Link href="/email-policy">이메일 무단 수집거부</Link></li>
-            <li><Link href="/youth-protection">청소년보호 책임자 고지</Link></li>
-            <li><Link href="/kakao">카카오톡 채널 추가</Link></li>
+            <li><Link href="/footer/terms">이용약관</Link></li>
+            <li><Link href="/footer/privacy">개인정보처리방침</Link></li>
+            <li><Link href="/footer/email-policy">이메일 무단 수집거부</Link></li>
+            <li><Link href="/footer/youth-protection">청소년보호 책임자 고지</Link></li>
+            <li><Link href="/footer/kakao">카카오톡 채널 추가</Link></li>
           </ul>
         </div>
 
