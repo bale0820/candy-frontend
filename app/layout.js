@@ -20,6 +20,20 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="ko">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              name: "Candy Market",
+              alternateName: "Candy-market",
+              url: "https://candy-frontend-taupe.vercel.app",
+            }),
+          }}
+        />
+      </head>
       <body>
         {/* ✅ 전역 상태 / 인증 / React Query Provider */}
         <Providers>
