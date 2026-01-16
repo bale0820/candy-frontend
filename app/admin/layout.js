@@ -1,6 +1,7 @@
 import AdminClientLayout from "./AdminClientLayout";
 
 
+export const dynamic = "force-dynamic";
 
 export const metadata = {
   robots: {
