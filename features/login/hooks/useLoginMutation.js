@@ -24,7 +24,7 @@
       onSuccess: async (data) => {
         const { accessToken, role } = data;
         const payload = parseJwt(accessToken);
-
+        console.log("payload", payload);
         // 1️⃣ Zustand 로그인 저장
         login({
           accessToken,
