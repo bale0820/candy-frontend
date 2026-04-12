@@ -7,6 +7,7 @@ import { useCategoryList } from "@/features/category/hooks/useCategoryList";
 import { FiMenu } from "react-icons/fi";
 export function CategoryMenu() {
   const { data: categoryList } = useCategoryList();
+  console.log(categoryList);
   const [open, setOpen] = useState(false);
 
   return (

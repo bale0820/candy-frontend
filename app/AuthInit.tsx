@@ -14,7 +14,7 @@ export default function AuthInit() {
     logout,
     _hasHydrated,
   } = useAuthStore();
-
+  
   const clearCart = useCartStore((s) => s.clearCart);
 
   // ✅ 카트 실행 조건

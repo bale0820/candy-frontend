@@ -53,7 +53,7 @@ export default function useCheckOutData() {
             setUserId(payload?.id);
         }
     }, []);
-    
+
 
     // -----------------------------
     // cartList 준비되면 receiver 초기화
@@ -85,7 +85,6 @@ export default function useCheckOutData() {
 
         const loadCoupons = async () => {
             const res = await api.get(`/coupon/my/${userId}`);
-            console.log("res",res);
             setCoupons(res.data.filter(item => !item?.isUsed));
         };
 
@@ -125,8 +124,8 @@ export default function useCheckOutData() {
     // 최근 주소 선택
     // -----------------------------
     const handleSelectAddress = (address) => {
-        setUserZoneCode(address.zipcode?? "");
-        setUserFullAddress(address.address1?? "");
+        setUserZoneCode(address.zipcode ?? "");
+        setUserFullAddress(address.address1 ?? "");
         setReceiver({
             name: address.receiverName ?? "",
             phone: address.receiverPhone ?? "",
@@ -149,6 +148,7 @@ export default function useCheckOutData() {
     // 쿠폰 적용
     // -----------------------------
     const handleChangeCoupon = (e) => {
+        
         const { value } = e.target;
         setCouponId(value);
 

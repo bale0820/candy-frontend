@@ -7,6 +7,7 @@ export function useConversionData() {
 
   const load = async () => {
     const result = await getConversionRates();
+    console.log(result);
     setData(result);
   };
 

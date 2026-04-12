@@ -129,7 +129,7 @@ function ProductList({
     const slideEl = el.querySelector(".slide");
     if (!slideEl) return;
 
-    const slideWidth = slideEl.offsetWidth + 24;
+    const slideWidth = slideEl.offsetWidth + 10;
     const scrollAmount = slideWidth * 5;
 
     el.scrollBy({

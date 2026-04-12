@@ -5,7 +5,7 @@ export function RecipeList({ recipeList }) {
   if (!Array.isArray(recipeList) || recipeList.length === 0) {
     return <p>레시피가 없습니다.</p>;
   }
-
+  console.log(recipeList);
   return (
     <div className="recipe-grid">
       {recipeList.map((recipe) => (

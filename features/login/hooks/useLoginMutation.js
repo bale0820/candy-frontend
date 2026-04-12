@@ -18,13 +18,15 @@
     return useMutation({
       mutationFn: async ({ userId, password }) => {
         const res = await api.post("/auth/login", { userId, password });
-        return res.data;
+        const data = res.data
+          console.log("data", data);
+        return data;
       },
-
+    
       onSuccess: async (data) => {
-        const { accessToken, role } = data;
+        const { accessToken, role, message } = data;
         const payload = parseJwt(accessToken);
-        console.log("payload", payload);
+        console.log("message", message);
         // 1️⃣ Zustand 로그인 저장
         login({
           accessToken,

@@ -8,7 +8,9 @@ export function useProductReviewList() {
     queryKey: ["productReviewList"],
     queryFn: async () => {
       const res = await api.get("/product/productReviewList");
-      return res.data.map(item => ({
+      const d = res.data;
+      console.log(d);
+      return d.map(item => ({
         ...item,
         images: typeof item.images === "string" ? JSON.parse(item.images) : item.images,
         tags: typeof item.tags === "string" ? JSON.parse(item.tags) : item.tags,

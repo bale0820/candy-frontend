@@ -35,7 +35,6 @@
 
         const { accessToken } = JSON.parse(stored).state;
         const payload = parseJwt(accessToken);
-
         api.post("/view/log", {
           upk: payload?.id,
           ppk: Number(id),

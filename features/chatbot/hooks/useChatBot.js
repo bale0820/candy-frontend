@@ -31,7 +31,6 @@ export function useChatBot() {
 
     try {
       const result = await askChatbotAPI({ userId, message: sendText });
-
       if (result.data) {
         // 주문 포함 응답
         setMessages(prev => [

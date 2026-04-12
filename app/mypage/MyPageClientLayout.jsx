@@ -31,7 +31,7 @@ export default function MyPageClientLayout({ children }) {
       {/* 사이드바 */}
       <aside className={`admin-sidebar ${open ? "open" : ""}`}>
         <h2 className="admin-title">마이페이지 메뉴</h2>
-
+~~
         <nav className="admin-nav">
           <Link href="/mypage/userdetail" onClick={() => setOpen(false)}>
             개인정보수정

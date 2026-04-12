@@ -26,6 +26,8 @@ export function useUserDetail() {
     async function fetchUser() {
       try {
         const res = await userAPI.getUser(userId);
+        const d = res.data;
+        console.log(d);
         setUser(res.data);
       } catch (err) {
         console.error("유저 정보 로드 실패:", err);
@@ -42,7 +44,6 @@ export function useUserDetail() {
     if (fieldName === "phone") {
       inputValue = currentValue ? currentValue.replace(/\D/g, "").slice(3) : "";
     }
-
     const { value: newValue } = await Swal.fire({
       title: `${label} 수정`,
       input: "text",

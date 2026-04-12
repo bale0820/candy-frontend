@@ -3,6 +3,7 @@
 import { api } from "@/shared/lib/axios";
 
 export async function exportConversionExcel(rows) {
+  console.log(rows);
   const res = await api.post(
     "/excel/conversion",
     { rows },

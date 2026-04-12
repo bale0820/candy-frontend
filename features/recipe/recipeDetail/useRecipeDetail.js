@@ -23,7 +23,7 @@ export function useRecipeDetail(id) {
   const [newContent, setNewContent] = useState("");
 
   const loginInfo = JSON.parse(localStorage.getItem("auth-storage"));
-  const isLoggedIn = !!loginInfo;
+  const isLoggedIn = !!loginInfo?.state?.isLogin;
 
   // 후기 정렬
   const sortedReviews = useMemo(() => {

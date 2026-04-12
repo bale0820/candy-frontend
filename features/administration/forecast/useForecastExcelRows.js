@@ -10,6 +10,7 @@
       const genDates = (len, type = "day") =>
         Array.from({ length: len }, (_, i) => {
           const d = new Date(today);
+          console.log(d);
           if (type === "day") d.setDate(today.getDate() + (i + 1));
           else d.setMonth(today.getMonth() + (i + 1));
           return d.toISOString().split("T")[0];
@@ -19,7 +20,7 @@
         rows.push({
           type: "7일 예측",
           date,
-          value: forecast.next7Days[i],
+          // value: forecast.next7Days[i],
         });
       });
       // 30일
@@ -27,7 +28,7 @@
         rows.push({
           type: "30일 예측",
           date,
-          value: forecast.next30Days[i],
+          // value: forecast.next30Days[i],
         });
       });
 
@@ -40,7 +41,7 @@
         rows.push({
           type: "12개월 예측",
           date: month,
-          value: forecast.next12Months[i],
+          // value: forecast.next12Months[i],
         });
       });
 
@@ -49,7 +50,7 @@
         rows.push({
           type: "365일 예측",
           date,
-          value: forecast.next365Days[i],
+          // value: forecast.next365Days[i],
         });
       });
 

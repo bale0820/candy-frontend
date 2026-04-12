@@ -25,7 +25,8 @@ export function useCartQuery(userId: number | null, enabled = true) {
       const res = await api.post("/cart/cartList", {
         user: { id: userId },
       });
-      setCartList(res.data);
+      const data = res.data;
+      setCartList(data);
       return res.data;
     },
     enabled: enabled && !!userId,

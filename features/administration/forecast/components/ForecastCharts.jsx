@@ -3,6 +3,7 @@ import ForecastChart from "./ForecastChart";
 
 
 export default function ForecastCharts({ sales, forecast, excelRows }) {
+  console.log(excelRows);
   return (
     <div>
       <h2>📌 과거 판매량</h2>

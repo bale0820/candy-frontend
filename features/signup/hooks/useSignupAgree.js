@@ -132,6 +132,7 @@ export function useSignupAgree() {
 
   const handleAgreeChange = (e) => {
     const { name, checked } = e.target;
+    console.log(name, checked);
 
     let updated = { ...agree, [name]: checked };
 

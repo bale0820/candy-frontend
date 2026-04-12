@@ -80,19 +80,19 @@ if (refs.current === null) {
     const { name, value } = e.target;
 
     if (numericOnly.includes(name) && !/^\d*$/.test(value)) return;
-
+    console.log(name, value);
     setForm((prev) => ({
       ...prev,
       [name]: value,
     }));
   };
-  console.log("form", form);
   // -------------------------------------------------------------------
   // 6️⃣ 주소 검색
   // -------------------------------------------------------------------
   const handleClickAddress = () => open({ onComplete });
 
   const onComplete = (data) => {
+    
     let fullAddress = data.address;
     let extraAddress = "";
     let zonecode = data.zonecode;
@@ -106,7 +106,6 @@ if (refs.current === null) {
 
       fullAddress += extraAddress ? ` (${extraAddress})` : "";
     }
-
     setUserFullAddress(fullAddress);
     setForm((prev) => ({ ...prev, zonecode }));
   };

@@ -33,7 +33,9 @@ export const getKakaoPayment = async (receiver, paymentInfo, cartList, couponId)
 
   try {
     const res = await api.post(url, data);
-    if (res.data.tid) {
+    const d = res.data;
+    
+    if (d.tid) {
       window.location.href = res.data.next_redirect_pc_url;
     }
   } catch (error) {

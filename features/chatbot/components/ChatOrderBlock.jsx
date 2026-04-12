@@ -9,7 +9,7 @@ export function ChatOrderBlock({ order }) {
       default: return "상태 정보 없음";
     }
   };
-
+  console.log("result",order);
   const getEta = (odate) => {
     if (!odate) return "";
     const date = new Date(odate);
@@ -33,7 +33,7 @@ export function ChatOrderBlock({ order }) {
         <div key={d?.id} className="order-item">
           <img
             className="order-img"
-            src={`/images/productImages/${d.product?.imageUrl}`}
+            src={`/data/productImages/${d.product?.imageUrl}`}
             alt=""
           />
           <div className="order-info">
