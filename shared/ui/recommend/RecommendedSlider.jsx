@@ -18,6 +18,7 @@ export default function RecommendedSlider({ title = "추천 상품", limit = 20 
     (state) => state.recentSubCategory
   );
 
+
   const sliderRef = useRef(null);
 
   // 🔹 필터된 추천 상품
@@ -28,6 +29,8 @@ export default function RecommendedSlider({ title = "추천 상품", limit = 20 
       .filter((item) => item.categorySub?.id === recentSubCategory)
       .slice(0, limit);
   }, [productList, recentSubCategory, limit]);
+
+    console.log("productList ", productList );
 
   // 🔹 자연스러운 무한 루프를 위해 리스트 확장
   const extendedList = useMemo(() => {

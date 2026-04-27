@@ -155,6 +155,7 @@ if (refs.current === null) {
       address: `${userFullAddress} ${form.addressDetail}`,
     };
 
+
     // 유효성 검사
     const errors = validateSignup(formData);
     if (Object.keys(errors).length > 0) {

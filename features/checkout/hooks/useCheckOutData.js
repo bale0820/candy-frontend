@@ -59,22 +59,45 @@ export default function useCheckOutData() {
     // cartList 준비되면 receiver 초기화
     // -----------------------------
     useEffect(() => {
-        if (cartList?.length > 0 && cartList[0].user) {
-            const u = cartList[0].user;
-            setUser(u);
+        const userApi = async() => {
+            const result = await api.get('/auth/user');
+            const u = result.data;
+            console.log("user", user);
+            if (!!u) {
+                setUser(u);
 
-            setReceiver({
-                name: u.name ?? "",
-                phone: u.phone ?? "",
-                address1: u.address ?? "",
-                address2: "",
-                zipcode: u.zonecode ?? "",
-                memo: "문앞에 놔주세요"
-            });
+                setReceiver({
+                    name: u.name ?? "",
+                    phone: u.phone ?? "",
+                    address1: u.address ?? "",
+                    address2: "",
+                    zipcode: u.zonecode ?? "",
+                    memo: "문앞에 놔주세요"
+                });
 
-            setUserZoneCode(u.zonecode);
-            setUserFullAddress(u.address);
+                setUserZoneCode(u.zonecode);
+                setUserFullAddress(u.address);
+
+            }
         }
+        userApi();
+
+        // if (cartList?.length > 0 && cartList[0].user) {
+        //     const u = cartList[0].user;
+        //     setUser(u);
+
+        //     setReceiver({
+        //         name: u.name ?? "",
+        //         phone: u.phone ?? "",
+        //         address1: u.address ?? "",
+        //         address2: "",
+        //         zipcode: u.zonecode ?? "",
+        //         memo: "문앞에 놔주세요"
+        //     });
+
+        //     setUserZoneCode(u.zonecode);
+        //     setUserFullAddress(u.address);
+        // }
     }, [cartList]);
 
     // -----------------------------
@@ -148,7 +171,7 @@ export default function useCheckOutData() {
     // 쿠폰 적용
     // -----------------------------
     const handleChangeCoupon = (e) => {
-        
+
         const { value } = e.target;
         setCouponId(value);
 

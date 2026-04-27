@@ -5,5 +5,7 @@ const API = "/api/analytics";
 
 export const getConversionRates = async () => {
   const res = await api.get(`${API}/conversion`);
-  return res.data;
+  const data = res.data;
+  console.log(data);
+  return data;
 };

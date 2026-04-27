@@ -19,7 +19,6 @@
       mutationFn: async ({ userId, password }) => {
         const res = await api.post("/auth/login", { userId, password });
         const data = res.data
-          console.log("data", data);
         return data;
       },
     
@@ -47,7 +46,9 @@
         // 2️⃣ 로그인 후 주문 내역 로드
         try {
           const res = await api.get(`/orders/my/${payload?.id}`);
-          setOrders(res.data);
+          const data = res.data;
+          console.log("data". data);
+          setOrders(data);
         } catch (err) {
           console.error("장바구니 불러오기 실패", err);
         }

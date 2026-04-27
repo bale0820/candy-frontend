@@ -6,13 +6,13 @@ import { useMemo, useState } from "react";
 export function useReviewList() {
   const {data : reviewsAll = []} = useProductReviewList();
   const [search, setSearch] = useState("");
-
+  console.log(reviewsAll);
   const grouped = useMemo(() => {
     return reviewsAll.reduce((acc, r) => {
       if (!acc[r.ppk]) {
         acc[r.ppk] = {
           ppk: r.ppk,
-          productName: r.product_name,
+          productName: r.productName,
           count: 0,
         };
       }
