@@ -20,7 +20,6 @@ export async function getAdvertiseList() {
   }
 
   const list = await res.json();
-
   return {
     bannerAds: list.filter(ad => ad?.advImageBanner),
     inlineAds: list.filter(ad => ad?.advImageInline),

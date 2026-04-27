@@ -28,6 +28,12 @@ export const useAuthStore = create(
           userId: null,
           isLogin: false,
         }),
+
+      setAccessToken: (token) =>
+        set((state) => ({
+          ...state,
+          accessToken: token,
+        })),
     }),
     {
       name: "auth-storage",

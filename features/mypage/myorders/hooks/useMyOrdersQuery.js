@@ -13,7 +13,9 @@ export function useMyOrdersQuery(userId) {
         queryKey: ["orders", userId],
         queryFn: async () => {
             const res = await api.get(`/orders/my/${userId}`);
-            setOrders(res.data); // Zustand 업데이트
+            const data= res.data;
+            console.log(data);
+            setOrders(data); // Zustand 업데이트
             return res.data;
         },
         enabled: !!userId,

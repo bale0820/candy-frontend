@@ -23,7 +23,7 @@ export function useCartQuery(userId: number | null, enabled = true) {
     queryKey: ["cart", userId],
     queryFn: async () => {
       const res = await api.post("/cart/cartList", {
-        user: { id: userId },
+        // user: { id: userId },
       });
       const data = res.data;
       setCartList(data);

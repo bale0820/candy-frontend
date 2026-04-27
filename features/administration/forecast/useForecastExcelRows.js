@@ -20,7 +20,7 @@
         rows.push({
           type: "7일 예측",
           date,
-          // value: forecast.next7Days[i],
+          value: forecast.next7Days[i],
         });
       });
       // 30일
@@ -28,7 +28,7 @@
         rows.push({
           type: "30일 예측",
           date,
-          // value: forecast.next30Days[i],
+          value: forecast.next30Days[i],
         });
       });
 
@@ -41,7 +41,7 @@
         rows.push({
           type: "12개월 예측",
           date: month,
-          // value: forecast.next12Months[i],
+          value: forecast.next12Months[i],
         });
       });
 
@@ -50,7 +50,7 @@
         rows.push({
           type: "365일 예측",
           date,
-          // value: forecast.next365Days[i],
+          value: forecast.next365Days[i],
         });
       });
 

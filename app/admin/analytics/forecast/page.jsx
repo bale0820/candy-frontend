@@ -19,6 +19,7 @@ export default function ForecastPage() {
 
   const loadSales = async () => {
     const data = await getSalesData(ppk);
+    console.log(data);
     setSales(data);
   };
   
@@ -27,6 +28,7 @@ export default function ForecastPage() {
     console.log(result);
     setForecast(result);
   };
+  console.log(forecast);
     // 🔥 forecast가 바뀔 때만 계산됨
   const excelRows = useForecastExcelRows(forecast);
 

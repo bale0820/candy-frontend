@@ -7,7 +7,9 @@ export function usePricingData() {
 
   const load = async () => {
     const res = await api.get("/api/admin/pricing/all");
-    setData(res.data);
+    const data = res.data;
+    console.log(data);
+    setData(data);
   };
 
   useEffect(() => {
