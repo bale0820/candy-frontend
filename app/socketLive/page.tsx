@@ -209,12 +209,14 @@ export default function Broadcast() {
                         "broadcast socket connect"
                     );
 
+                    // 먼저 media 생성
+                    await startMedia();
+
+                    // 그 다음 room 입장
                     socketRef.current?.emit(
                         "join_room",
                         roomId
                     );
-
-                    await startMedia();
 
                 }
             );
