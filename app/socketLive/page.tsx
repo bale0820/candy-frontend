@@ -276,7 +276,7 @@ export default function Broadcast() {
     // =========================
     // Zustand 구독
     // =========================
-    const accessToken =
+    const token =
         useAuthStore(
             state => state.accessToken
         );
@@ -467,7 +467,7 @@ export default function Broadcast() {
                 setMessages(res.data);
 
                 // access token 없으면 종료
-                if (!accessToken) {
+                if (!token) {
 
                     console.log(
                         "access token 없음"
@@ -479,7 +479,7 @@ export default function Broadcast() {
 
                 // socket 연결
                 connectSocket(
-                    accessToken
+                    token
                 );
 
             } catch (err) {
@@ -512,7 +512,7 @@ export default function Broadcast() {
 
     }, [
         hasHydrated,
-        accessToken
+        token
     ]);
 
     // =========================
