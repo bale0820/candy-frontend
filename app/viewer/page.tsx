@@ -211,7 +211,9 @@ export default function Viewer() {
                 playsInline
                 muted
                 style={{
-                    width: "500px"
+                    width: "500px",
+                    height: "300px",
+                    backgroundColor: "black"
                 }}
             />
 
