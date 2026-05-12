@@ -47,7 +47,15 @@ export default function Viewer() {
 
         // Peer 생성
         peerRef.current =
-            new RTCPeerConnection();
+            new RTCPeerConnection({
+                iceServers: [
+                    {
+                        urls: [
+                            "stun:stun.l.google.com:19302"
+                        ]
+                    }
+                ]
+            })
 
         peerRef.current.onicecandidate =
             (event) => {
