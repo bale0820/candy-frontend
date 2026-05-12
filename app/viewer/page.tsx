@@ -39,10 +39,35 @@ export default function Viewer() {
             }
         );
 
-        // room 입장
-        socketRef.current.emit(
-            "join_room",
-            roomId
+        // socket 연결 성공
+        socketRef.current.on(
+            "connect",
+            () => {
+
+                console.log(
+                    "viewer socket connect"
+                );
+
+                // room 입장
+                socketRef.current?.emit(
+                    "join_room",
+                    roomId
+                );
+
+            }
+        );
+
+        // socket 이벤트 확인용
+        socketRef.current.onAny(
+            (event, ...args) => {
+
+                console.log(
+                    "socket event:",
+                    event,
+                    args
+                );
+
+            }
         );
 
         // Peer 생성
@@ -55,12 +80,15 @@ export default function Viewer() {
                         ]
                     }
                 ]
-            })
-
+            });
 
         // 상대 영상 받기
         peerRef.current.ontrack =
             (event) => {
+
+                console.log(
+                    "ontrack 발생"
+                );
 
                 console.log(event);
 
@@ -75,10 +103,37 @@ export default function Viewer() {
 
             };
 
-        // offer 받기
+        // ICE 생성 시 broadcaster로 전송
+        peerRef.current.onicecandidate =
+            (event) => {
+
+                if (event.candidate) {
+
+                    console.log(
+                        "viewer ICE 생성"
+                    );
+
+                    socketRef.current?.emit(
+                        "ice-candidate",
+                        {
+                            roomId,
+                            candidate:
+                                event.candidate
+                        }
+                    );
+
+                }
+
+            };
+
+        // offer 수신
         socketRef.current.on(
             "offer",
             async (offer) => {
+
+                console.log(
+                    "offer 수신"
+                );
 
                 console.log(offer);
 
@@ -96,6 +151,10 @@ export default function Viewer() {
                     answer
                 );
 
+                console.log(
+                    "answer 생성 완료"
+                );
+
                 // broadcaster에게 answer 전송
                 socketRef.current?.emit(
                     "answer",
@@ -108,9 +167,14 @@ export default function Viewer() {
             }
         );
 
+        // ICE candidate 수신
         socketRef.current.on(
             "ice-candidate",
             async (candidate) => {
+
+                console.log(
+                    "viewer ICE 수신"
+                );
 
                 if (
                     peerRef.current?.remoteDescription
@@ -125,22 +189,13 @@ export default function Viewer() {
             }
         );
 
-        peerRef.current.onicecandidate =
-            (event) => {
+        return () => {
 
-                if (event.candidate) {
+            socketRef.current?.disconnect();
 
-                    socketRef.current?.emit(
-                        "ice-candidate",
-                        {
-                            roomId,
-                            candidate: event.candidate
-                        }
-                    );
+            peerRef.current?.close();
 
-                }
-
-            };
+        };
 
     }, []);
 
