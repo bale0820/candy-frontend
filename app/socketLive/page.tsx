@@ -254,7 +254,7 @@
 
 "use client";
 
-import { API_BASE_URL, LIVE_SERVER_URL } from "@/shared/constants/clientEnv";
+import { LIVE_SERVER_URL } from "@/shared/constants/clientEnv";
 import { api } from "@/shared/lib/axios";
 import { useAuthStore } from "@/store/authStore";
 import { useEffect, useRef, useState } from "react";
@@ -274,7 +274,7 @@ export default function Broadcast() {
         useState("");
 
     // =========================
-    // Zustand 구독
+    // Zustand
     // =========================
     const token =
         useAuthStore(
@@ -297,25 +297,154 @@ export default function Broadcast() {
     const socketRef =
         useRef<Socket | null>(null);
 
-    const isRefreshing =
-        useRef(false);
+    const peerRef =
+        useRef<RTCPeerConnection | null>(null);
 
     const videoRef =
         useRef<HTMLVideoElement | null>(null);
 
-    const peerRef =
-        useRef<RTCPeerConnection | null>(null);
+    const isRefreshing =
+        useRef(false);
 
     const roomId = "live-1";
 
     // =========================
-    // socket 연결 함수
+    // WebRTC 시작
+    // =========================
+    const startMedia =
+        async () => {
+
+            try {
+
+                console.log(
+                    "WebRTC 시작"
+                );
+
+                // 카메라 + 마이크
+                const stream =
+                    await navigator
+                        .mediaDevices
+                        .getUserMedia({
+                            video: true,
+                            audio: true
+                        });
+
+                // 내 화면 출력
+                if (videoRef.current) {
+
+                    videoRef.current.srcObject =
+                        stream;
+
+                }
+
+                // Peer 생성
+                peerRef.current =
+                    new RTCPeerConnection();
+
+                // answer 수신
+                socketRef.current?.on(
+                    "answer",
+                    async (answer) => {
+
+                        console.log(
+                            "answer 수신"
+                        );
+
+                        await peerRef.current?.setRemoteDescription(
+                            answer
+                        );
+
+                    }
+                );
+
+                // ICE 수신
+                socketRef.current?.on(
+                    "ice-candidate",
+                    async (candidate) => {
+
+                        console.log(
+                            "ICE 수신"
+                        );
+
+                        await peerRef.current?.addIceCandidate(
+                            candidate
+                        );
+
+                    }
+                );
+
+                // 상대에게 stream 전달
+                stream
+                    .getTracks()
+                    .forEach(track => {
+
+                        peerRef.current?.addTrack(
+                            track,
+                            stream
+                        );
+
+                    });
+
+                // ICE 생성 시 전송
+                peerRef.current.onicecandidate =
+                    (event) => {
+
+                        if (event.candidate) {
+
+                            console.log(
+                                "ICE 생성"
+                            );
+
+                            socketRef.current?.emit(
+                                "ice-candidate",
+                                {
+                                    roomId,
+                                    candidate:
+                                        event.candidate
+                                }
+                            );
+
+                        }
+
+                    };
+
+                // offer 생성
+                const offer =
+                    await peerRef.current?.createOffer();
+
+                // 내 브라우저 저장
+                await peerRef.current?.setLocalDescription(
+                    offer
+                );
+
+                console.log(
+                    "offer 생성"
+                );
+
+                // offer 전송
+                socketRef.current?.emit(
+                    "offer",
+                    {
+                        roomId,
+                        offer
+                    }
+                );
+
+            } catch (err) {
+
+                console.log(err);
+
+            }
+
+        };
+
+    // =========================
+    // socket 연결
     // =========================
     const connectSocket = (
         token: string
     ) => {
 
-        // 기존 socket 제거
         socketRef.current?.disconnect();
 
         const socket = io(
@@ -333,12 +462,10 @@ export default function Broadcast() {
 
         socketRef.current = socket;
 
-        // =========================
         // 연결 성공
-        // =========================
         socket.on(
             "connect",
-            () => {
+            async () => {
 
                 console.log(
                     "socket 연결 성공"
@@ -350,12 +477,13 @@ export default function Broadcast() {
                     roomId
                 );
 
+                // socket 연결 후 WebRTC 시작
+                await startMedia();
+
             }
         );
 
-        // =========================
         // 채팅 수신
-        // =========================
         socket.on(
             "chat",
             (data: ChatMessage) => {
@@ -368,22 +496,20 @@ export default function Broadcast() {
             }
         );
 
-        // =========================
-        // 연결 실패
-        // =========================
+        // socket 인증 실패
         socket.on(
             "connect_error",
             async (err: any) => {
 
                 console.log(err);
 
-                // 이미 refresh 중이면 막기
                 if (
                     err.data?.status === 401 &&
                     !isRefreshing.current
                 ) {
 
-                    isRefreshing.current = true;
+                    isRefreshing.current =
+                        true;
 
                     try {
 
@@ -391,7 +517,6 @@ export default function Broadcast() {
                             "refresh 시도"
                         );
 
-                        // refresh 요청
                         const res =
                             await api.post(
                                 "/auth/refresh",
@@ -404,16 +529,14 @@ export default function Broadcast() {
                         const newAccessToken =
                             res.data.accessToken;
 
-                        // Zustand 저장
                         setAccessToken(
                             newAccessToken
                         );
 
                         console.log(
-                            "새 access token 발급"
+                            "새 accessToken 발급"
                         );
 
-                        // 새 토큰으로 재연결
                         connectSocket(
                             newAccessToken
                         );
@@ -443,7 +566,6 @@ export default function Broadcast() {
     // =========================
     useEffect(() => {
 
-        // hydration 끝날 때까지 대기
         if (!hasHydrated) {
 
             console.log(
@@ -454,57 +576,48 @@ export default function Broadcast() {
 
         }
 
-        const init = async () => {
+        const init =
+            async () => {
 
-            try {
+                try {
 
-                // 기존 채팅 조회
-                const res =
-                    await api.get(
-                        `${LIVE_SERVER_URL}/live/chat/${roomId}`
+                    // 기존 채팅 조회
+                    const res =
+                        await api.get(
+                            `${LIVE_SERVER_URL}/live/chat/${roomId}`
+                        );
+
+                    setMessages(
+                        res.data
                     );
 
-                setMessages(res.data);
+                    // access token 없으면 종료
+                    if (!token) {
 
-                // access token 없으면 종료
-                if (!token) {
+                        console.log(
+                            "access token 없음"
+                        );
 
-                    console.log(
-                        "access token 없음"
+                        return;
+
+                    }
+
+                    // socket 연결
+                    connectSocket(
+                        token
                     );
 
-                    return;
+                } catch (err) {
+
+                    console.log(err);
 
                 }
 
-                // socket 연결
-                connectSocket(
-                    token
-                );
-
-            } catch (err) {
-
-                console.log(err);
-
-            }
-
-        };
+            };
 
         init();
 
         return () => {
-
-            socketRef.current?.off(
-                "connect"
-            );
-
-            socketRef.current?.off(
-                "chat"
-            );
-
-            socketRef.current?.off(
-                "connect_error"
-            );
 
             socketRef.current?.disconnect();
 
@@ -516,131 +629,12 @@ export default function Broadcast() {
     ]);
 
     // =========================
-    // WebRTC
-    // =========================
-    useEffect(() => {
-
-        const startMedia =
-            async () => {
-
-                try {
-
-                    // 카메라 + 마이크
-                    const stream =
-                        await navigator
-                            .mediaDevices
-                            .getUserMedia({
-                                video: true,
-                                audio: true
-                            });
-
-                    // 내 화면 출력
-                    if (videoRef.current) {
-
-                        videoRef.current.srcObject =
-                            stream;
-
-                    }
-
-                    // Peer 생성
-                    peerRef.current =
-                        new RTCPeerConnection();
-
-                    socketRef.current?.on(
-                        "answer",
-                        async (answer) => {
-
-                            await peerRef.current?.setRemoteDescription(
-                                answer
-                            );
-
-                        }
-                    );
-
-                    socketRef.current?.on(
-                        "ice-candidate",
-                        async (candidate) => {
-
-                            await peerRef.current?.addIceCandidate(
-                                candidate
-                            );
-
-                        }
-                    );
-
-                    // stream 등록
-                    stream
-                        .getTracks()
-                        .forEach(track => {
-
-                            peerRef.current?.addTrack(
-                                track,
-                                stream
-                            );
-
-                        });
-
-                    // offer 생성
-                    const offer =
-                        await peerRef.current?.createOffer();
-
-                    // 내 브라우저 저장
-                    await peerRef.current?.setLocalDescription(
-                        offer
-                    );
-
-                    console.log(offer);
-
-                    // offer 전송
-                    socketRef.current?.emit(
-                        "offer",
-                        {
-                            roomId,
-                            offer
-                        }
-                    );
-
-
-
-                    peerRef.current.onicecandidate =
-                        (event) => {
-
-                            if (event.candidate) {
-
-                                socketRef.current?.emit(
-                                    "ice-candidate",
-                                    {
-                                        roomId,
-                                        candidate: event.candidate
-                                    }
-                                );
-
-                            }
-
-                        };
-
-
-
-                } catch (err) {
-
-                    console.log(err);
-
-                }
-
-            };
-
-        startMedia();
-
-    }, []);
-
-    // =========================
     // 채팅 전송
     // =========================
     const sendMessage = () => {
 
         if (!input.trim()) return;
 
-        // 연결 안 되어 있으면 종료
         if (
             !socketRef.current?.connected
         ) {
