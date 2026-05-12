@@ -57,22 +57,6 @@ export default function Viewer() {
                 ]
             })
 
-        peerRef.current.onicecandidate =
-            (event) => {
-
-                if (event.candidate) {
-
-                    socketRef.current?.emit(
-                        "ice-candidate",
-                        {
-                            roomId,
-                            candidate: event.candidate
-                        }
-                    );
-
-                }
-
-            };
 
         // 상대 영상 받기
         peerRef.current.ontrack =
@@ -128,9 +112,15 @@ export default function Viewer() {
             "ice-candidate",
             async (candidate) => {
 
-                await peerRef.current?.addIceCandidate(
-                    candidate
-                );
+                if (
+                    peerRef.current?.remoteDescription
+                ) {
+
+                    await peerRef.current.addIceCandidate(
+                        candidate
+                    );
+
+                }
 
             }
         );
@@ -164,7 +154,7 @@ export default function Viewer() {
                 ref={remoteVideoRef}
                 autoPlay
                 playsInline
-                controls
+                muted
                 style={{
                     width: "500px"
                 }}
