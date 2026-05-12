@@ -254,6 +254,7 @@
 
 "use client";
 
+import { API_BASE_URL, LIVE_SERVER_URL } from "@/shared/constants/clientEnv";
 import { api } from "@/shared/lib/axios";
 import { useAuthStore } from "@/store/authStore";
 import { useEffect, useRef, useState } from "react";
@@ -318,8 +319,10 @@ export default function Broadcast() {
         socketRef.current?.disconnect();
 
         const socket = io(
-            process.env.NEXT_PUBLIC_SOCKET_URL!,
+            LIVE_SERVER_URL,
             {
+                path: "/live/socket.io",
+
                 auth: {
                     token
                 },
@@ -458,7 +461,7 @@ export default function Broadcast() {
                 // 기존 채팅 조회
                 const res =
                     await api.get(
-                        `http://192.168.219.137:8081/chat/${roomId}`
+                        `${LIVE_SERVER_URL}/live/chat/${roomId}`
                     );
 
                 setMessages(res.data);
