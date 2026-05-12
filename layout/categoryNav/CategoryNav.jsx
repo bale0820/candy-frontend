@@ -24,7 +24,7 @@ export default function CategoryNav() {
             <li><Link href="/productList/deal">특가/혜택</Link></li>
             <li><Link href="/recipe">레시피</Link></li>
             <li><Link href="/socketLive">실시간 라이브</Link></li>
-          
+            <li><Link href="/viewer">뷰어</Link></li>
           </ul>
         </li>
 

@@ -546,6 +546,28 @@ export default function Broadcast() {
                     peerRef.current =
                         new RTCPeerConnection();
 
+                    socketRef.current?.on(
+                        "answer",
+                        async (answer) => {
+
+                            await peerRef.current?.setRemoteDescription(
+                                answer
+                            );
+
+                        }
+                    );
+
+                    socketRef.current?.on(
+                        "ice-candidate",
+                        async (candidate) => {
+
+                            await peerRef.current?.addIceCandidate(
+                                candidate
+                            );
+
+                        }
+                    );
+
                     // stream 등록
                     stream
                         .getTracks()
@@ -568,6 +590,36 @@ export default function Broadcast() {
                     );
 
                     console.log(offer);
+
+                    // offer 전송
+                    socketRef.current?.emit(
+                        "offer",
+                        {
+                            roomId,
+                            offer
+                        }
+                    );
+
+
+
+                    peerRef.current.onicecandidate =
+                        (event) => {
+
+                            if (event.candidate) {
+
+                                socketRef.current?.emit(
+                                    "ice-candidate",
+                                    {
+                                        roomId,
+                                        candidate: event.candidate
+                                    }
+                                );
+
+                            }
+
+                        };
+
+
 
                 } catch (err) {
 
