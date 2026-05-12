@@ -32,7 +32,7 @@ export function useAdminProducts() {
     if (!productList || !userId) return [];
     return productList.filter((p) => p?.user?.id === userId);
   }, [productList, userId]);
-
+  console.log(myProducts);
   // ✅ 2차 필터 + 정렬
   const filteredProducts = useMemo(() => {
     const sorted = [...myProducts];

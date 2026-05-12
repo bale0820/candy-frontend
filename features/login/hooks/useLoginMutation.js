@@ -47,7 +47,7 @@
         try {
           const res = await api.get(`/orders/my/${payload?.id}`);
           const data = res.data;
-          console.log("data". data);
+          console.log("data", data);
           setOrders(data);
         } catch (err) {
           console.error("장바구니 불러오기 실패", err);

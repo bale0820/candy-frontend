@@ -25,9 +25,7 @@ export function useProductForm({
   const [subCategoryList, setSubCategoryList] = useState([]);
   const [selectedMain, setSelectedMain] = useState("");
   const [selectedSub, setSelectedSub] = useState("");
-  console.log("formData", formData);
-  console.log("categoryList", categoryList);
-  console.log("imageListFile", imageListFile);
+  console.log("formData", formData)
   useEffect(() => {
     if (!categoryList) return;
     if (!initialFormData?.categorySub) return;
