@@ -21,8 +21,11 @@ function getAccessToken() {
   // }
   return useAuthStore.getState().accessToken;
 }
-
+let isInterceptorSet = false;
 export function setupApiInterceptors() {
+  if (isInterceptorSet) return;
+
+  isInterceptorSet = true;
 
   const setAccessToken = useAuthStore.getState().setAccessToken;
   const logout = useAuthStore.getState().logout;
@@ -64,14 +67,13 @@ export function setupApiInterceptors() {
     (res) => res,
     async (error) => {
       const originalRequest = error.config;
-
+      console.log(error);
       if (
         originalRequest.url === "/auth/login" ||
         originalRequest.url === "/auth/refresh"
       ) {
         return Promise.reject(error);
       }
-
       if (error.response?.status === 401 && !originalRequest._retry) {
         originalRequest._retry = true;
 
@@ -113,10 +115,10 @@ export function setupApiInterceptors() {
           onRefreshed(null);
           // isRefreshing = false;
           try {
-            await api.post("/auth/logout", {}, { withCredentials: true });
+            // await api.post("/auth/logout", {}, { withCredentials: true });
             // localStorage.removeItem("");
-            logout(); // Zustand 상태 변경
-            window.location.href = "/";
+            // logout(); // Zustand 상태 변경
+            // window.location.href = "/";
           } catch (err) {
             console.log("로그아웃 실패:", err);
           }
