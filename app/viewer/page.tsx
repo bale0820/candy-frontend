@@ -5,6 +5,7 @@ import { io, Socket } from "socket.io-client";
 import {
     LIVE_SERVER_URL
 } from "@/shared/constants/clientEnv";
+import { useAuthStore } from "@/store/authStore";
 
 export default function Viewer() {
 
@@ -17,6 +18,11 @@ export default function Viewer() {
     const remoteVideoRef =
         useRef<HTMLVideoElement | null>(null);
 
+    const token =
+        useAuthStore(
+            state => state.accessToken
+        );
+
     const roomId = "live-1";
 
     useEffect(() => {
@@ -25,7 +31,11 @@ export default function Viewer() {
         socketRef.current = io(
             LIVE_SERVER_URL,
             {
-                path: "/live/socket.io"
+                path: "/live/socket.io",
+
+                auth: {
+                    token
+                }
             }
         );
 
