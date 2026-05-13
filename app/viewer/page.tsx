@@ -68,22 +68,41 @@ export default function Viewer() {
         // 상대 영상 받기
         // =========================
         peerRef.current.ontrack =
-            (event) => {
+            async (event) => {
 
                 console.log(
-                    "ontrack 발생"
+                    event.track.kind
                 );
 
-                console.log("event",event);
-                console.log(
-                    "event.streams", event.streams
-                );
                 if (
-                    remoteVideoRef.current
-                ) {
+                    event.track.kind !== "video"
+                ) return;
 
-                    remoteVideoRef.current.srcObject =
-                        event.streams[0];
+                if (!remoteVideoRef.current)
+                    return;
+
+                remoteVideoRef.current.srcObject =
+                    event.streams[0];
+
+                console.log(
+                    remoteVideoRef.current.readyState
+                );
+
+                try {
+
+                    await remoteVideoRef.current.play();
+
+                    console.log(
+                        "play 성공"
+                    );
+
+                } catch (err) {
+
+                    console.log(
+                        "play 실패"
+                    );
+
+                    console.log(err);
 
                 }
 
@@ -330,6 +349,7 @@ export default function Viewer() {
                 ref={remoteVideoRef}
                 autoPlay
                 playsInline
+                muted
                 controls
                 style={{
                     width: "500px",
