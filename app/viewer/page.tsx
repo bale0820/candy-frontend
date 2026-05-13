@@ -171,11 +171,22 @@ export default function Viewer() {
         peerRef.current.onicecandidateerror =
             (err) => {
 
+                console.log("ICE ERROR");
+
                 console.log(
-                    "ICE ERROR"
+                    "url:",
+                    err.url
                 );
 
-                console.log(err);
+                console.log(
+                    "errorCode:",
+                    err.errorCode
+                );
+
+                console.log(
+                    "errorText:",
+                    err.errorText
+                );
 
             };
 
