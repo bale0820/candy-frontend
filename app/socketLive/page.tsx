@@ -132,7 +132,9 @@ export default function Broadcast() {
                         );
 
                         await peerRef.current?.setRemoteDescription(
-                            answer
+                            new RTCSessionDescription(
+                                answer
+                            )
                         );
 
                     }
@@ -147,15 +149,15 @@ export default function Broadcast() {
                             "ICE 수신"
                         );
 
-                        if (
-                            peerRef.current?.remoteDescription
-                        ) {
+                       
 
                             await peerRef.current.addIceCandidate(
-                                candidate
+                                new RTCIceCandidate(
+                                    candidate
+                                )
                             );
 
-                        }
+                        
 
                     }
                 );
@@ -183,6 +185,18 @@ export default function Broadcast() {
                             );
 
                         }
+
+                    };
+
+
+                peerRef.current.onicecandidateerror =
+                    (err) => {
+
+                        console.log(
+                            "ICE ERROR"
+                        );
+
+                        console.log(err);
 
                     };
 
