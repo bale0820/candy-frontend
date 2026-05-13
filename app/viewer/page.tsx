@@ -168,6 +168,17 @@ export default function Viewer() {
 
             };
 
+        peerRef.current.onicecandidateerror =
+            (err) => {
+
+                console.log(
+                    "ICE ERROR"
+                );
+
+                console.log(err);
+
+            };
+
         // =========================
         // socket 연결
         // =========================
