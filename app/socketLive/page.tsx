@@ -96,9 +96,16 @@ export default function Broadcast() {
                     new RTCPeerConnection({
                         iceServers: [
                             {
-                                urls: [
+                                urls:
                                     "stun:stun.l.google.com:19302"
-                                ]
+                            },
+                            {
+                                urls:
+                                    "turn:openrelay.metered.ca:80",
+                                username:
+                                    "openrelayproject",
+                                credential:
+                                    "openrelayproject"
                             }
                         ]
                     });
@@ -158,7 +165,10 @@ export default function Broadcast() {
                     (event) => {
 
                         if (event.candidate) {
-
+                            console.log(
+                                "gathering:",
+                                peerRef.current?.iceGatheringState
+                            );
                             console.log(
                                 "ICE 생성"
                             );

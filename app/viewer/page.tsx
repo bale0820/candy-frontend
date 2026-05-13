@@ -57,9 +57,16 @@ export default function Viewer() {
             new RTCPeerConnection({
                 iceServers: [
                     {
-                        urls: [
+                        urls:
                             "stun:stun.l.google.com:19302"
-                        ]
+                    },
+                    {
+                        urls:
+                            "turn:openrelay.metered.ca:80",
+                        username:
+                            "openrelayproject",
+                        credential:
+                            "openrelayproject"
                     }
                 ]
             });
@@ -141,6 +148,10 @@ export default function Viewer() {
             (event) => {
 
                 if (!event.candidate) return;
+                console.log(
+                    "gathering:",
+                    peerRef.current?.iceGatheringState
+                );
 
                 console.log(
                     "viewer ICE 생성"
