@@ -74,8 +74,10 @@ export default function Viewer() {
                     "ontrack 발생"
                 );
 
-                console.log(event);
-
+                console.log("event",event);
+                console.log(
+                    "event.streams", event.streams
+                );
                 if (
                     remoteVideoRef.current
                 ) {
@@ -314,7 +316,7 @@ export default function Viewer() {
 
         };
 
-    }, [token,hasHydrated]);
+    }, [token, hasHydrated]);
 
     return (
 
