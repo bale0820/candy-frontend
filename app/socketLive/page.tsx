@@ -149,15 +149,15 @@ export default function Broadcast() {
                             "ICE 수신"
                         );
 
-                       
 
-                            await peerRef.current.addIceCandidate(
-                                new RTCIceCandidate(
-                                    candidate
-                                )
-                            );
 
-                        
+                        await peerRef.current.addIceCandidate(
+                            new RTCIceCandidate(
+                                candidate
+                            )
+                        );
+
+
 
                     }
                 );
@@ -192,11 +192,22 @@ export default function Broadcast() {
                 peerRef.current.onicecandidateerror =
                     (err) => {
 
+                        console.log("ICE ERROR");
+
                         console.log(
-                            "ICE ERROR"
+                            "url:",
+                            err.url
                         );
 
-                        console.log(err);
+                        console.log(
+                            "errorCode:",
+                            err.errorCode
+                        );
+
+                        console.log(
+                            "errorText:",
+                            err.errorText
+                        );
 
                     };
 
