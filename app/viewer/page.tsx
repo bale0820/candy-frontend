@@ -38,11 +38,16 @@ export default function Viewer() {
         useAuthStore(
             state => state.accessToken
         );
+    const hasHydrated =
+        useAuthStore(
+            state => state._hasHydrated
+        );
 
     const roomId = "live-1";
 
     useEffect(() => {
-
+        console.log("viewer useEffect 실행");
+        if (!hasHydrated) return;
         if (!token) return;
 
         // =========================
@@ -309,7 +314,7 @@ export default function Viewer() {
 
         };
 
-    }, [token]);
+    }, [token,hasHydrated]);
 
     return (
 
