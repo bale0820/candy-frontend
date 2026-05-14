@@ -62,19 +62,11 @@ export default function Viewer() {
                     },
                     {
                         urls:
-                            "turn:openrelay.metered.ca:80",
+                            "turn:candy-api.duckdns.org:3478",
                         username:
-                            "openrelayproject",
+                            "test",
                         credential:
-                            "openrelayproject"
-                    },
-                    {
-                        urls:
-                            "turn:openrelay.metered.ca:443?transport=tcp",
-                        username:
-                            "openrelayproject",
-                        credential:
-                            "openrelayproject"
+                            "1234"
                     }
                 ]
             });
