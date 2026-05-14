@@ -7,7 +7,7 @@ import { useParams, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { io, Socket } from "socket.io-client";
-
+import "./viewer.scss";
 type ChatMessage = {
     name: string;
     message: string;
@@ -82,18 +82,39 @@ export default function Broadcast() {
         };
 
     const endBroadcast =
-    async () => {
+        async () => {
 
-        await api.delete(
-            `${LIVE_SERVER_URL}/live/${roomId}`
-        );
+            try {
 
-        socketRef.current?.disconnect();
+                // viewer들에게 방송 종료 알림
+                socketRef.current?.emit(
+                    "broadcast_end",
+                    roomId
+                );
 
-        peerRef.current?.close();
+                // DB 방송 삭제
+                await api.delete(
+                    `${LIVE_SERVER_URL}/live/${roomId}`
+                );
 
-        router.push("/");
-    };
+            } catch (err) {
+
+                console.log(err);
+
+            } finally {
+
+                // socket 종료
+                socketRef.current?.disconnect();
+
+                // WebRTC 종료
+                peerRef.current?.close();
+
+                // 홈 이동
+                router.push("/");
+
+            }
+
+        };
     // =========================
     // offer 생성 함수
     // =========================
@@ -454,62 +475,185 @@ export default function Broadcast() {
 
     return (
 
-        <div>
+        // <div>
 
-            <h1>
-                broadcaster
-            </h1>
+        //     <h1>
+        //         broadcaster
+        //     </h1>
 
-            <video
-                ref={videoRef}
-                autoPlay
-                playsInline
-                muted
-                style={{
-                    width: "500px",
-                    height: "300px",
-                    backgroundColor: "black"
-                }}
-            />
+        //     <video
+        //         ref={videoRef}
+        //         autoPlay
+        //         playsInline
+        //         muted
+        //         style={{
+        //             width: "500px",
+        //             height: "300px",
+        //             backgroundColor: "black"
+        //         }}
+        //     />
 
-            <button
-                onClick={createOffer}
-            >
-                offer 재전송
-            </button>
+        //     <button
+        //         onClick={createOffer}
+        //     >
+        //         offer 재전송
+        //     </button>
 
-            <button
-                onClick={endBroadcast}
-            >
-                방송 종료
-            </button>
-            <div
-                style={{
-                    width: "500px",
-                    marginTop: "20px"
-                }}
-            >
+        //     <button
+        //         onClick={endBroadcast}
+        //     >
+        //         방송 종료
+        //     </button>
+        //     <div
+        //         style={{
+        //             width: "500px",
+        //             marginTop: "20px"
+        //         }}
+        //     >
 
-                <div
-                    style={{
-                        height: "200px",
-                        overflowY: "scroll",
-                        border: "1px solid gray",
-                        padding: "10px"
-                    }}
-                >
+        //         <div
+        //             style={{
+        //                 height: "200px",
+        //                 overflowY: "scroll",
+        //                 border: "1px solid gray",
+        //                 padding: "10px"
+        //             }}
+        //         >
+
+        //             {
+        //                 chats.map(
+        //                     (chat, index) => (
+
+        //                         <div key={index}>
+
+        //                             <strong>
+        //                                 {chat.name}
+        //                             </strong>
+
+        //                             : {chat.message}
+
+        //                         </div>
+
+        //                     )
+        //                 )
+        //             }
+
+        //         </div>
+
+        //         <div
+        //             style={{
+        //                 display: "flex",
+        //                 marginTop: "10px",
+        //                 gap: "10px"
+        //             }}
+        //         >
+
+        //             <input
+        //                 value={message}
+        //                 onChange={(e) =>
+        //                     setMessage(
+        //                         e.target.value
+        //                     )
+        //                 }
+        //                 placeholder="채팅 입력"
+        //                 style={{
+        //                     flex: 1
+        //                 }}
+        //             />
+
+        //             <button
+        //                 onClick={sendChat}
+        //             >
+        //                 전송
+        //             </button>
+
+        //         </div>
+
+        //     </div>
+
+        // </div>
+
+          <div className="viewer-page">
+
+        <div className="viewer-layout">
+
+            {/* 왼쪽 방송 영역 */}
+            <div className="video-section">
+
+                <div className="video-container">
+
+                    <div className="live-badge">
+                        LIVE
+                    </div>
+
+                    <video
+                        ref={videoRef}
+                        autoPlay
+                        playsInline
+                        muted
+                    />
+
+                </div>
+
+                <div className="live-info">
+
+                    <div className="stream-title">
+                        {title || "라이브 방송"}
+                    </div>
+
+                    <div
+                        style={{
+                            display: "flex",
+                            gap: "10px"
+                        }}
+                    >
+
+                        <button
+                            className="chat-button"
+                            onClick={createOffer}
+                        >
+                            재연결
+                        </button>
+
+                        <button
+                            className="chat-button"
+                            onClick={endBroadcast}
+                            style={{
+                                background: "#ff2a2a"
+                            }}
+                        >
+                            방송 종료
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {/* 오른쪽 채팅 */}
+            <div className="chat-section">
+
+                <div className="chat-header">
+                    실시간 채팅
+                </div>
+
+                <div className="chat-list">
 
                     {
                         chats.map(
                             (chat, index) => (
 
-                                <div key={index}>
+                                <div
+                                    key={index}
+                                    className="chat-item"
+                                >
 
-                                    <strong>
+                                    <span className="chat-name">
                                         {chat.name}
-                                    </strong>
+                                    </span>
 
-                                    : {chat.message}
+                                    {chat.message}
 
                                 </div>
 
@@ -519,28 +663,21 @@ export default function Broadcast() {
 
                 </div>
 
-                <div
-                    style={{
-                        display: "flex",
-                        marginTop: "10px",
-                        gap: "10px"
-                    }}
-                >
+                <div className="chat-input-wrap">
 
                     <input
+                        className="chat-input"
                         value={message}
                         onChange={(e) =>
                             setMessage(
                                 e.target.value
                             )
                         }
-                        placeholder="채팅 입력"
-                        style={{
-                            flex: 1
-                        }}
+                        placeholder="메시지 보내기"
                     />
 
                     <button
+                        className="chat-button"
                         onClick={sendChat}
                     >
                         전송
@@ -551,6 +688,9 @@ export default function Broadcast() {
             </div>
 
         </div>
+
+    </div>
+
 
     );
 

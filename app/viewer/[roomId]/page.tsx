@@ -6,15 +6,15 @@ import { io, Socket } from "socket.io-client";
 import {
     LIVE_SERVER_URL
 } from "@/shared/constants/clientEnv";
-
+import "./viewer.scss";
 import {
     useAuthStore
 } from "@/store/authStore";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 
 export default function Viewer() {
-
-    const {roomId } = useParams();
+    const router = useRouter();
+    const { roomId } = useParams();
     // =========================
     // socket
     // =========================
@@ -53,7 +53,7 @@ export default function Viewer() {
     const [message, setMessage] =
         useState("");
 
-
+    const [broadEnd, setBroadEnd] = useState<boolean>(false);
     const sendChat =
         () => {
 
@@ -300,6 +300,27 @@ export default function Viewer() {
             }
         );
 
+        socketRef.current.on(
+            "broadcast_end",
+            () => {
+
+                console.log(
+                    "방송 종료"
+                );
+                 setBroadEnd(true);
+                alert(
+                    "방송이 종료되었습니다."
+                );
+
+                socketRef.current?.disconnect();
+
+                peerRef.current?.close();
+
+               
+
+            }
+        );
+
 
         // =========================
         // 연결 실패 확인
@@ -316,6 +337,7 @@ export default function Viewer() {
 
             }
         );
+
 
         // =========================
         // offer 수신
@@ -449,95 +471,195 @@ export default function Viewer() {
 
     return (
 
-        <div>
+        // <div>
 
-            <h1>
-                viewer
-            </h1>
+        //     <h1>
+        //         viewer
+        //     </h1>
+        //     <div className="video-container">
+        //     <video
+        //         ref={remoteVideoRef}
+        //         autoPlay
+        //         playsInline
+        //         muted
+        //         controls
+        //         style={{
+        //             width: "500px",
+        //             height: "300px",
+        //             backgroundColor: "black"
+        //         }}
+        //     />
+        //     {broadEnd === true && <div className="end">라이브 종료</div>}
+        //     </div>
+        //     <div
+        //         style={{
+        //             width: "500px",
+        //             marginTop: "20px"
+        //         }}
+        //     >
 
-            <video
-                ref={remoteVideoRef}
-                autoPlay
-                playsInline
-                muted
-                controls
-                style={{
-                    width: "500px",
-                    height: "300px",
-                    backgroundColor: "black"
-                }}
-            />
-            <div
-                style={{
-                    width: "500px",
-                    marginTop: "20px"
-                }}
-            >
+        //         <div
+        //             style={{
+        //                 height: "200px",
+        //                 overflowY: "scroll",
+        //                 border: "1px solid gray",
+        //                 padding: "10px"
+        //             }}
+        //         >
 
-                <div
-                    style={{
-                        height: "200px",
-                        overflowY: "scroll",
-                        border: "1px solid gray",
-                        padding: "10px"
-                    }}
-                >
+        //             {
+        //                 chats.map(
+        //                     (chat, index) => (
 
-                    {
-                        chats.map(
-                            (chat, index) => (
+        //                         <div key={index}>
 
-                                <div key={index}>
+        //                             <strong>
+        //                                 {chat.name}
+        //                             </strong>
 
-                                    <strong>
-                                        {chat.name}
-                                    </strong>
+        //                             : {chat.message}
 
-                                    : {chat.message}
+        //                         </div>
 
-                                </div>
+        //                     )
+        //                 )
+        //             }
 
-                            )
-                        )
-                    }
+        //         </div>
 
-                </div>
+        //         <div
+        //             style={{
+        //                 display: "flex",
+        //                 marginTop: "10px",
+        //                 gap: "10px"
+        //             }}
+        //         >
 
-                <div
-                    style={{
-                        display: "flex",
-                        marginTop: "10px",
-                        gap: "10px"
-                    }}
-                >
+        //             <input
+        //                 value={message}
+        //                 onChange={(e) =>
+        //                     setMessage(
+        //                         e.target.value
+        //                     )
+        //                 }
+        //                 placeholder="채팅 입력"
+        //                 style={{
+        //                     flex: 1
+        //                 }}
+        //             />
 
-                    <input
-                        value={message}
-                        onChange={(e) =>
-                            setMessage(
-                                e.target.value
-                            )
-                        }
-                        placeholder="채팅 입력"
-                        style={{
-                            flex: 1
-                        }}
-                    />
+        //             <button
+        //                 onClick={sendChat}
+        //             >
+        //                 전송
+        //             </button>
 
-                    <button
-                        onClick={sendChat}
-                    >
-                        전송
-                    </button>
+        //         </div>
 
-                </div>
+        //     </div>
+
+
+
+        // </div>
+        
+        <div className="viewer-page">
+
+    <div className="viewer-layout">
+
+        <div className="video-section">
+
+            <div className="video-container">
+
+                <video
+                    ref={remoteVideoRef}
+                    autoPlay
+                    playsInline
+                    muted
+                    controls
+                />
+
+                {
+                    broadEnd &&
+                    <div className="end">
+                        라이브 종료
+                    </div>
+                }
 
             </div>
 
+            <div className="live-info">
 
+                <div className="stream-title">
+                    실시간 라이브 방송
+                </div>
+
+                {
+                    !broadEnd &&
+                    <div className="live-badge">
+                        LIVE
+                    </div>
+                }
+
+            </div>
 
         </div>
 
+        <div className="chat-section">
+
+            <div className="chat-header">
+                실시간 채팅
+            </div>
+
+            <div className="chat-list">
+
+                {
+                    chats.map((chat, index) => (
+
+                        <div
+                            key={index}
+                            className="chat-item"
+                        >
+
+                            <span className="chat-name">
+                                {chat.name}
+                            </span>
+
+                            {chat.message}
+
+                        </div>
+
+                    ))
+                }
+
+            </div>
+
+            <div className="chat-input-wrap">
+
+                <input
+                    className="chat-input"
+                    value={message}
+                    onChange={(e) =>
+                        setMessage(
+                            e.target.value
+                        )
+                    }
+                    placeholder="메시지 보내기"
+                />
+
+                <button
+                    className="chat-button"
+                    onClick={sendChat}
+                >
+                    전송
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
     );
 
 }
