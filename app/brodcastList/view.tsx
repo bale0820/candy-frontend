@@ -48,6 +48,27 @@ export default function Viewer() {
     const [chats, setChats] =
         useState<any[]>([]);
 
+    const [message, setMessage] =
+        useState("");
+
+
+    const sendChat =
+        () => {
+
+            if (!message.trim()) return;
+
+            socketRef.current?.emit(
+                "chat",
+                {
+                    roomId,
+                    message
+                }
+            );
+
+            setMessage("");
+
+        };
+
     const roomId = "live-1";
 
     useEffect(() => {
@@ -257,6 +278,27 @@ export default function Viewer() {
             }
         );
 
+
+
+        socketRef.current?.on(
+            "chat",
+            (chatData) => {
+
+                console.log(
+                    "채팅 수신"
+                );
+
+                console.log(chatData);
+
+                setChats(prev => [
+                    ...prev,
+                    chatData
+                ]);
+
+            }
+        );
+
+
         // =========================
         // 연결 실패 확인
         // =========================
@@ -423,22 +465,72 @@ export default function Viewer() {
                     backgroundColor: "black"
                 }}
             />
+            <div
+                style={{
+                    width: "500px",
+                    marginTop: "20px"
+                }}
+            >
 
-            {
-                chats.map((chat, index) => (
+                <div
+                    style={{
+                        height: "200px",
+                        overflowY: "scroll",
+                        border: "1px solid gray",
+                        padding: "10px"
+                    }}
+                >
 
-                    <div key={index}>
+                    {
+                        chats.map(
+                            (chat, index) => (
 
-                        <strong>
-                            {chat.name}
-                        </strong>
+                                <div key={index}>
 
-                        : {chat.message}
+                                    <strong>
+                                        {chat.name}
+                                    </strong>
 
-                    </div>
+                                    : {chat.message}
 
-                ))
-            }
+                                </div>
+
+                            )
+                        )
+                    }
+
+                </div>
+
+                <div
+                    style={{
+                        display: "flex",
+                        marginTop: "10px",
+                        gap: "10px"
+                    }}
+                >
+
+                    <input
+                        value={message}
+                        onChange={(e) =>
+                            setMessage(
+                                e.target.value
+                            )
+                        }
+                        placeholder="채팅 입력"
+                        style={{
+                            flex: 1
+                        }}
+                    />
+
+                    <button
+                        onClick={sendChat}
+                    >
+                        전송
+                    </button>
+
+                </div>
+
+            </div>
 
 
 
