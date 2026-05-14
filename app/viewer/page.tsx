@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { io, Socket } from "socket.io-client";
 
 import {
@@ -43,12 +43,45 @@ export default function Viewer() {
             state => state._hasHydrated
         );
 
+
+
+    const [chats, setChats] =
+        useState<any[]>([]);
+
     const roomId = "live-1";
 
     useEffect(() => {
         console.log("viewer useEffect 실행");
         if (!hasHydrated) return;
         if (!token) return;
+
+        const fetchChats =
+            async () => {
+
+                try {
+
+                    const response =
+                        await fetch(
+                            `${LIVE_SERVER_URL}/live/chat/${roomId}`
+                        );
+
+                    const data =
+                        await response.json();
+
+                    console.log(data);
+
+                    setChats(data);
+
+                } catch (err) {
+
+                    console.log(err);
+
+                }
+
+            };
+
+        fetchChats();
+
 
         // =========================
         // peer 생성 먼저
@@ -390,6 +423,24 @@ export default function Viewer() {
                     backgroundColor: "black"
                 }}
             />
+
+            {
+                chats.map((chat, index) => (
+
+                    <div key={index}>
+
+                        <strong>
+                            {chat.name}
+                        </strong>
+
+                        : {chat.message}
+
+                    </div>
+
+                ))
+            }
+
+
 
         </div>
 
