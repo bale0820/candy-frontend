@@ -42,6 +42,9 @@ export default function MyPageClientLayout({ children }) {
           <Link href="/mypage/mycoupon" onClick={() => setOpen(false)}>
             쿠폰함
           </Link>
+          <Link href="/mypage/productList" onClick={() => setOpen(false)}>
+            상품 방송
+          </Link>
         </nav>
       </aside>
 

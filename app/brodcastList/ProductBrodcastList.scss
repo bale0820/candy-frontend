@@ -1,0 +1,41 @@
+ .product-list-container {
+     width: 100%;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+
+     .product-grid {
+         width: 100%;
+         display: grid;
+         gap: 2rem;
+
+         /* 🔥 데스크탑 기준 */
+         grid-template-columns: repeat(4, minmax(260px, 1fr));
+
+         /* 🔥 grid 아이템(= Link) 중앙 정렬 */
+         justify-items: center;
+     }
+
+     /* 🔥 Link가 grid 아이템이므로 block 처리 (중요) */
+     .product-grid>a {
+         width: 100%;
+         display: block;
+     }
+
+     .product-grid>div {
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+     }
+
+     .empty {
+         color: #888;
+         margin-top: 2rem;
+         font-size: 1rem;
+     }
+
+     .b-button {
+         display: block;
+         text-align: center;
+     }
+ }

@@ -3,6 +3,7 @@
 import { LIVE_SERVER_URL } from "@/shared/constants/clientEnv";
 import { api } from "@/shared/lib/axios";
 import { useAuthStore } from "@/store/authStore";
+import { useParams, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { io, Socket } from "socket.io-client";
 
@@ -12,6 +13,22 @@ type ChatMessage = {
 };
 
 export default function Broadcast() {
+    const params = useParams();
+
+    const roomId =
+        params.roomId as string;
+
+    const searchParams =
+        useSearchParams();
+
+    const productId =
+        searchParams.get("productId");
+
+    const thumbnail =
+        searchParams.get("thumbnail");
+
+    const title =
+        searchParams.get("title");
 
     const [messages, setMessages] =
         useState<ChatMessage[]>([]);
@@ -38,7 +55,31 @@ export default function Broadcast() {
     const videoRef =
         useRef<HTMLVideoElement | null>(null);
 
-    const roomId = "live-1";
+    const [chats, setChats] =
+        useState<any[]>([]);
+
+    const [message, setMessage] =
+        useState("");
+
+    const startedRef =
+        useRef(false);
+    const sendChat =
+        () => {
+
+            if (!message.trim()) return;
+
+            socketRef.current?.emit(
+                "chat",
+                {
+                    roomId,
+                    message
+                }
+            );
+
+            setMessage("");
+
+        };
+
 
     // =========================
     // offer 생성 함수
@@ -246,11 +287,30 @@ export default function Broadcast() {
                     // 먼저 media 생성
                     await startMedia();
 
+
                     // 그 다음 room 입장
                     socketRef.current?.emit(
                         "join_room",
                         roomId
                     );
+
+                }
+            );
+
+            socketRef.current?.on(
+                "chat",
+                (chatData) => {
+
+                    console.log(
+                        "채팅 수신"
+                    );
+
+                    console.log(chatData);
+
+                    setChats(prev => [
+                        ...prev,
+                        chatData
+                    ]);
 
                 }
             );
@@ -292,6 +352,58 @@ export default function Broadcast() {
         if (!hasHydrated) return;
 
         if (!token) return;
+
+        const fetchChats =
+            async () => {
+
+                try {
+
+                    const response =
+                        await fetch(
+                            `${LIVE_SERVER_URL}/live/chat/${roomId}`
+                        );
+
+                    const data =
+                        await response.json();
+
+                    console.log(data);
+
+                    setChats(data);
+
+                } catch (err) {
+
+                    console.log(err);
+
+                }
+
+            };
+
+        const handleStartLive =
+            async () => {
+
+                if (startedRef.current)
+                    return;
+                startedRef.current=true;
+                await api.post(
+                    `${LIVE_SERVER_URL}/live/start`,
+                    {
+                        roomId,
+
+                        productId:
+                            Number(productId),
+
+                        title:
+                            title || "라이브 방송",
+
+                        thumbnail
+                    }
+                );
+            }
+
+
+        handleStartLive();
+
+        fetchChats();
 
         connectSocket(token);
 
@@ -352,41 +464,72 @@ export default function Broadcast() {
             >
                 offer 재전송
             </button>
+            <div
+                style={{
+                    width: "500px",
+                    marginTop: "20px"
+                }}
+            >
 
-            <div>
+                <div
+                    style={{
+                        height: "200px",
+                        overflowY: "scroll",
+                        border: "1px solid gray",
+                        padding: "10px"
+                    }}
+                >
 
-                {messages.map(
-                    (msg, i) => (
+                    {
+                        chats.map(
+                            (chat, index) => (
 
-                        <div key={i}>
+                                <div key={index}>
 
-                            <strong>
-                                {msg.name}
-                            </strong>
+                                    <strong>
+                                        {chat.name}
+                                    </strong>
 
-                            : {msg.message}
+                                    : {chat.message}
 
-                        </div>
+                                </div>
 
-                    )
-                )}
+                            )
+                        )
+                    }
+
+                </div>
+
+                <div
+                    style={{
+                        display: "flex",
+                        marginTop: "10px",
+                        gap: "10px"
+                    }}
+                >
+
+                    <input
+                        value={message}
+                        onChange={(e) =>
+                            setMessage(
+                                e.target.value
+                            )
+                        }
+                        placeholder="채팅 입력"
+                        style={{
+                            flex: 1
+                        }}
+                    />
+
+                    <button
+                        onClick={sendChat}
+                    >
+                        전송
+                    </button>
+
+                </div>
 
             </div>
-
-            <input
-                value={input}
-                onChange={(e) =>
-                    setInput(
-                        e.target.value
-                    )
-                }
-            />
-
-            <button
-                onClick={sendMessage}
-            >
-                send
-            </button>
 
         </div>
 
