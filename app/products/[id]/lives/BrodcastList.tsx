@@ -44,6 +44,7 @@ export default function BrodcastList({
 
     staleTime: 1000 * 60,
   });
+  console.log("liveList", liveList);
   return (
     <div className="broadcast-container">
 

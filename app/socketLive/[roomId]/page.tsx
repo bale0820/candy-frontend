@@ -4,6 +4,7 @@ import { LIVE_SERVER_URL } from "@/shared/constants/clientEnv";
 import { api } from "@/shared/lib/axios";
 import { useAuthStore } from "@/store/authStore";
 import { useParams, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { io, Socket } from "socket.io-client";
 
@@ -14,7 +15,7 @@ type ChatMessage = {
 
 export default function Broadcast() {
     const params = useParams();
-
+    const router = useRouter();
     const roomId =
         params.roomId as string;
 
@@ -80,7 +81,19 @@ export default function Broadcast() {
 
         };
 
+    const endBroadcast =
+    async () => {
 
+        await api.delete(
+            `${LIVE_SERVER_URL}/live/${roomId}`
+        );
+
+        socketRef.current?.disconnect();
+
+        peerRef.current?.close();
+
+        router.push("/");
+    };
     // =========================
     // offer 생성 함수
     // =========================
@@ -383,7 +396,7 @@ export default function Broadcast() {
 
                 if (startedRef.current)
                     return;
-                startedRef.current=true;
+                startedRef.current = true;
                 await api.post(
                     `${LIVE_SERVER_URL}/live/start`,
                     {
@@ -463,6 +476,12 @@ export default function Broadcast() {
                 onClick={createOffer}
             >
                 offer 재전송
+            </button>
+
+            <button
+                onClick={endBroadcast}
+            >
+                방송 종료
             </button>
             <div
                 style={{
