@@ -64,6 +64,8 @@ export default function Broadcast() {
 
     const startedRef =
         useRef(false);
+    const endedRef =
+        useRef(false);
     const sendChat =
         () => {
 
@@ -83,6 +85,10 @@ export default function Broadcast() {
 
     const endBroadcast =
         async () => {
+            if (endedRef.current)
+                return;
+
+            endedRef.current = true;
 
             try {
 
@@ -110,7 +116,7 @@ export default function Broadcast() {
                 peerRef.current?.close();
 
                 // 홈 이동
-                router.push("/");
+                // router.push("/");
 
             }
 
@@ -442,7 +448,7 @@ export default function Broadcast() {
         connectSocket(token);
 
         return () => {
-
+            endBroadcast();
             socketRef.current?.disconnect();
 
             peerRef.current?.close();
@@ -573,123 +579,123 @@ export default function Broadcast() {
 
         // </div>
 
-          <div className="viewer-page">
+        <div className="viewer-page">
 
-        <div className="viewer-layout">
+            <div className="viewer-layout">
 
-            {/* 왼쪽 방송 영역 */}
-            <div className="video-section">
+                {/* 왼쪽 방송 영역 */}
+                <div className="video-section">
 
-                <div className="video-container">
+                    <div className="video-container">
 
-                    <div className="live-badge">
-                        LIVE
+                        <div className="live-badge">
+                            LIVE
+                        </div>
+
+                        <video
+                            ref={videoRef}
+                            autoPlay
+                            playsInline
+                            muted
+                        />
+
                     </div>
 
-                    <video
-                        ref={videoRef}
-                        autoPlay
-                        playsInline
-                        muted
-                    />
+                    <div className="live-info">
 
-                </div>
+                        <div className="stream-title">
+                            {title || "라이브 방송"}
+                        </div>
 
-                <div className="live-info">
-
-                    <div className="stream-title">
-                        {title || "라이브 방송"}
-                    </div>
-
-                    <div
-                        style={{
-                            display: "flex",
-                            gap: "10px"
-                        }}
-                    >
-
-                        <button
-                            className="chat-button"
-                            onClick={createOffer}
-                        >
-                            재연결
-                        </button>
-
-                        <button
-                            className="chat-button"
-                            onClick={endBroadcast}
+                        <div
                             style={{
-                                background: "#ff2a2a"
+                                display: "flex",
+                                gap: "10px"
                             }}
                         >
-                            방송 종료
-                        </button>
+
+                            <button
+                                className="chat-button"
+                                onClick={createOffer}
+                            >
+                                재연결
+                            </button>
+
+                            <button
+                                className="chat-button"
+                                onClick={endBroadcast}
+                                style={{
+                                    background: "#ff2a2a"
+                                }}
+                            >
+                                방송 종료
+                            </button>
+
+                        </div>
 
                     </div>
 
                 </div>
 
-            </div>
+                {/* 오른쪽 채팅 */}
+                <div className="chat-section">
 
-            {/* 오른쪽 채팅 */}
-            <div className="chat-section">
+                    <div className="chat-header">
+                        실시간 채팅
+                    </div>
 
-                <div className="chat-header">
-                    실시간 채팅
-                </div>
+                    <div className="chat-list">
 
-                <div className="chat-list">
+                        {
+                            chats.map(
+                                (chat, index) => (
 
-                    {
-                        chats.map(
-                            (chat, index) => (
+                                    <div
+                                        key={index}
+                                        className="chat-item"
+                                    >
 
-                                <div
-                                    key={index}
-                                    className="chat-item"
-                                >
+                                        <span className="chat-name">
+                                            {chat.name}
+                                        </span>
 
-                                    <span className="chat-name">
-                                        {chat.name}
-                                    </span>
+                                        {chat.message}
 
-                                    {chat.message}
+                                    </div>
 
-                                </div>
-
-                            )
-                        )
-                    }
-
-                </div>
-
-                <div className="chat-input-wrap">
-
-                    <input
-                        className="chat-input"
-                        value={message}
-                        onChange={(e) =>
-                            setMessage(
-                                e.target.value
+                                )
                             )
                         }
-                        placeholder="메시지 보내기!"
-                    />
 
-                    <button
-                        className="chat-button"
-                        onClick={sendChat}
-                    >
-                        전송
-                    </button>
+                    </div>
+
+                    <div className="chat-input-wrap">
+
+                        <input
+                            className="chat-input"
+                            value={message}
+                            onChange={(e) =>
+                                setMessage(
+                                    e.target.value
+                                )
+                            }
+                            placeholder="메시지 보내기!"
+                        />
+
+                        <button
+                            className="chat-button"
+                            onClick={sendChat}
+                        >
+                            전송
+                        </button>
+
+                    </div>
 
                 </div>
 
             </div>
 
         </div>
-
-    </div>
 
 
     );
