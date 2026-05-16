@@ -673,7 +673,7 @@ export default function Broadcast() {
                                 e.target.value
                             )
                         }
-                        placeholder="메시지 보내기"
+                        placeholder="메시지 보내기!"
                     />
 
                     <button
