@@ -12,6 +12,7 @@ import { ReviewList } from "@/features/productDetail/components/review/component
 import { QnA } from "@/features/productDetail/components/qna/QnA";
 import { Return } from "@/features/productDetail/components/return/Return";
 import { IMAGE_BASE_URL } from "@/shared/constants/clientEnv";
+import SimilarProducts from "@/features/similarProducts/SimilarProducts";
 
 export default function ProductDetail({ product }) {
   const {
@@ -36,7 +37,7 @@ export default function ProductDetail({ product }) {
     <div className="product-container">
       <div className="product-detail">
         <div className="product-detail-main">
-          
+
           <div className="product-image">
             <div className="product-image-container">
 
@@ -115,6 +116,7 @@ export default function ProductDetail({ product }) {
               </li>
             </ul>
 
+
             <ul className="product-meta"><li>판매자</li><li>{product.seller}</li></ul>
             <ul className="product-meta"><li>원산지</li><li>{product.origin}</li></ul>
             <ul className="product-meta"><li>판매단위</li><li>{product.unit}</li></ul>
@@ -165,6 +167,7 @@ export default function ProductDetail({ product }) {
           </div>
         </div>
       </div>
+          <SimilarProducts productId={id} />
 
       {/* ----------------------- 탭 ----------------------- */}
       <div className="product-tabs">
