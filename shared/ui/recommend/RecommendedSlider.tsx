@@ -3,34 +3,67 @@
 import Link from "next/link";
 import { useRef, useEffect, useMemo } from "react";
 import "./RecommendedSlider.scss";
+import { useAuthStore } from "@/store/authStore";
 
 
 import { useRecentCategoryStore } from "@/store/useRecentCategoryStore";
 import { useProductList } from "@/features/product/hooks/useProductList";
 import ProductCard from "@/shared/productCard/ProductCart";
+import { useAiRecommend } from "@/features/ai/hooks/useAiRecommend";
+import { Interface } from "node:readline";
+
+
+export interface RecommendIds {
+  message?: string;
+  recommended_products: number[];
+  similar_user?: string;
+}
 
 export default function RecommendedSlider({ title = "추천 상품", limit = 20 }) {
   // 🔹 React Query
   const { data: productList = [] } = useProductList();
-
-  // 🔹 Zustand로 변환된 최근 카테고리
-  const recentSubCategory = useRecentCategoryStore(
-    (state) => state.recentSubCategory
-  );
-
+  const userId =
+    useAuthStore(
+      state => state.userId
+    );
+  // // 🔹 Zustand로 변환된 최근 카테고리
+  // const recentSubCategory = useRecentCategoryStore(
+  //   (state) => state.recentSubCategory
+  // );
+ 
+  const { data: recommendIds = {} as RecommendIds } =
+    useAiRecommend(userId);
 
   const sliderRef = useRef(null);
+  // // 🔹 필터된 추천 상품
+  // const filteredList = useMemo(() => {
+  //   if (!recentSubCategory || productList.length === 0) return [];
+
+  //   return productList
+  //     .filter((item) => item.categorySub?.id === recentSubCategory)
+  //     .slice(0, limit);
+  // }, [productList, recentSubCategory, limit]);
 
   // 🔹 필터된 추천 상품
   const filteredList = useMemo(() => {
-    if (!recentSubCategory || productList.length === 0) return [];
+
+    if (
+      !recommendIds?.recommended_products?.length ||
+      productList.length === 0
+    ) {
+      return [];
+    }
 
     return productList
-      .filter((item) => item.categorySub?.id === recentSubCategory)
+      .filter((item) =>
+        recommendIds.recommended_products.includes(item.id)
+      )
       .slice(0, limit);
-  }, [productList, recentSubCategory, limit]);
 
-    // console.log("productList ", productList );
+  }, [productList, recommendIds, limit]);
+
+
+
 
   // 🔹 자연스러운 무한 루프를 위해 리스트 확장
   const extendedList = useMemo(() => {
@@ -45,6 +78,7 @@ export default function RecommendedSlider({ title = "추천 상품", limit = 20 
 
     return arr.slice(0, minCount * 2);
   }, [filteredList]);
+
 
   // // 🔹 자동 스크롤 애니메이션
   // useEffect(() => {
@@ -97,25 +131,29 @@ export default function RecommendedSlider({ title = "추천 상품", limit = 20 
     return () => cancelAnimationFrame(rafId);
   }, [extendedList]);
 
-  if (extendedList.length === 0) return null;
+  // if (extendedList.length === 0) return null;
 
   return (
-    <section className="recommend-section">
-      <h2 className="recommend-title">{title}</h2>
+    recommendIds?.recommended_products?.length === 0 ? (<div></div>) :
+      (
+        <section className="recommend-section">
+          <h2 className="recommend-title">{title}</h2>
 
-      <div className="recommend-slider" ref={sliderRef}>
-        <div className="recommend-track">
-          {extendedList.map((item, idx) => (
-            <Link
-              href={`/products/${item?.id}`}
-              className="recommend-item small-card"
-              key={`${item?.id}-${idx}`}
-            >
-              <ProductCard item={item} />
-            </Link>
-          ))}
-        </div>
-      </div>
-    </section>
+          <div className="recommend-slider" ref={sliderRef}>
+            <div className="recommend-track">
+              {extendedList.map((item, idx) => (
+                <Link
+                  href={`/products/${item?.id}`}
+                  className="recommend-item small-card"
+                  key={`${item?.id}-${idx}`}
+                >
+                  <ProductCard item={item} />
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )
+
   );
 }

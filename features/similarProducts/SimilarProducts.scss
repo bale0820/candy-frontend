@@ -1,0 +1,28 @@
+.similar-products {
+//   margin-top: 80px;
+display: flex;
+flex-direction: column;
+justify-content: center;
+background-color: #bdbdf0;
+border-radius : 20px;
+padding: 10px;
+}
+
+.similar-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+.similar-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fill, minmax(180px, 1fr));
+
+  gap: 20px;
+}
+
+.similar-item {
+  text-decoration: none;
+}
