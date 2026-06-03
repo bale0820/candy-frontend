@@ -10,10 +10,10 @@ import "./viewer.scss";
 import {
     useAuthStore
 } from "@/store/authStore";
-import { useParams, useRouter } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 
 export default function Viewer() {
-    const router = useRouter();
+    const searchParams = useSearchParams();
     const { roomId } = useParams();
     // =========================
     // socket
@@ -44,6 +44,10 @@ export default function Viewer() {
         useAuthStore(
             state => state._hasHydrated
         );
+    const queryToken =
+        searchParams.get("token");
+    const liveToken =
+        queryToken || token;
 
 
 
@@ -75,8 +79,8 @@ export default function Viewer() {
 
     useEffect(() => {
         console.log("viewer useEffect 실행");
-        if (!hasHydrated) return;
-        if (!token) return;
+        if (!queryToken && !hasHydrated) return;
+        if (!liveToken) return;
 
         const fetchChats =
             async () => {
@@ -255,7 +259,7 @@ export default function Viewer() {
                 path: "/live/socket.io",
 
                 auth: {
-                    token
+                    token: liveToken
                 }
             }
         );
@@ -467,7 +471,7 @@ export default function Viewer() {
 
         };
 
-    }, [token, hasHydrated]);
+    }, [liveToken, queryToken, hasHydrated, roomId]);
 
     return (
 
