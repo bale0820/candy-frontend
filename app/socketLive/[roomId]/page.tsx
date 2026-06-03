@@ -619,12 +619,7 @@ export default function Broadcast() {
                             {title || "라이브 방송"}
                         </div>
 
-                        <div
-                            style={{
-                                display: "flex",
-                                gap: "10px"
-                            }}
-                        >
+                        <div className="live-actions">
 
                             <button
                                 className="chat-button"
@@ -636,9 +631,7 @@ export default function Broadcast() {
                             <button
                                 className="chat-button"
                                 onClick={endBroadcast}
-                                style={{
-                                    background: "#ff2a2a"
-                                }}
+                                data-danger="true"
                             >
                                 방송 종료
                             </button>

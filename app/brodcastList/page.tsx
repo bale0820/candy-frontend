@@ -7,7 +7,7 @@ import Link from "next/link";
 import ProductCard from "@/shared/productCard/ProductCart";
 import { useRouter } from "next/navigation";
 
-export default function brodCastLayout({ children }) {
+export default function BrodCastLayout() {
 
   const router = useRouter();
   // ▶ 전체 상품 리스트 가져오기
@@ -29,9 +29,9 @@ export default function brodCastLayout({ children }) {
         <p className="loading">로딩 중...</p>
       ) : productList.length > 0 ? (
         <div className="product-grid">
-          {productList.map((item, idx) => (
-            <div>
-              <Link key={idx} href={`/products/${item?.id}`}>
+          {productList.map((item) => (
+            <div key={item?.id}>
+              <Link href={`/products/${item?.id}`}>
                 <ProductCard item={item} />
               </Link>
               <button className="b-button" onClick={() => router.push(`/products/${item.id}/lives`)} >방송보기</button>

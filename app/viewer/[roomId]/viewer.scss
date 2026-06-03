@@ -23,39 +23,46 @@
 // }
 
 .viewer-page {
-  width: 100%;
+    width: 100%;
 
-  display: flex;
-  justify-content: center;
+    display: flex;
+    justify-content: center;
 
-  padding: 30px;
+    padding: 30px;
+    box-sizing: border-box;
 
-  background: rgb(60, 60, 116);
+    background: rgb(60, 60, 116);
 
-  color: white;
+    color: white;
 
   min-height: 100vh;
 }
 
 .viewer-layout {
-  display: flex;
-  gap: 20px;
+    width: min(100%, 1200px);
 
-  align-items: flex-start;
+    display: flex;
+    gap: 20px;
+
+    align-items: flex-start;
 }
 
 .video-section {
-  display: flex;
-  flex-direction: column;
+    flex: 1 1 auto;
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
 }
 
 .video-container {
-  position: relative;
+    position: relative;
 
-  width: 820px;
-  height: 460px;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    max-height: calc(100vh - 150px);
 
-  background: #000;
+    background: #000;
 
   border-radius: 14px;
 
@@ -64,12 +71,13 @@
   box-shadow:
     0 10px 40px rgba(0,0,0,0.45);
 
-  video {
-    width: 100%;
-    height: 100%;
+    video {
+        width: 100%;
+        height: 100%;
+        display: block;
 
-    object-fit: cover;
-  }
+        object-fit: cover;
+    }
 
   .end {
     position: absolute;
@@ -106,8 +114,10 @@
 }
 
 .stream-title {
-  font-size: 1.2rem;
-  font-weight: 700;
+    font-size: 1.2rem;
+    font-weight: 700;
+    min-width: 0;
+    overflow-wrap: anywhere;
 }
 
 .live-badge {
@@ -122,10 +132,11 @@
 }
 
 .chat-section {
-  width: 360px;
-  height: 620px;
+    flex: 0 0 360px;
+    width: 360px;
+    height: min(620px, calc(100vh - 60px));
 
-  background: #18181b;
+    background: #18181b;
 
   border-radius: 14px;
 
@@ -192,7 +203,8 @@
 }
 
 .chat-input {
-  flex: 1;
+    flex: 1;
+    min-width: 0;
 
   height: 42px;
 
@@ -209,7 +221,7 @@
 }
 
 .chat-button {
-  width: 80px;
+    width: 80px;
 
   border: none;
 
@@ -227,5 +239,109 @@
 }
 
 .chat-button:hover {
-  background: #7d35e8;
+    background: #7d35e8;
+}
+
+@media (max-width: 960px) {
+    .viewer-page {
+        padding: 18px;
+    }
+
+    .viewer-layout {
+        flex-direction: column;
+        gap: 14px;
+    }
+
+    .video-section,
+    .chat-section {
+        width: 100%;
+    }
+
+    .chat-section {
+        flex: none;
+        height: 360px;
+    }
+}
+
+@media (max-width: 640px) {
+    .viewer-page {
+        min-height: 100dvh;
+        padding: 0;
+        background: #0b0b12;
+    }
+
+    .viewer-layout {
+        width: 100%;
+        gap: 0;
+    }
+
+    .video-container {
+        border-radius: 0;
+        box-shadow: none;
+        max-height: none;
+    }
+
+    .video-container .end {
+        font-size: 26px;
+        text-align: center;
+        padding: 0 20px;
+    }
+
+    .live-info {
+        align-items: flex-start;
+        gap: 10px;
+        margin: 0;
+        padding: 12px 14px;
+        background: #111827;
+    }
+
+    .stream-title {
+        font-size: 16px;
+        line-height: 1.35;
+    }
+
+    .live-badge {
+        flex: 0 0 auto;
+        padding: 5px 9px;
+        font-size: 11px;
+    }
+
+    .chat-section {
+        height: calc(100dvh - 56.25vw - 53px);
+        min-height: 300px;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    .chat-header {
+        height: 48px;
+        padding: 0 14px;
+    }
+
+    .chat-list {
+        padding: 12px 14px;
+        gap: 8px;
+    }
+
+    .chat-item {
+        font-size: 14px;
+    }
+
+    .chat-input-wrap {
+        padding: 10px;
+        gap: 8px;
+    }
+
+    .chat-input {
+        height: 40px;
+        border-radius: 8px;
+        font-size: 16px;
+    }
+
+    .chat-button {
+        width: 58px;
+        height: 40px;
+        border-radius: 8px;
+        font-size: 13px;
+    }
 }
