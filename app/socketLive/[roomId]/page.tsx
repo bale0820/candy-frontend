@@ -4,7 +4,6 @@ import { LIVE_SERVER_URL } from "@/shared/constants/clientEnv";
 import { api } from "@/shared/lib/axios";
 import { useAuthStore } from "@/store/authStore";
 import { useParams, useSearchParams } from "next/navigation";
-import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { io, Socket } from "socket.io-client";
 import "./viewer.scss";
@@ -15,7 +14,6 @@ type ChatMessage = {
 
 export default function Broadcast() {
     const params = useParams();
-    const router = useRouter();
     const roomId =
         params.roomId as string;
 
@@ -46,6 +44,10 @@ export default function Broadcast() {
         useAuthStore(
             state => state._hasHydrated
         );
+    const queryToken =
+        searchParams.get("token");
+    const liveToken =
+        queryToken || token;
 
     const socketRef =
         useRef<Socket | null>(null);
@@ -389,9 +391,9 @@ export default function Broadcast() {
     // =========================
     useEffect(() => {
 
-        if (!hasHydrated) return;
+        if (!queryToken && !hasHydrated) return;
 
-        if (!token) return;
+        if (!liveToken) return;
 
         const fetchChats =
             async () => {
@@ -436,6 +438,11 @@ export default function Broadcast() {
                             title || "라이브 방송",
 
                         thumbnail
+                    },
+                    {
+                        headers: {
+                            Authorization: `Bearer ${liveToken}`
+                        }
                     }
                 );
             }
@@ -445,7 +452,7 @@ export default function Broadcast() {
 
         fetchChats();
 
-        connectSocket(token);
+        connectSocket(liveToken);
 
         return () => {
             endBroadcast();
@@ -457,7 +464,12 @@ export default function Broadcast() {
 
     }, [
         hasHydrated,
-        token
+        liveToken,
+        queryToken,
+        roomId,
+        productId,
+        title,
+        thumbnail
     ]);
 
     // =========================
