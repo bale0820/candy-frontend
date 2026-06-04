@@ -68,6 +68,27 @@ export default function Broadcast() {
         useRef(false);
     const endedRef =
         useRef(false);
+    const stopBroadcastMedia =
+        () => {
+            const video =
+                videoRef.current;
+            const stream =
+                video?.srcObject as MediaStream | null;
+
+            stream
+                ?.getTracks()
+                .forEach(track =>
+                    track.stop()
+                );
+
+            if (video) {
+                video.pause();
+                video.srcObject = null;
+            }
+
+            peerRef.current?.close();
+            peerRef.current = null;
+        };
     const sendChat =
         () => {
 
@@ -113,9 +134,9 @@ export default function Broadcast() {
 
                 // socket 종료
                 socketRef.current?.disconnect();
+                socketRef.current = null;
 
-                // WebRTC 종료
-                peerRef.current?.close();
+                stopBroadcastMedia();
 
                 // 홈 이동
                 // router.push("/");
@@ -165,7 +186,11 @@ export default function Broadcast() {
                         .mediaDevices
                         .getUserMedia({
                             video: true,
-                            audio: true
+                            audio: {
+                                echoCancellation: true,
+                                noiseSuppression: true,
+                                autoGainControl: true
+                            }
                         });
 
                 if (videoRef.current) {
@@ -457,8 +482,8 @@ export default function Broadcast() {
         return () => {
             endBroadcast();
             socketRef.current?.disconnect();
-
-            peerRef.current?.close();
+            socketRef.current = null;
+            stopBroadcastMedia();
 
         };
 
