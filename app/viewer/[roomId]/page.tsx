@@ -58,6 +58,30 @@ export default function Viewer() {
         useState("");
 
     const [broadEnd, setBroadEnd] = useState<boolean>(false);
+    const stopViewing =
+        () => {
+            const video =
+                remoteVideoRef.current;
+            const stream =
+                video?.srcObject as MediaStream | null;
+
+            stream
+                ?.getTracks()
+                .forEach(track =>
+                    track.stop()
+                );
+
+            if (video) {
+                video.pause();
+                video.srcObject = null;
+            }
+
+            peerRef.current?.close();
+            peerRef.current = null;
+
+            socketRef.current?.disconnect();
+            socketRef.current = null;
+        };
     const sendChat =
         () => {
 
@@ -311,16 +335,11 @@ export default function Viewer() {
                 console.log(
                     "방송 종료"
                 );
-                 setBroadEnd(true);
+                setBroadEnd(true);
+                stopViewing();
                 alert(
                     "방송이 종료되었습니다."
                 );
-
-                socketRef.current?.disconnect();
-
-                peerRef.current?.close();
-
-               
 
             }
         );
@@ -465,9 +484,7 @@ export default function Viewer() {
         // =========================
         return () => {
 
-            socketRef.current?.disconnect();
-
-            peerRef.current?.close();
+            stopViewing();
 
         };
 
