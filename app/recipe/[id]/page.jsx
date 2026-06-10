@@ -44,7 +44,7 @@ export default function RecipeDetailPage() {
 
   return (
     <div className="recipe-detail-container">
-      <img src={`${IMAGE_BASE_URL}/data/recipe/${recipe.imageUrl}`} className="detail-img" />
+      <img src={`${IMAGE_BASE_URL}/data${recipe.imageUrl}`} className="detail-img" />
 
       <h1 className="detail-title">{recipe.title}</h1>
       <div className="detail-summary">{recipe.summary}</div>
