@@ -48,7 +48,7 @@ export function useHeaderProductList(type) {
     if (type === "time") return sortByOld(productList);
     if (type === "best") return bestProducts;
     return [];
-  }, [id, productList, bestProducts]);
+  }, [productList, bestProducts, type]);
 
   // ▶ 필터 버튼 클릭 시 정렬
   const filteredProducts = useMemo(() => {
