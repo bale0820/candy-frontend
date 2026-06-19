@@ -7,11 +7,13 @@ import { Providers } from "./providers";
 
 // 📌 Next.js App Router 기준 전역 메타데이터
 export const metadata = {
+  metadataBase: new URL("https://candy-frontend-taupe.vercel.app"),
   title: {
     default: "Candy Market",
     template: "%s | Candy Market",
   },
-  description: "Next.js Shopping Mall",
+  applicationName: "Candy Market",
+  description: "원딜핫딜, 멤버특가 등 실시간 인기 상품을 가장 빠르게 만나보세요.",
   verification: {
     google: "359In8q40-mtbh78wCDQZ_YHIoDJAbisN-1e72YfYK0", // 👈 여기 붙여넣기
   },
