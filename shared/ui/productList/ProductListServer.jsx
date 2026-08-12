@@ -10,6 +10,7 @@ export default async function ProductListServer({
 }) {
   // ✅ 서버에서 상품 데이터 가져오기
   const productList = await getProductList();
+  console.log("productList", productList);
 
   // ❗ 아직 필터링은 안 한다 (다음 단계)
   return (
